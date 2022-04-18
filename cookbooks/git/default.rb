@@ -1,12 +1,17 @@
 package 'git'
 
 if node[:platform] == 'darwin'
-  # Remove:
-  # [filesystem "Azul Systems, Inc.|1.8.0_222|/dev/disk1s5"]
-  # [filesystem "Oracle Corporation|1.8.0_221|/dev/disk1s5"]
-  file(gitconfig = File.join(ENV['HOME'], '.gitconfig')) do
-    action :delete
-    only_if { File.file?(gitconfig) && !File.symlink?(gitconfig) }
+  package 'gh'
+else
+  github_release 'gh' do
+    v = "1.2.1"
+    name = "gh_#{v}_#{node[:kernel][:name].downcase}_amd64"
+
+    repo 'cli/cli'
+    version "v#{v}"
+    archive "#{name}.tar.gz"
+    checksum "gh_#{v}_checksums.txt"
+    bin "#{name}/bin/gh"
   end
 end
 

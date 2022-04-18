@@ -28,6 +28,7 @@ download() {
 }
 
 if [ ! -d $WORKDIR ]; then
+  mkdir $HOME/github.com/igsr5
   download
 fi
 
