@@ -10,4 +10,4 @@ $ ./install.sh
 - https://github.com/k0kubun/dotfiles
 
 ## License
-Licensed under the [MIT license](https://izumin.mit-license.org/2015).
+Licensed under the [MIT license](https://igsr5.mit-license.org/2022).
