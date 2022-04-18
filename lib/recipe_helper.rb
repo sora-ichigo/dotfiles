@@ -13,4 +13,13 @@ MItamae::RecipeContext.class_eval do
     result = run_command("dpkg-query -f '${Status}' -W #{name.shellescape} | grep -E '^(install|hold) ok installed$'", error: false)
     result.exit_status == 0
   end
+
+  def brew_prefix
+    arch = `uname -m`.chomp
+    case arch
+    when 'x86_64'; '/usr/local'
+    when 'arm64';  '/opt/homebrew'
+    else fail "unknown arch: #{arch}"
+    end
+  end
 end
