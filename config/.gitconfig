@@ -1,0 +1,21 @@
+[user]
+	name = igsr5
+	email = i@gsr5.dev
+[core]
+  excludesFile = ~/.gitignore
+	editor = nvim
+  filemode = true
+[color]
+  ui = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+	insteadOf = git://github.com/
+[url "git@gist.github.com:"]
+  pushInsteadOf = https://gist.github.com/
+  pushInsteadOf = git://gist.github.com/
+[branch]
+  defaultBranch = master
+[submodule]
+  recurse = true
+[pull]
+  rebase = true
