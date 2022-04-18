@@ -7,7 +7,7 @@ hasCommand() {
   return `type $1 > /dev/null 2>&1`
 }
 
-download() {
+installRepository() {
   local github_url="https://${GITHUB_REPO}"
 
   if hasCommand "git"; then
@@ -29,7 +29,7 @@ download() {
 
 if [ ! -d $WORKDIR ]; then
   mkdir $HOME/github.com/igsr5
-  download
+  installRepository
 fi
 
 cd $WORKDIR
