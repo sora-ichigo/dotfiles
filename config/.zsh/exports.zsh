@@ -56,3 +56,6 @@ export PATH=$HOME/.wantedly/bin:$PATH
 
 # google-cloud-sdk
 export PATH=$HOME/google-cloud-sdk/bin:$PATH
+if [ -f '/Users/ichigo/google-cloud-sdk/path.zsh.inc' ]; then
+  . '/Users/ichigo/google-cloud-sdk/path.zsh.inc';
+fi
