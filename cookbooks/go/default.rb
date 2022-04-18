@@ -8,7 +8,7 @@ define 'go_install', build: true do
   pkg = params[:name]
   execute "install #{pkg}" do
     command "GOPATH=#{gopath} GOBIN=#{gobin} go install #{params[:build] ? "" : "-d"} #{pkg}"
-    not_if "test -e #{gopath}/src/#{pkg}"
+    not_if "test -e #{gobin}/#{pkg}"
   end
 end
 
