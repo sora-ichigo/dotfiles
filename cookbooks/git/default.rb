@@ -17,3 +17,4 @@ end
 
 dotfile '.gitconfig'
 dotfile '.gitignore'
+dotfile '.git_template'
