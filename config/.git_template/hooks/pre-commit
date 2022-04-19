@@ -2,4 +2,4 @@
 
 git status
 
-git diff --cached
+LESS='--no-init --shift 4 --LONG-PROMPT --RAW-CONTROL-CHARS' git diff --cached
