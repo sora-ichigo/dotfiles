@@ -3,9 +3,18 @@ on:
   push:
 
 jobs:
-  test:
+  ubuntu:
     runs-on: ubuntu-latest
     name: Ubuntu
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup mitamae
+        run: ./bin/setup
+      - name: mitamae local
+        run: make mitamae-dry > out.txt
+  macos:
+    runs-on: macos-latest
+    name: MacOS Big Sur Latest
     steps:
       - uses: actions/checkout@v3
       - name: setup mitamae
