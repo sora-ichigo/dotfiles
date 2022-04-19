@@ -11,18 +11,32 @@ jobs:
       - name: setup mitamae
         run: ./bin/setup
       - name: mitamae local
-        run: make mitamae-dry > output.txt
-      - name: make pr comment body
-        id: pr-comment-body
-        if: ${{ github.event.pull_request.merged }} == false
-        run: |
-          text="
-            ## Provisioning DryRun Output
-            <details><summary>Ubuntu</summary>
-
-              ```sh
-              ${cat output.txt}
-              ```
+        run: make mitamae-dry > out.txt
+      - name: find pr
+        uses: jwalton/gh-find-current-pr@v1
+        id: findPr
+        with:
+          state: open
+      - name: Update Pull Request
+        uses: actions/github-script@0.9.0
+        if: github.ref != 'refs/heads/master'
+        env:
+          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+          GITHUB_ISSUE_NUMBER: ${{ steps.findPr.outputs.pr }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### Output mitamae dry-run\`
+            #### `#### Ubuntu\`
+            <details><summary>Log</summary>
+            \`\`\`\n
+            ${cat out.txt}
+            \`\`\`
             </details>
-          "
-          echo "::set-output name=message_body::$text"
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+            github.issues.createComment({
+              issue_number: process.env.GITHUB_ISSUE_NUMBER,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
