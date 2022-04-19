@@ -27,7 +27,7 @@ installRepository() {
 }
 
 if [ ! -d $WORKDIR ]; then
-  mkdir $HOME/github.com/igsr5
+  mkdir -p $HOME/github.com/igsr5
   installRepository
 fi
 
