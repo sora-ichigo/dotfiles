@@ -22,8 +22,8 @@ MItamae::RecipeContext.class_eval do
     else fail "unknown arch: #{arch}"
     end
   end
-end
 
-def default_prefix
-  "#{home_dir}/.local"
+  def default_prefix
+    "#{home_dir}/.local"
+  end
 end
