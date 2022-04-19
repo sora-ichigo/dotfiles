@@ -23,3 +23,7 @@ MItamae::RecipeContext.class_eval do
     end
   end
 end
+
+def default_prefix
+  "#{home_dir}/.local"
+end
