@@ -10,9 +10,9 @@ hasCommand() {
 
 installRepository() {
   if hasCommand "git"; then
-    git clone --recursive "https://${github_url}" "${WORKDIR}"
+    git clone --recursive "https://${GITHUB_REPO}" "${WORKDIR}"
   elif hasCommand "curl" || hasCommand "wget"; then
-    local zip_url="https://${github_url}/archive/refs/heads/master.tar.gz"
+    local zip_url="https://${GITHUB_REPO}/archive/refs/heads/master.tar.gz"
 
     if hasCommand "curl"; then
       curl -L "${zip_url}"
