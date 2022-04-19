@@ -12,7 +12,6 @@ jobs:
         run: ./bin/setup
       - name: mitamae local
         run: make mitamae-dry > out.txt
-jobs:
   macos:
     runs-on: macos-latest
     name: MacOS Big Sur Latest
