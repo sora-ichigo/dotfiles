@@ -8,6 +8,23 @@
   hooksPath = ~/.git_template/hooks
 [color]
   ui = true
+[alias]
+  a = add
+  ai = add -i
+  c = commit
+  ci = commit --allow-empty -m 'initial commit'
+  p = push
+  ph = push origin HEAD
+  pm = push origin master
+  m = merge
+  mm = merge master
+  f = fetch origin
+  s = status
+  d = diff
+  l = log
+  co = checkout
+  cb = checkout -b
+  cm = checkout master
 [push]
 	default = simple
 [pull]
@@ -22,3 +39,5 @@
 [url "git@gist.github.com:"]
   pushInsteadOf = https://gist.github.com/
   pushInsteadOf = git://gist.github.com/
+[init]
+  defaultBranch = master
