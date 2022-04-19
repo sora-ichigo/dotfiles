@@ -59,6 +59,3 @@ export PATH=$HOME/google-cloud-sdk/bin:$PATH
 if [ -f '/Users/ichigo/google-cloud-sdk/path.zsh.inc' ]; then
   . '/Users/ichigo/google-cloud-sdk/path.zsh.inc';
 fi
-
-# less command custamize
-export LESS='--no-init --shift 4 --LONG-PROMPT --RAW-CONTROL-CHARS'
