@@ -2,7 +2,7 @@
   name = igsr5
   email = i@gsr5.dev
 [core]
-  excludesFile = ~/.gitignore
+  # excludesFile = ~/.gitignore
   editor = nvim
   filemode = true
   hooksPath = ~/.git_template/hooks
