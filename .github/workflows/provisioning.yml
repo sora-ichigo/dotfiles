@@ -5,6 +5,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    name: Ubuntu
     steps:
       - uses: actions/checkout@v3
       - name: setup mitamae
