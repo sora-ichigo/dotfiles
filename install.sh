@@ -1,5 +1,6 @@
 #!/bin/bash
-set -eu
+
+set -eux
 GITHUB_REPO="github.com/igsr5/dotfiles"
 WORKDIR="${HOME}/${GITHUB_REPO}"
 
@@ -8,12 +9,10 @@ hasCommand() {
 }
 
 installRepository() {
-  local github_url="https://${GITHUB_REPO}"
-
   if hasCommand "git"; then
-    git clone --recursive "${github_url}" "${WORKDIR}"
+    git clone --recursive "https://${github_url}" "${WORKDIR}"
   elif hasCommand "curl" || hasCommand "wget"; then
-    local zip_url="${github_url}/archive/refs/heads/master.tar.gz"
+    local zip_url="https://${github_url}/archive/refs/heads/master.tar.gz"
 
     if hasCommand "curl"; then
       curl -L "${zip_url}"
@@ -37,7 +36,7 @@ cd $WORKDIR
 bin/setup
 
 case "$(uname)" in
-  "Darwin")  bin/mitamae local lib/recipe.rb ;;
-  *) sudo -E bin/mitamae local lib/recipe.rb ;;
+  "Darwin")  bin/mitamae local $@ lib/recipe.rb ;;
+  *) sudo -E bin/mitamae local $@ lib/recipe.rb ;;
 esac
 
