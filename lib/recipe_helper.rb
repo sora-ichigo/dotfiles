@@ -22,4 +22,8 @@ MItamae::RecipeContext.class_eval do
     else fail "unknown arch: #{arch}"
     end
   end
+
+  def default_prefix
+    "#{ENV["HOME"]}/.local"
+  end
 end
