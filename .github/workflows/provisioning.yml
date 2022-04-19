@@ -11,4 +11,18 @@ jobs:
       - name: setup mitamae
         run: ./bin/setup
       - name: mitamae local
-        run: make mitamae-dry
+        run: make mitamae-dry > output.txt
+      - name: make pr comment body
+        id: pr-comment-body
+        if: ${{ github.event.pull_request.merged }} == false
+        run: |
+          text="
+            ## Provisioning DryRun Output
+            <details><summary>Ubuntu</summary>
+
+              ```sh
+              ${cat output.txt}
+              ```
+            </details>
+          "
+          echo "::set-output name=message_body::$text"
