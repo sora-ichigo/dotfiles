@@ -4,21 +4,31 @@ gopath = "#{ENV['HOME']}"
 gobin = "#{ENV['HOME']}/gobin"
 
 
-define 'go_install', build: true do
+define 'go_install', version: "latest" do
   pkg = params[:name]
+  pkg_bin_name = pkg.split("/").last
+
   execute "install #{pkg}" do
-    command "GOPATH=#{gopath} GOBIN=#{gobin} go install #{params[:build] ? "" : "-d"} #{pkg}"
-    not_if "test -e #{gobin}/#{pkg}"
+    command "GOPATH=#{gopath} GOBIN=#{gobin} go install #{pkg}@#{params[:version]}"
+    not_if "test -e #{gobin}/#{pkg_bin_name}"
   end
 end
 
-# command
-go_install 'github.com/go-delve/delve/cmd/dlv@latest'
+packages = %w(
+  github.com/go-delve/delve/cmd/dlv@latest
+  golang.org/x/tools/cmd/godoc@latest
+  golang.org/x/tools/cmd/goimports@latest
+  golang.org/x/tools/gopls@latest
+)
 
-# vim
-go_install 'golang.org/x/tools/cmd/godoc@latest'
-go_install 'golang.org/x/tools/cmd/goimports@latest'
-go_install 'golang.org/x/tools/gopls@latest'
+packages.each do |v|
+  url = v.split("@")[0]
+  version = v.split("@")[1]
+
+  go_install url do
+    version version
+  end
+end
 
 golangcilint_version = "v1.43.0"
 
