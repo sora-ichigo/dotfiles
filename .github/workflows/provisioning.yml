@@ -6,6 +6,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - use: actions/checkout@v3
+      - uses: actions/checkout@v3
       - name: ./install.sh -n
         run: ./install.sh -n
