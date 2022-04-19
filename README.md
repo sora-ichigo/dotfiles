@@ -7,6 +7,10 @@ my development kitchen.
 
 ## Installation
 ```sh
+$ ctrl -sSL https://raw.githubusercontent.com/igsr5/dotfiles/master/install.sh | sh
+```
+or
+```sh
 $ ./install.sh
 $ ./install.sh -n # dry-run
 ```
