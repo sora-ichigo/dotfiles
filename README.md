@@ -4,6 +4,7 @@ my development kitchen.
 ## Installation
 ```sh
 $ ./install.sh
+$ ./install.sh -n # dry-run
 ```
 
 ## Gratitude
