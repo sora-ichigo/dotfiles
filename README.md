@@ -1,4 +1,8 @@
 # dotfiles
+![](https://github.com/igsr5/dotfiles/workflows/Provisioning%20Test/badge.svg)
+![](https://img.shields.io/badge/license-MIT-green)
+
+
 my development kitchen.
 
 ## Installation
