@@ -12,12 +12,12 @@ installRepository() {
   if hasCommand "git"; then
     git clone --recursive "https://${GITHUB_REPO}" "${WORKDIR}"
   elif hasCommand "curl" || hasCommand "wget"; then
-    local zip_url="https://${GITHUB_REPO}/archive/refs/heads/master.tar.gz"
+    local url="https://${GITHUB_REPO}/archive/refs/heads/master.tar.gz"
 
     if hasCommand "curl"; then
-      curl -L "${zip_url}"
+      curl -L "${url}"
     elif hasCommand "wget"; then
-      wget -O "${zip_url}"
+      wget -O "${url}"
     fi | tar xv -
 
     mv -f dotfiles-master "${WORKDIR}"
