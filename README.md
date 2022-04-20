@@ -9,10 +9,9 @@ my development kitchen.
 ```sh
 $ curl -sSL https://raw.githubusercontent.com/igsr5/dotfiles/master/install.sh | sh
 ```
-or
+after first setup.
 ```sh
-$ ./install.sh
-$ ./install.sh -n # dry-run
+$ make
 ```
 
 ## Gratitude
