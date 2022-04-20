@@ -1,0 +1,10 @@
+package 'gcc'
+package 'wget'
+package 'curl'
+package 'jq'
+package 'direnv'
+package 'htop'
+package 'make'
+
+# package 'terraform'
+package 'rg'
