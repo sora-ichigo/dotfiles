@@ -19,5 +19,7 @@ end
 if node[:platform] == 'darwin'
   package 'rg'
 else
-  # FIXME: ubuntuでrgがインストールできない
+  package 'ripgrep' do
+    user 'root'
+  end
 end

@@ -7,6 +7,7 @@ elsif node[:platform] == 'ubuntu'
       tar -C /usr/local -xzf go1.18beta1.linux-amd64.tar.gz
     "
     user 'root'
+    not_if 'test -e $(which go)'
   end
 end
 
@@ -43,5 +44,5 @@ golangcilint_version = "v1.43.0"
 
 execute 'install golangci-lint' do
   command "curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b #{gobin} #{golangcilint_version}"
-  not_if 'test $(which golangci-lint)'
+  not_if "test -e #{gobin}/golangci-lint"
 end

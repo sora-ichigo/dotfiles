@@ -8,7 +8,7 @@ else
   http_request "#{default_prefix}/bin/nvim" do
     url "https://github.com/neovim/neovim/releases/download/v0.6.0/nvim.appimage"
     user node[:user]
-    mode "744"
+    mode "0744"
   end
 end
 
