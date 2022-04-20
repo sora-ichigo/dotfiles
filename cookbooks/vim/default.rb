@@ -4,7 +4,6 @@ if node[:platform] == 'darwin'
   end
 else
   directory "#{default_prefix}/bin"
-  # FIXME: ~/.local/bin が存在しないと怒られた
   http_request "#{default_prefix}/bin/nvim" do
     url "https://github.com/neovim/neovim/releases/download/v0.6.0/nvim.appimage"
     user node[:user]
@@ -13,6 +12,10 @@ else
 end
 
 directory "#{ENV["HOME"]}/.config"
-# FIXME: ~/.config/nvim が存在しないと怒られた
-# FIXME: NeoBundle を別途インストールしないといけない
 dotfile '.config/nvim'
+
+directory "#{ENV["HOME"]}/.vim/bundle"
+git "#{ENV["HOME"]}/.vim/bundle/neobundle.vim" do
+  repository "https://github.com/Shougo/neobundle.vim"
+  user node[:user]
+end
