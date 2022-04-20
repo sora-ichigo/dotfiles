@@ -1,4 +1,4 @@
-if platform[:platform] == 'darwin'
+if node[:platform] == 'darwin'
   package 'fzf'
 else
   # FIXME: Ubuntu で入らない
