@@ -12,4 +12,5 @@ else
 end
 
 # FIXME: ~/.config/nvim が存在しないと怒られた
+# FIXME: NeoBundle を別途インストールしないといけない
 dotfile '.config/nvim'
