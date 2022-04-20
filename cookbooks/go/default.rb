@@ -1,12 +1,13 @@
 if node[:platform] == 'darwin'
   package 'golang'
 elsif node[:platform] == 'ubuntu'
-  execute "install go" do
-    command "
-      curl -LO https://go.dev/dl/go1.18beta1.linux-amd64.tar.gz
-      tar -C /usr/local -xzf go1.18beta1.linux-amd64.tar.gz
-    "
-  end
+  # FIXME: うまく動いていない
+  # execute "install go" do
+  #   command "
+  #     curl -LO https://go.dev/dl/go1.18beta1.linux-amd64.tar.gz
+  #     tar -C /usr/local -xzf go1.18beta1.linux-amd64.tar.gz
+  #   "
+  # end
 end
 
 gopath = "#{ENV['HOME']}"
