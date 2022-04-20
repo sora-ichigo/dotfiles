@@ -6,6 +6,7 @@
   jq
   gcc
   direnv
+  fzf
 ).each do |v|
   package v do
     if node[:platform] == 'darwin'
