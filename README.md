@@ -7,7 +7,7 @@ my development kitchen.
 
 ## Installation
 ```sh
-$ ctrl -sSL https://raw.githubusercontent.com/igsr5/dotfiles/master/install.sh | sh
+$ curl -sSL https://raw.githubusercontent.com/igsr5/dotfiles/master/install.sh | sh
 ```
 or
 ```sh
