@@ -3,6 +3,7 @@ if node[:platform] == 'darwin'
     options '--HEAD'
   end
 else
+  # FIXME: ~/.local/bin が存在しないと怒られた
   http_request "#{default_prefix}/bin/nvim" do
     url "https://github.com/neovim/neovim/releases/download/v0.6.0/nvim.appimage"
     user node[:user]
@@ -10,4 +11,5 @@ else
   end
 end
 
+# FIXME: ~/.config/nvim が存在しないと怒られた
 dotfile '.config/nvim'
