@@ -1,4 +1,5 @@
 package 'git'
+# FIXME: ssh-key の用意をする必要がある
 
 if node[:platform] == 'darwin'
   package 'gh'
