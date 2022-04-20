@@ -12,7 +12,7 @@ else
   end
 end
 
-directory "#{ENV[HOME]}/.config"
+directory "#{ENV["HOME"]}/.config"
 # FIXME: ~/.config/nvim が存在しないと怒られた
 # FIXME: NeoBundle を別途インストールしないといけない
 dotfile '.config/nvim'
