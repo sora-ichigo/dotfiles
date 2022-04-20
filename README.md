@@ -16,6 +16,7 @@ $ make
 
 ## Gratitude
 - https://github.com/k0kubun/dotfiles
+- https://github.com/izumin5210/dotfiles
 
 ## License
 Licensed under the [MIT license](https://igsr5.mit-license.org/2022).
