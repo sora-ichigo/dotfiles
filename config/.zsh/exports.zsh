@@ -7,7 +7,7 @@ export TERM=xterm-256color
 eval $(/opt/homebrew/bin/brew shellenv)
 
 # nvim
-export PATH="$PATH:~/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 # vim
 export PATH="$PATH:/usr/bin/vim"
