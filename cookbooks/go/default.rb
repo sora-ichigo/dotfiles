@@ -12,7 +12,6 @@ end
 gopath = "#{ENV['HOME']}"
 gobin = "#{ENV['HOME']}/gobin"
 
-
 define 'go_install', version: "latest" do
   pkg = params[:name]
   pkg_bin_name = pkg.split("/").last
@@ -23,25 +22,29 @@ define 'go_install', version: "latest" do
   end
 end
 
-packages = %w(
-  github.com/go-delve/delve/cmd/dlv@latest
-  golang.org/x/tools/cmd/godoc@latest
-  golang.org/x/tools/cmd/goimports@latest
-  golang.org/x/tools/gopls@latest
-)
+# FIXME: ubuntu でうまく動かなかった
+# error: can't load package: package github.com/go-delve/delve/cmd/dlv@latest: cannot use path@version syntax in GOPATH mode
+if node[:platform] == 'darwin'
+  packages = %w(
+    github.com/go-delve/delve/cmd/dlv@latest
+    golang.org/x/tools/cmd/godoc@latest
+    golang.org/x/tools/cmd/goimports@latest
+    golang.org/x/tools/gopls@latest
+  )
 
-packages.each do |v|
-  url = v.split("@")[0]
-  version = v.split("@")[1]
+  packages.each do |v|
+    url = v.split("@")[0]
+    version = v.split("@")[1]
 
-  go_install url do
-    version version
+    go_install url do
+      version version
+    end
   end
-end
 
-golangcilint_version = "v1.43.0"
+  golangcilint_version = "v1.43.0"
 
-execute 'install golangci-lint' do
-  command "curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b #{gobin} #{golangcilint_version}"
-  not_if 'test $(which golangci-lint)'
+  execute 'install golangci-lint' do
+    command "curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b #{gobin} #{golangcilint_version}"
+    not_if 'test $(which golangci-lint)'
+  end
 end
