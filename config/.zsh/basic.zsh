@@ -19,4 +19,4 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 DIRSTACKSIZE=100
 
-
+bindkey -e
