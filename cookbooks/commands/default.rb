@@ -1,10 +1,23 @@
-package 'gcc'
-package 'wget'
-package 'curl'
-package 'jq'
-package 'direnv'
-package 'htop'
-package 'make'
+%w(
+  wget
+  curl
+  htop
+  make
+  jq
+  gcc
+  direnv
+).each do |v|
+  package v do
+    if node[:platform] == 'darwin'
+      user node[:user]
+    else
+      user 'root'
+    end
+  end
+end
 
-# package 'terraform'
-package 'rg'
+if node[:platform] == 'darwin'
+  package 'rg'
+else
+  # FIXME: ubuntuでrgがインストールできない
+end
