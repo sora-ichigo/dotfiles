@@ -28,6 +28,7 @@ eval "$(pyenv init -)"
 
 # go
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/gobin
 export GOPATH=$HOME
 export GOBIN=$HOME/gobin
 
