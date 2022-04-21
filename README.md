@@ -1,4 +1,4 @@
-# dotfiles
+# dotfiles 🥘
 ![](https://github.com/igsr5/dotfiles/workflows/Provisioning%20Test/badge.svg)
 ![](https://github.com/igsr5/dotfiles/workflows/install.sh%20Test/badge.svg)
 ![](https://img.shields.io/badge/license-MIT-green)
