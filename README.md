@@ -14,6 +14,10 @@ after first setup.
 ```sh
 $ make
 ```
+dry run.
+```sh
+$ make mitamae-dry
+```
 
 ## Gratitude
 - https://github.com/k0kubun/dotfiles
