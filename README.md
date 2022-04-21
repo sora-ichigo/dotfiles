@@ -10,11 +10,11 @@ my development kitchen.
 ```sh
 $ curl -sSL https://raw.githubusercontent.com/igsr5/dotfiles/master/install.sh | sh
 ```
-after first setup.
+After the second time, this is command.
 ```sh
 $ make
 ```
-dry run.
+Dry run.
 ```sh
 $ make mitamae-dry
 ```
