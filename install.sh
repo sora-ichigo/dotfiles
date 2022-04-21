@@ -35,8 +35,9 @@ cd $WORKDIR
 
 bin/setup
 
-case "$(uname)" in
-  "Darwin")  bin/mitamae local $@ lib/recipe.rb ;;
-  *) sudo -E bin/mitamae local $@ lib/recipe.rb ;;
-esac
+# case "$(uname)" in
+#   "Darwin")  bin/mitamae local $@ lib/recipe.rb ;;
+#   *) sudo -E bin/mitamae local $@ lib/recipe.rb ;;
+# esac
 
+bin/mitamae local $@ lib/recipe.rb
