@@ -1,0 +1,13 @@
+name: install.sh Test
+on: 
+  push:
+
+jobs:
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup mitamae
+        run: ./install.sh -n
+      - name: check dotfiles
+        run: test -e ~/github.com/igsr5/dotfiles
