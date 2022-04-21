@@ -3,8 +3,10 @@ export LANG=en_US.UTF-8
 export EDITOR=nvim
 export TERM=xterm-256color
 
-# homebrew
-eval $(/opt/homebrew/bin/brew shellenv)
+if [ $(uname) = "Darwin" ]; then
+  # homebrew
+  eval $(/opt/homebrew/bin/brew shellenv)
+fi
 
 # nvim
 export PATH="$PATH:$HOME/.local/bin"
