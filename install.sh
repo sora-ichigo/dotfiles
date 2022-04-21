@@ -6,7 +6,7 @@ WORKDIR="${HOME}/${GITHUB_REPO}"
 
 installRepository() {
   local url="https://${GITHUB_REPO}/archive/refs/heads/master.tar.gz"
-  curl -L "${url}" | tar xv -
+  curl -L "${url}" | tar xvz
 
   mv -f dotfiles-master "${WORKDIR}"
 }
