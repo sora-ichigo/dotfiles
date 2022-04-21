@@ -20,3 +20,11 @@ setopt pushd_ignore_dups
 DIRSTACKSIZE=100
 
 bindkey -e
+
+# autoload
+autoload -U compinit
+compinit -u
+autoload -Uz colors
+colors
+autoload -U +X bashcompinit && bashcompinit
+
