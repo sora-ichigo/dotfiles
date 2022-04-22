@@ -1,0 +1,16 @@
+#!/bin/bash
+current_branch=`git branch|grep "*"|sed "s/* //g"`;
+
+if [ $current_branch = "master" -o $current_branch = "main" ]; then
+  echo 'current branch is '$current_branch;
+  echo '[warn] push to master branch, continue? [y/N]'
+
+  exec < /dev/tty
+  read answer
+  case $answer in
+      'y' | 'yes') echo '[info] OK. push start.';;
+      * ) echo '[no] push abort.';exit 1;;
+  esac
+fi
+
+exit 0
