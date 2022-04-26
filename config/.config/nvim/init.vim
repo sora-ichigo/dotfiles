@@ -33,10 +33,11 @@ inoremap <C-e> <ESC>A
 map <Space><Space> o<ESC>
 map H ^
 map L $
+map <Space>p "*p
+map <Space>y "+y
 tnoremap <silent> jj  <C-\><C-n>
 nnoremap <silent> mm <C-w>w
 nnoremap <silent> m <C-w>
-
 
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
