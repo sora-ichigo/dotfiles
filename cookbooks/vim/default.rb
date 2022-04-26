@@ -18,4 +18,5 @@ directory "#{ENV["HOME"]}/.vim/bundle"
 git "#{ENV["HOME"]}/.vim/bundle/neobundle.vim" do
   repository "https://github.com/Shougo/neobundle.vim"
   user node[:user]
+  not_if "test -e #{ENV["HOME"]}/.vim/bundle/neobundle.vim"
 end
