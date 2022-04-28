@@ -38,8 +38,8 @@ map <Space>y "+y
 " all code of current file to clipboard, and close
 map Zy gg^"+yG<ENTER>ZZ
 tnoremap <silent> jj  <C-\><C-n>
-nnoremap <silent> mm <C-ww
-nnoremap <silent> m <C-w>
+nnoremap <silent> mm <C-w>
+nnoremap <silent> m <C-w>w
 
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
