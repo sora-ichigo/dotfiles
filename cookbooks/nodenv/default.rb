@@ -4,7 +4,13 @@ include_cookbook 'anyenv'
 
 nodenv_root = "#{ENV['HOME']}/.nodenv"
 
-package 'nodenv'
+package 'nodenv' do
+  if node[:platform] == "darwin"
+    user node[:user]
+  else
+    user 'root'
+  end
+end
 
 directory "#{nodenv_root}/plugins" do
   action :create

@@ -4,7 +4,14 @@ include_cookbook 'anyenv'
 
 rbenv_root = "#{ENV["HOME"]}/.rbenv"
 
-package 'rbenv'
+package 'rbenv' do
+  if node[:platform] == "darwin"
+    user node[:user]
+  else
+    user 'root'
+  end
+end
+
 directory "#{rbenv_root}/plugins"
 
 git "#{rbenv_root}/plugins/rbenv-default-gems" do
