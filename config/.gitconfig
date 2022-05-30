@@ -26,11 +26,11 @@
   cb = checkout -b
   cm = checkout master
 [push]
-	default = simple
+  default = simple
 [pull]
   rebase = true
 [branch]
-	autoSetupRebase = always
+  autoSetupRebase = always
 [submodule]
   recurse = true
 [url "git@github.com:"]
