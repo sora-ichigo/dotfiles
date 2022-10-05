@@ -6,6 +6,5 @@ include_cookbook 'commands'
 
 # second
 include_cookbook 'git'
-include_cookbook 'go'
 include_cookbook 'tmux'
 include_cookbook 'vim'
