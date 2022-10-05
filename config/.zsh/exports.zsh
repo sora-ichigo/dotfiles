@@ -32,6 +32,9 @@ export PATH=$PATH:$HOME/gobin
 export GOPATH=$HOME
 export GOBIN=$HOME/gobin
 
+# flutter
+export PATH=$PATH:$HOME/flutter/bin
+
 # Java
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.0.1.jdk/Contents/Home
 

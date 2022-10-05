@@ -3,3 +3,17 @@
 git status
 
 LESS='--no-init --shift 4 --LONG-PROMPT --RAW-CONTROL-CHARS' git diff --cached
+# DO NOT EDIT frolint START
+
+scriptPath="node_modules/frolint/index.js"
+hookName="pre-commit"
+gitParams="$*"
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "Can't find node in PATH, trying to find a node binary on your system"
+fi
+if [ -f $scriptPath ]; then
+  node $scriptPath $hookName "$gitParams"
+fi
+
+# DO NOT EDIT frolint END

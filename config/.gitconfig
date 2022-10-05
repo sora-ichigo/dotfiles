@@ -1,6 +1,6 @@
 [user]
   name = igsr5
-  email = i@gsr5.dev
+  email = igsr5.dev@gmail.com
 [core]
   # excludesFile = ~/.gitignore
   editor = nvim
@@ -27,8 +27,10 @@
   cm = checkout master
 [push]
   default = simple
+	autoSetupRemote = true
 [pull]
   rebase = true
+	default = current
 [branch]
   autoSetupRebase = always
 [submodule]

@@ -87,6 +87,7 @@ NeoBundle "jose-elias-alvarez/null-ls.nvim"
 NeoBundle "nvim-lua/plenary.nvim"
 NeoBundle "github/copilot.vim"
 NeoBundle 'mattn/vim-goimports'
+NeoBundle 'ruanyl/vim-gh-line'
 "----------------------------------------------------------
 call neobundle#end()
 filetype plugin indent on
