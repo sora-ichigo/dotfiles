@@ -26,7 +26,7 @@ if ! [ -f "bin/${mitamae_cache}" ]; then
         "x86_64")
           mitamae_bin="mitamae-x86_64-linux"
           ;;
-        "arm64")
+        "arm64" | "aarch64")
           mitamae_bin="mitamae-aarch64-linux"
           ;;
         *)
