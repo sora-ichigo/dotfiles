@@ -22,7 +22,17 @@ if ! [ -f "bin/${mitamae_cache}" ]; then
       esac
       ;;
     "Linux")
-      mitamae_bin="mitamae-x86_64-linux"
+      case "$(uname -m)" in
+        "x86_64")
+          mitamae_bin="mitamae-x86_64-linux"
+          ;;
+        "arm64")
+          mitamae_bin="mitamae-aarch64-linux"
+          ;;
+        *)
+          echo "unexpected uname: $(uname -m)"
+          exit 1
+      esac
       ;;
     *)
       echo "unexpected uname: $(uname)"
