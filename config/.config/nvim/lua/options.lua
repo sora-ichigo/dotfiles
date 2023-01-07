@@ -13,6 +13,7 @@ local options = {
   smarttab = true,
   laststatus = 2,
   swapfile = false,
+  background = "light"
 }
 
 for k, v in pairs(options) do

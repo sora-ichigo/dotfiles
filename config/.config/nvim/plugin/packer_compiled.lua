@@ -124,6 +124,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["vim-wwdc17-theme"] = {
+    loaded = true,
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/vim-wwdc17-theme",
+    url = "https://github.com/lifepillar/vim-wwdc17-theme"
   }
 }
 
