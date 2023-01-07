@@ -28,3 +28,8 @@ keymap("n", "H", "^", opts)
 keymap("n", "L", "$", opts)
 keymap("n", "mm", "<C-w>w", opts)
 keymap("n", "m", "<C-w>", opts)
+
+keymap('n', 'ff', "<cmd>Telescope find_files hidden=true<cr>", {})
+keymap('n', 'fg', "<cmd>Telescope live_grep hidden=true<cr>", {})
+keymap('n', 'fb', "<cmd>Telescope buffers hidden=true<cr>", {})
+keymap('n', 'fh', "<cmd>Telescope help_tags hidden=true<cr>", {})
