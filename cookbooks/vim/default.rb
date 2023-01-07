@@ -20,3 +20,9 @@ git "#{ENV["HOME"]}/.vim/bundle/neobundle.vim" do
   user node[:user]
   not_if "test -e #{ENV["HOME"]}/.vim/bundle/neobundle.vim"
 end
+
+git "#{ENV["HOME"]}/.local/share/nvim/site/pack/packer/opt/packer.nvim" do
+  repository "https://github.com/wbthomason/packer.nvim"
+  user node[:user]
+  not_if "test -e #{ENV["HOME"]}/.local/share/nvim/site/pack/packer/opt/packer.nvim"
+end
