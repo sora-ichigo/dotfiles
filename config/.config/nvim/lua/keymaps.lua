@@ -21,9 +21,15 @@ keymap("i", "<", "<><LEFT>", opts)
 keymap("i", ",", ", ", opts)
 keymap("i", "<C-k>",  "<Up>", opts)
 keymap("i", "<C-j>",  "<Down>", opts)
-
 keymap("i", "<C-h>",  "<Left>", opts)
 keymap("i", "<C-l>",  "<Right>", opts)
+keymap("i", "<C-p>",  "<Up>", opts)
+keymap("i", "<C-n>",  "<Down>", opts)
+keymap("i", "<C-b>",  "<Left>", opts)
+keymap("i", "<C-f>",  "<Right>", opts)
+
+keymap("v", "H", "^", opts)
+keymap("v", "L", "$", opts)
 
 keymap("n", "H", "^", opts)
 keymap("n", "L", "$", opts)

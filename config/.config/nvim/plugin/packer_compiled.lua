@@ -94,6 +94,11 @@ _G.packer_plugins = {
     path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/fern.vim",
     url = "https://github.com/lambdalisue/fern.vim"
   },
+  ["gruvbox-material"] = {
+    loaded = true,
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/gruvbox-material",
+    url = "https://github.com/sainnhe/gruvbox-material"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/lualine.nvim",
