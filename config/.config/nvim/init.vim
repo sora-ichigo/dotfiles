@@ -88,6 +88,8 @@ NeoBundle "nvim-lua/plenary.nvim"
 NeoBundle "github/copilot.vim"
 NeoBundle 'mattn/vim-goimports'
 NeoBundle 'ruanyl/vim-gh-line'
+NeoBundle 'savq/melange'
+NeoBundle 'sainnhe/sonokai'
 "----------------------------------------------------------
 call neobundle#end()
 filetype plugin indent on
@@ -96,8 +98,7 @@ NeoBundleCheck
 "----------------------------------------------------------
 " colorcheme
 "----------------------------------------------------------
-colorscheme bluloco-dark
-
+colorscheme sonokai
 
 "----------------------------------------------------------
 " lualine

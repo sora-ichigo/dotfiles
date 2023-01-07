@@ -41,6 +41,9 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.0.1.jdk/Contents/Home
 # Haskell
 [ -f "/Users/ichigo/.ghcup/env" ] && source "/Users/ichigo/.ghcup/env" # ghcup-env
 
+# Deno
+export PATH="/Users/ichigo/.deno/bin:$PATH"
+
 # mysql
 export PATH="/opt/homebrew/opt/mysql@5.7/bin:$PATH"
 
