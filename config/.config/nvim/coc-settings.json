@@ -8,6 +8,10 @@
     "javascriptreact",
     "javascript",
     "json",
-    "graphql"
+    "graphql",
+    "go"
+  ],
+  "cSpell.userWords": [
+    "Youn"
   ]
 }

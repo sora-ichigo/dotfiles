@@ -38,3 +38,5 @@ keymap('n', 'fb', "<cmd>Telescope buffers hidden=true<cr>", {})
 keymap('n', 'fh', "<cmd>Telescope help_tags hidden=true<cr>", {})
 
 keymap('n', 'nn', "<cmd>Fern . -drawer -toggle<cr>", {})
+
+keymap('n', '<Space>a', "<Plug>(coc-codeaction-selected)", {})
