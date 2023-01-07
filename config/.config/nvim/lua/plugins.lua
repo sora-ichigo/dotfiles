@@ -56,6 +56,9 @@ return packer.startup(function(use)
     end
   }
   use { "neoclide/coc.nvim", branch = "release" }
+  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+    require("toggleterm").setup()
+  end}
 
   -- colorschema
   use { "sainnhe/gruvbox-material"}
