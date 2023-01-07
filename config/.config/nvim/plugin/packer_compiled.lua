@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
     url = "https://github.com/akinsho/bufferline.nvim"
   },
+  ["fern.vim"] = {
+    loaded = true,
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/fern.vim",
+    url = "https://github.com/lambdalisue/fern.vim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/lualine.nvim",

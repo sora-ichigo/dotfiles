@@ -33,3 +33,5 @@ keymap('n', 'ff', "<cmd>Telescope find_files hidden=true<cr>", {})
 keymap('n', 'fg', "<cmd>Telescope live_grep hidden=true<cr>", {})
 keymap('n', 'fb', "<cmd>Telescope buffers hidden=true<cr>", {})
 keymap('n', 'fh', "<cmd>Telescope help_tags hidden=true<cr>", {})
+
+keymap('n', 'nn', "<cmd>Fern . -drawer -toggle<cr>", {})
