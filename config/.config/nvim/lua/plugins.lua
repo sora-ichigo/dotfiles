@@ -43,10 +43,11 @@ return packer.startup(function(use)
   use({ "nvim-lualine/lualine.nvim",
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   })
-  use({ "nvim-telescope/telescope.nvim" })
-  use({ "nvim-lua/plenary.nvim" })
+  use { "nvim-telescope/telescope.nvim" }
+  use { "nvim-lua/plenary.nvim" }
   use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
   use { "lambdalisue/fern.vim" }
+  use { "github/copilot.vim" }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

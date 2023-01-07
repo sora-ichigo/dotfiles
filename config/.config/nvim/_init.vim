@@ -1,4 +1,4 @@
-syntax enable 
+syntax enable
 set hlsearch
 set incsearch
 set wildmenu
@@ -341,7 +341,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 
 ""----------------------------------------------------------
-" tpope/vim-fugitive 
+" tpope/vim-fugitive
 "----------------------------------------------------------
 map <leader>gs :Git<CR><C-w>T
 map <leader>gl :Commits<CR><C-w>T
@@ -356,7 +356,7 @@ let g:user_leader_key='<c-t>'
 
 
 ""----------------------------------------------------------
-" ale 
+" ale
 "----------------------------------------------------------
 let g:ale_linters = {
 \ 'go': ['gopls']
