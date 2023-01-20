@@ -1,4 +1,5 @@
 {
+  "deno.enable": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "html",
@@ -13,6 +14,34 @@
   ],
   "cSpell.userWords": [
     "Ichigo",
-    "Youn"
+    "Layouter",
+    "Nextjs",
+    "Nextra",
+    "Tagglable",
+    "Uncommited",
+    "Vaild",
+    "Yasoshima",
+    "Youn",
+    "authorable",
+    "camelcase",
+    "codegen",
+    "dataloader",
+    "dataloaders",
+    "draftjs",
+    "endregion",
+    "graphiql",
+    "igsr",
+    "igsrt",
+    "jwks",
+    "kbar",
+    "kobayang",
+    "navs",
+    "nextui",
+    "noopener",
+    "noreferrer",
+    "rehype",
+    "taggings",
+    "unspalsh",
+    "wantedly"
   ]
 }

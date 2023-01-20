@@ -84,11 +84,6 @@ _G.packer_plugins = {
     path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/coc.nvim",
     url = "https://github.com/neoclide/coc.nvim"
   },
-  ["copilot.vim"] = {
-    loaded = true,
-    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/copilot.vim",
-    url = "https://github.com/github/copilot.vim"
-  },
   ["fern.vim"] = {
     loaded = true,
     path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/fern.vim",

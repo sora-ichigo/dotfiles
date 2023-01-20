@@ -47,7 +47,7 @@ return packer.startup(function(use)
   use { "nvim-lua/plenary.nvim" }
   use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
   use { "lambdalisue/fern.vim" }
-  use { "github/copilot.vim" }
+  --- use { "github/copilot.vim" }
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function()
