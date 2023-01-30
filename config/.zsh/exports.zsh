@@ -8,6 +8,8 @@ if [ $(uname) = "Darwin" ]; then
   eval $(/opt/homebrew/bin/brew shellenv)
 fi
 
+export PATH=$PATH:$HOME/.bin
+
 # nvim
 export PATH="$PATH:$HOME/.local/bin"
 
@@ -72,3 +74,4 @@ export PATH=$HOME/google-cloud-sdk/bin:$PATH
 if [ -f '/Users/ichigo/google-cloud-sdk/path.zsh.inc' ]; then
   . '/Users/ichigo/google-cloud-sdk/path.zsh.inc';
 fi
+

@@ -10,11 +10,13 @@
     "javascript",
     "json",
     "graphql",
-    "go"
+    "go",
+    "terraform"
   ],
   "cSpell.userWords": [
     "Ichigo",
     "Layouter",
+    "MAILTRAP",
     "Nextjs",
     "Nextra",
     "Tagglable",
@@ -23,13 +25,18 @@
     "Yasoshima",
     "Youn",
     "authorable",
+    "bigquery",
     "camelcase",
     "codegen",
+    "codespace",
+    "codespaces",
     "dataloader",
     "dataloaders",
+    "devcontainers",
     "draftjs",
     "endregion",
     "graphiql",
+    "hoge",
     "igsr",
     "igsrt",
     "jwks",
@@ -39,9 +46,19 @@
     "nextui",
     "noopener",
     "noreferrer",
+    "npmjs",
     "rehype",
+    "slackapi",
     "taggings",
     "unspalsh",
     "wantedly"
-  ]
+  ],
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  }
 }
