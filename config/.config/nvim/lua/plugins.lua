@@ -60,6 +60,18 @@ return packer.startup(function(use)
     require("toggleterm").setup()
   end}
 
+  use {
+    'pwntester/octo.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function ()
+      require"octo".setup()
+    end
+  }
+
   -- colorschema
   use { "sainnhe/gruvbox-material"}
   use { "lifepillar/vim-wwdc17-theme"}

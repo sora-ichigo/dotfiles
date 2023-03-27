@@ -75,3 +75,5 @@ if [ -f '/Users/ichigo/google-cloud-sdk/path.zsh.inc' ]; then
   . '/Users/ichigo/google-cloud-sdk/path.zsh.inc';
 fi
 
+# github
+export GIT_SSH_COMMAND="ssh -i ~/.ssh/github.pem"
