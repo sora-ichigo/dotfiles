@@ -18,6 +18,7 @@ export PATH="$PATH:/usr/bin/vim"
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/shims:$PATH"
 eval "$(rbenv init -)"
 
 # nodebrew
@@ -77,3 +78,7 @@ fi
 
 # github
 export GIT_SSH_COMMAND="ssh -i ~/.ssh/github.pem"
+
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
