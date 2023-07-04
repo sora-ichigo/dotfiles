@@ -1,46 +1,46 @@
 [user]
-  name = igsr5
-  email = igsr5.dev@gmail.com
+        name = igsr5
+        email = igsr5.dev@gmail.com
 [core]
   # excludesFile = ~/.gitignore
-  editor = nvim
-  filemode = true
-  hooksPath = ~/.git_template/hooks
+        editor = nvim
+        filemode = true
+        hooksPath = ~/.git_template/hooks
 	excludesFile = /Users/wantedly546/.gitignore
 [color]
-  ui = true
+        ui = true
 [alias]
-  a = add
-  ai = add -i
-  c = commit
-  ci = commit --allow-empty -m 'initial commit'
-  p = push
-  ph = push origin HEAD
-  pm = push origin master
-  m = merge
-  mm = merge master
-  f = fetch origin
-  s = status
-  d = diff
-  l = log
-  co = checkout
-  cb = checkout -b
-  cm = checkout master
+        a = add -p
+        ai = add -i
+        c = commit
+        ci = commit --allow-empty -m 'initial commit'
+        p = push
+        ph = push origin HEAD
+        pm = push origin master
+        m = merge
+        mm = merge master
+        f = fetch origin
+        s = status
+        d = diff
+        l = log
+        co = checkout
+        cb = checkout -b
+        cm = checkout master
 [push]
-  default = simple
+        default = simple
 	autoSetupRemote = true
 [pull]
-  rebase = true
+        rebase = true
 	default = current
 [branch]
-  autoSetupRebase = always
+        autoSetupRebase = always
 [submodule]
-  recurse = true
+        recurse = true
 [url "git@github.com:"]
-  pushInsteadOf = https://github.com/
-  pushInsteadOf = git://github.com/
+        pushInsteadOf = https://github.com/
+        pushInsteadOf = git://github.com/
 [url "git@gist.github.com:"]
-  pushInsteadOf = https://gist.github.com/
-  pushInsteadOf = git://gist.github.com/
+        pushInsteadOf = https://gist.github.com/
+        pushInsteadOf = git://gist.github.com/
 [init]
-  defaultBranch = master
+        defaultBranch = master
