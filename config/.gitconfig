@@ -11,7 +11,7 @@
         ui = true
 [alias]
         a = add -p
-        ai = add -i
+        an = add -N
         c = commit
         ci = commit --allow-empty -m 'initial commit'
         p = push
