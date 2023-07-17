@@ -82,3 +82,11 @@ export GIT_SSH_COMMAND="ssh -i ~/.ssh/github.pem"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
+
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+export PATH="$PATH:/Users/wantedly546/Library/Android/sdk/cmdline-tools/latest/bin"
+
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home"
