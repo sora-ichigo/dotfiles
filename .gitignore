@@ -1,2 +1,4 @@
 /bin/mitamae
 /bin/mitamae-*
+/vendor
+/.idea
