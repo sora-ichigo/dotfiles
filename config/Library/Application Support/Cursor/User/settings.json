@@ -1,0 +1,92 @@
+{
+  // 同じファイルが複数開かれるのを防ぐ
+  "workbench.editor.revealIfOpen": true,
+  // インサートモードでjを2回押すとノーマルモードに戻る
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "window.closeWhenEmpty": true,
+  "workbench.editor.closeEmptyGroups": false,
+  "editor.inlineSuggest.enabled": true,
+  "vim.neovimUseConfigFile": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "ruby.intellisense": "rubyLocate",
+  "workbench.preferredLightColorTheme": "Hyper Term Black",
+  "explorer.confirmDelete": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "vim.useSystemClipboard": true,
+  "git.confirmSync": false,
+  "editor.accessibilitySupport": "on",
+  "vim.neovimPath": "/opt/homebrew/bin/nvim",
+  "vim.neovimConfigPath": "$HOME/.config/nvim/init.lua",
+  "workbench.editor.autoLockGroups": {
+    "vscode.markdown.preview.editor": true,
+    "jsProfileVisualizer.heapprofile.table": true
+  },
+  "[html]": {
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.cursorBlinking": "solid",
+  "explorer.confirmDragAndDrop": false,
+  "workbench.preferredDarkColorTheme": "Tomorrow Night Blue",
+  "editor.tabSize": 2,
+  "ruby.codeCompletion": "rcodetools",
+  "git.autofetch": true,
+  "editor.minimap.enabled": false,
+  "vim.vimrc.enable": true,
+  "window.autoDetectColorScheme": true,
+  "extensions.ignoreRecommendations": true,
+  "workbench.colorTheme": "JaCaMo Theme",
+  "vim.vimrc.path": "$HOME/.config/nvim/init.lua",
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
+  },
+  "githubPullRequests.pullBranch": "never",
+  "liveshare.accessibility.soundsEnabled": false,
+  "audioCues.lineHasBreakpoint": "off",
+  "audioCues.lineHasError": "off",
+  "audioCues.lineHasFoldedArea": "off",
+  "audioCues.lineHasInlineSuggestion": "off",
+  "audioCues.noInlayHints": "off",
+  "audioCues.onDebugBreak": "off",
+  "audioCues.terminalQuickFix": "off",
+  "scm.providerCountBadge": "visible",
+  "files.insertFinalNewline": true,
+  "editor.renderFinalNewline": "on",
+  "editor.formatOnSave": true,
+  "window.zoomLevel": 1,
+  "prettier.bracketSameLine": true,
+  "dart.debugExternalPackageLibraries": true,
+  "dart.debugSdkLibraries": false,
+  "files.autoSave": "onFocusChange",
+  "workbench.view.alwaysShowHeaderActions": true,
+  "editor.autoClosingBrackets": "always",
+  "editor.autoClosingComments": "always",
+  "editor.autoClosingQuotes": "always",
+  "search.experimental.quickAccess.preserveInput": true,
+  "rubyLsp.enableExperimentalFeatures": true,
+  "vim.statusBarColorControl": true,
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#005f5f",
+    "statusBar.noFolderBackground": "#005f5f",
+    "statusBar.debuggingBackground": "#005f5f",
+    "statusBar.foreground": "#ffffff",
+    "statusBar.debuggingForeground": "#ffffff"
+  }
+}

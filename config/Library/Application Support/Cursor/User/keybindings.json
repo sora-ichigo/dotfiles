@@ -1,0 +1,11 @@
+[
+  {
+    "command": "extension.runLineOnRspec",
+    "key": "shift+ctrl+r",
+    "when": "editorLangId == 'ruby'"
+  },
+  {
+    "key": "cmd+r shift+cmd+right",
+    "command": "-workbench.action.moveEditorRightInGroup"
+  }
+]
