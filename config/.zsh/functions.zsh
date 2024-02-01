@@ -37,3 +37,8 @@ fzf_jump_g() {
   cd ~/github.com
 }
 register_keycommand "^g" fzf_jump_g
+
+
+rubymine() {
+  open -na "RubyMine.app" --args "$@"
+}
