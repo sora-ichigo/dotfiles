@@ -7,5 +7,15 @@
   {
     "key": "cmd+r shift+cmd+right",
     "command": "-workbench.action.moveEditorRightInGroup"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "workbench.action.chat.clear",
+    "when": "hasChatProvider && inChat"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "-workbench.action.chat.clear",
+    "when": "hasChatProvider && inChat"
   }
 ]
