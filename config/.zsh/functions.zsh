@@ -34,7 +34,7 @@ fzf_files() {
 register_keycommand "^w" fzf_files
 
 fzf_jump_g() {
-  cd ~/github.com
+  cd ~/ghq/github.com
 }
 register_keycommand "^g" fzf_jump_g
 
