@@ -88,5 +88,6 @@
     "statusBar.debuggingBackground": "#005f5f",
     "statusBar.foreground": "#ffffff",
     "statusBar.debuggingForeground": "#ffffff"
-  }
+  },
+  "files.trimTrailingWhitespace": true
 }

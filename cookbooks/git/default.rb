@@ -3,6 +3,7 @@ package 'git'
 
 if node[:platform] == 'darwin'
   package 'gh'
+  package 'ghq'
 elsif node[:platform] == 'ubuntu' || node[:platform] == 'debian'
   execute 'install gh' do
     command `
