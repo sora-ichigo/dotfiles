@@ -9,6 +9,7 @@
     }
   ],
   "window.closeWhenEmpty": true,
+  "editor.formatOnSave": true,
   "workbench.editor.closeEmptyGroups": false,
   "editor.inlineSuggest.enabled": true,
   "vim.neovimUseConfigFile": true,
@@ -34,13 +35,13 @@
     "editor.formatOnSave": false,
     "editor.defaultFormatter": "vscode.html-language-features"
   },
-  "[yaml]": {
-    "editor.formatOnSave": false,
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
   "[markdown]": {
     "editor.formatOnSave": false,
     "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": false
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -49,7 +50,9 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
   "editor.cursorBlinking": "solid",
   "explorer.confirmDragAndDrop": false,
   "workbench.preferredDarkColorTheme": "Tomorrow Night Blue",
@@ -60,24 +63,16 @@
   "vim.vimrc.enable": true,
   "window.autoDetectColorScheme": true,
   "extensions.ignoreRecommendations": true,
-  "workbench.colorTheme": "JaCaMo Theme",
+  "workbench.colorTheme": "Tomorrow Night Blue",
   "vim.vimrc.path": "$HOME/.config/nvim/init.lua",
   "terminal.integrated.env.osx": {
     "FIG_NEW_SESSION": "1"
   },
   "githubPullRequests.pullBranch": "never",
   "liveshare.accessibility.soundsEnabled": false,
-  "audioCues.lineHasBreakpoint": "off",
-  "audioCues.lineHasError": "off",
-  "audioCues.lineHasFoldedArea": "off",
-  "audioCues.lineHasInlineSuggestion": "off",
-  "audioCues.noInlayHints": "off",
-  "audioCues.onDebugBreak": "off",
-  "audioCues.terminalQuickFix": "off",
   "scm.providerCountBadge": "visible",
   "files.insertFinalNewline": true,
   "editor.renderFinalNewline": "on",
-  "editor.formatOnSave": true,
   "window.zoomLevel": 1,
   "prettier.bracketSameLine": true,
   "dart.debugExternalPackageLibraries": true,
@@ -87,7 +82,6 @@
   "editor.autoClosingBrackets": "always",
   "editor.autoClosingComments": "always",
   "editor.autoClosingQuotes": "always",
-  "search.experimental.quickAccess.preserveInput": true,
   "rubyLsp.enableExperimentalFeatures": true,
   "vim.statusBarColorControl": true,
   "workbench.colorCustomizations": {
@@ -98,6 +92,7 @@
     "statusBar.debuggingForeground": "#ffffff"
   },
   "files.trimTrailingWhitespace": true,
+<<<<<<< HEAD
   "markdown.marp.themes": [
     "https://raw.githubusercontent.com/dracula/marp/master/dracula/dracula.css"
   ],
@@ -119,5 +114,34 @@
     "definition": true,
     "workspaceSymbol": true,
     "signatureHelp": true
+=======
+  "workbench.editor.enablePreviewFromCodeNavigation": true,
+  "workbench.editor.enablePreviewFromQuickOpen": true,
+  "accessibility.signals.lineHasError": {
+    "sound": "off"
+  },
+  "accessibility.signals.lineHasFoldedArea": {
+    "sound": "off"
+  },
+  "accessibility.signals.lineHasBreakpoint": {
+    "sound": "off"
+  },
+  "accessibility.signals.lineHasInlineSuggestion": {
+    "sound": "off"
+  },
+  "accessibility.signals.terminalQuickFix": {
+    "sound": "off"
+  },
+  "accessibility.signals.onDebugBreak": {
+    "sound": "off"
+  },
+  "accessibility.signals.noInlayHints": {
+    "sound": "off"
+  },
+  "search.quickAccess.preserveInput": true,
+  "go.toolsManagement.autoUpdate": true,
+  "gitlens.advanced.messages": {
+    "suppressIntegrationRequestTimedOutWarning": true
+>>>>>>> 2bfec43 (Update config)
   }
 }
