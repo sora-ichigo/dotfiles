@@ -92,7 +92,6 @@
     "statusBar.debuggingForeground": "#ffffff"
   },
   "files.trimTrailingWhitespace": true,
-<<<<<<< HEAD
   "markdown.marp.themes": [
     "https://raw.githubusercontent.com/dracula/marp/master/dracula/dracula.css"
   ],
@@ -114,7 +113,7 @@
     "definition": true,
     "workspaceSymbol": true,
     "signatureHelp": true
-=======
+  },
   "workbench.editor.enablePreviewFromCodeNavigation": true,
   "workbench.editor.enablePreviewFromQuickOpen": true,
   "accessibility.signals.lineHasError": {
@@ -142,6 +141,5 @@
   "go.toolsManagement.autoUpdate": true,
   "gitlens.advanced.messages": {
     "suppressIntegrationRequestTimedOutWarning": true
->>>>>>> 2bfec43 (Update config)
   }
 }
