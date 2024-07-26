@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/Users/user/.cache/nvim/packer_hererocks/2.1.1716656478/share/lua/5.1/?.lua;/Users/user/.cache/nvim/packer_hererocks/2.1.1716656478/share/lua/5.1/?/init.lua;/Users/user/.cache/nvim/packer_hererocks/2.1.1716656478/lib/luarocks/rocks-5.1/?.lua;/Users/user/.cache/nvim/packer_hererocks/2.1.1716656478/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/Users/user/.cache/nvim/packer_hererocks/2.1.1716656478/lib/lua/5.1/?.so"
+local package_path_str = "/Users/ichigo/.cache/nvim/packer_hererocks/2.1.1720049189/share/lua/5.1/?.lua;/Users/ichigo/.cache/nvim/packer_hererocks/2.1.1720049189/share/lua/5.1/?/init.lua;/Users/ichigo/.cache/nvim/packer_hererocks/2.1.1720049189/lib/luarocks/rocks-5.1/?.lua;/Users/ichigo/.cache/nvim/packer_hererocks/2.1.1720049189/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/ichigo/.cache/nvim/packer_hererocks/2.1.1720049189/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -76,78 +76,78 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["bufferline.nvim"] = {
     loaded = true,
-    path = "/Users/user/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
     url = "https://github.com/akinsho/bufferline.nvim"
   },
   ["coc.nvim"] = {
     loaded = true,
-    path = "/Users/user/.local/share/nvim/site/pack/packer/start/coc.nvim",
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/coc.nvim",
     url = "https://github.com/neoclide/coc.nvim"
   },
   ["fern.vim"] = {
     loaded = true,
-    path = "/Users/user/.local/share/nvim/site/pack/packer/start/fern.vim",
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/fern.vim",
     url = "https://github.com/lambdalisue/fern.vim"
   },
   ["gruvbox-material"] = {
     loaded = true,
-    path = "/Users/user/.local/share/nvim/site/pack/packer/start/gruvbox-material",
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/gruvbox-material",
     url = "https://github.com/sainnhe/gruvbox-material"
   },
   ["lualine.nvim"] = {
     loaded = true,
-    path = "/Users/user/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
   ["nvim-treesitter"] = {
     loaded = true,
-    path = "/Users/user/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
     loaded = false,
     needs_bufread = false,
-    path = "/Users/user/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["octo.nvim"] = {
     config = { "\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tocto\frequire\0" },
     loaded = true,
-    path = "/Users/user/.local/share/nvim/site/pack/packer/start/octo.nvim",
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/octo.nvim",
     url = "https://github.com/pwntester/octo.nvim"
   },
   ["plenary.nvim"] = {
     loaded = true,
-    path = "/Users/user/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
-    path = "/Users/user/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["toggleterm.nvim"] = {
     config = { "\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0" },
     loaded = true,
-    path = "/Users/user/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
   },
   ["vim-wwdc17-theme"] = {
     loaded = true,
-    path = "/Users/user/.local/share/nvim/site/pack/packer/start/vim-wwdc17-theme",
+    path = "/Users/ichigo/.local/share/nvim/site/pack/packer/start/vim-wwdc17-theme",
     url = "https://github.com/lifepillar/vim-wwdc17-theme"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: toggleterm.nvim
-time([[Config for toggleterm.nvim]], true)
-try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
-time([[Config for toggleterm.nvim]], false)
 -- Config for: octo.nvim
 time([[Config for octo.nvim]], true)
 try_loadstring("\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tocto\frequire\0", "config", "octo.nvim")
 time([[Config for octo.nvim]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
+time([[Config for toggleterm.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
