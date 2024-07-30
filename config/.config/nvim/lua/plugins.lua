@@ -47,7 +47,7 @@ return packer.startup(function(use)
   use { "nvim-lua/plenary.nvim" }
   use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
   use { "lambdalisue/fern.vim" }
-  --- use { "github/copilot.vim" }
+  use { "github/copilot.vim" }
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function()
@@ -75,6 +75,14 @@ return packer.startup(function(use)
   -- colorschema
   use { "sainnhe/gruvbox-material"}
   use { "lifepillar/vim-wwdc17-theme"}
+  use { "ellisonleao/gruvbox.nvim" }
+
+  use {
+    'numToStr/Comment.nvim',
+      config = function()
+        require('Comment').setup()
+        end
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

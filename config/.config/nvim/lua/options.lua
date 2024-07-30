@@ -1,6 +1,6 @@
 local options = {
-	encoding = "utf-8",
-	fileencoding = "utf-8",
+  encoding = "utf-8",
+  fileencoding = "utf-8",
   number = true,
   cursorline = true,
   hlsearch = true,
@@ -13,7 +13,7 @@ local options = {
   smarttab = true,
   laststatus = 2,
   swapfile = false,
-  background = "light"
+  background = "dark"
 }
 
 for k, v in pairs(options) do

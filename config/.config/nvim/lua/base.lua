@@ -1,1 +1,1 @@
-vim.cmd 'colorscheme wwdc17'
+vim.cmd 'colorscheme gruvbox'
