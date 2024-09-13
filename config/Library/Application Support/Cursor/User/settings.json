@@ -141,5 +141,10 @@
   "go.toolsManagement.autoUpdate": true,
   "gitlens.advanced.messages": {
     "suppressIntegrationRequestTimedOutWarning": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "accessibility.signals.chatRequestSent": {
+    "sound": "off",
+    "announcement": "off"
   }
 }
