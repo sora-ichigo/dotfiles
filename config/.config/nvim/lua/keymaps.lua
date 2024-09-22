@@ -11,6 +11,8 @@ vim.g.maplocalleader = " "
 
 if vim.g.vscode then
 else
+  keymap("i", "jj", "<ESC>", opts)
+
   keymap("n", "mm", "<C-w>w", opts)
   keymap("n", "m", "<C-w>", opts)
 
@@ -34,7 +36,6 @@ else
   keymap("i", "<C-l>",  "<Right>", opts)
 end
 
-keymap("i", "jj", "<ESC>", opts)
 keymap("i", '"', '""<LEFT>', opts)
 keymap("i", "'", "''<LEFT>", opts)
 keymap("i", "`", "``<LEFT>", opts)
