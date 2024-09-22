@@ -146,5 +146,20 @@
   "accessibility.signals.chatRequestSent": {
     "sound": "off",
     "announcement": "off"
+  },
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "makefile.configureOnOpen": true,
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "vscode-neovim.compositeKeys": {
+    "jj": {
+      "command": "vscode-neovim.escape"
+    }
   }
 }
