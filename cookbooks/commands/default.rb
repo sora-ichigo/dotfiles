@@ -7,6 +7,7 @@
   gcc
   direnv
   fzf
+  gnu-sed
   fd
 ).each do |v|
   package v do

@@ -105,3 +105,6 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
 # https://stackoverflow.com/questions/52671926/rails-may-have-been-in-progress-in-another-thread-when-fork-was-called
 export DISABLE_SPRING=true
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+# gnu-sed
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
