@@ -18,7 +18,7 @@ local branch="`git branch --format='%(refname:short)' | fzf`"
 register_keycommand "^o" fzf_git_branch
 
 fzf_files() {
-  local filepath="$(find . -maxdepth 4 |fzf --preview "bat --color=always --style=header,grid --line-range :100 {}" --prompt 'PATH>')"
+  local filepath="$(fd |fzf --preview "bat --color=always --style=header,grid --line-range :100 {}" --prompt 'PATH>')"
   [ -z "$filepath" ] && return
   if [ -n "$LBUFFER" ]; then
     BUFFER="$LBUFFER$filepath"
