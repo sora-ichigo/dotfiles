@@ -49,4 +49,3 @@ keymap("v", "L", "$", opts)
 
 keymap("n", "H", "^", opts)
 keymap("n", "L", "$", opts)
-
