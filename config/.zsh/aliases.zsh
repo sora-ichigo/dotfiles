@@ -4,6 +4,7 @@ alias tf='terraform'
 alias re='source ~/.zshrc'
 alias mkdir='mkdir -p'
 alias ls='ls -l -a'
+alias fd='fd -H'
 alias valec='AWS_SDK_LOAD_CONFIG=1 valec'
 alias aic='aicommits'
 
