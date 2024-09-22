@@ -8,11 +8,11 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 if vim.g.vscode then
+  vim.keymap.set("n", "ff", "<Cmd>call VSCodeNotify('workbench.action.quickOpen')<CR>")
+  vim.keymap.set("n", "fg", "<Cmd>call VSCodeNotify('workbench.action.findInFiles')<CR>")
+  vim.keymap.set("n", "gs", "<Cmd>call VSCodeNotify('workbench.view.scm')<CR>")
 else
   keymap("i", "jj", "<ESC>", opts)
-
-  keymap("n", "mm", "<C-w>w", opts)
-  keymap("n", "m", "<C-w>", opts)
 
   keymap('n', 'ff', "<cmd>Telescope find_files hidden=true<cr>", {})
   keymap('n', 'fg', "<cmd>Telescope live_grep hidden=true<cr>", {})
@@ -24,7 +24,7 @@ else
   keymap('n', '<Space>a', "<Plug>(coc-codeaction-selected)", {})
 
   keymap('n', '<C-y>', "<cmd>ToggleTerm size=30<cr>", {})
-  keymap("n", "gl", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+  keymap("n", "gl", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, sient = true })
 
   keymap('t', '<C-y>', "<C-\\><C-n><cmd>ToggleTerm size=30<cr>", {})
 

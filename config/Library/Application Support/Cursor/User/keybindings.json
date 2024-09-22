@@ -25,5 +25,10 @@
   {
     "key": "cmd+r cmd+\\",
     "command": "-workbench.action.splitEditorDown"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "sideBarVisible"
   }
 ]
