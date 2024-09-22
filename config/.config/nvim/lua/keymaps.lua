@@ -24,7 +24,6 @@ else
   keymap('n', '<Space>a', "<Plug>(coc-codeaction-selected)", {})
 
   keymap('n', '<C-y>', "<cmd>ToggleTerm size=30<cr>", {})
-  keymap("n", "gl", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, sient = true })
 
   keymap('t', '<C-y>', "<C-\\><C-n><cmd>ToggleTerm size=30<cr>", {})
 
