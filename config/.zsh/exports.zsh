@@ -44,7 +44,9 @@ export GOBIN=$HOME/gobin
 export PATH=$PATH:$HOME/flutter/bin
 
 # Java
-export JAVA_HOME=$(/usr/libexec/java_home)
+if (/usr/libexec/java_home > /dev/null 2>&1); then
+  export JAVA_HOME=$(/usr/libexec/java_home)
+fi
 
 # Haskell
 [ -f "/Users/ichigo/.ghcup/env" ] && source "/Users/ichigo/.ghcup/env" # ghcup-env
