@@ -30,9 +30,11 @@ eval "$(nodenv init -)"
 # export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
+if [ -x "$(command -v pyenv)" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$HOME/.pyenv/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
 
 # go
 export PATH=$PATH:/usr/local/go/bin
