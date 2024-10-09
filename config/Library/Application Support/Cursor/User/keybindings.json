@@ -9,16 +9,6 @@
     "command": "-workbench.action.moveEditorRightInGroup"
   },
   {
-    "key": "ctrl+shift+l",
-    "command": "workbench.action.chat.clear",
-    "when": "hasChatProvider && inChat"
-  },
-  {
-    "key": "ctrl+l",
-    "command": "-workbench.action.chat.clear",
-    "when": "hasChatProvider && inChat"
-  },
-  {
     "key": "shift+cmd+\\",
     "command": "workbench.action.splitEditorDown"
   },
@@ -30,5 +20,9 @@
     "key": "ctrl+n",
     "command": "workbench.action.toggleSidebarVisibility",
     "when": "sideBarVisible"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "aichat.open-ai-chat-side-pane"
   }
 ]
