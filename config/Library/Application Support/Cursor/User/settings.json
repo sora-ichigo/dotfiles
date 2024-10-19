@@ -161,5 +161,6 @@
     "jj": {
       "command": "vscode-neovim.escape"
     }
-  }
+  },
+  "dart.openDevTools": "flutter"
 }
