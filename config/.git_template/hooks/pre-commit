@@ -1,8 +1,8 @@
 #!/bin/bash
 
-git status
+# git status
 
-LESS='--no-init --shift 4 --LONG-PROMPT --RAW-CONTROL-CHARS' git diff --cached
+# LESS='--no-init --shift 4 --LONG-PROMPT --RAW-CONTROL-CHARS' git diff --cached
 # DO NOT EDIT frolint START
 
 scriptPath="node_modules/frolint/index.js"
