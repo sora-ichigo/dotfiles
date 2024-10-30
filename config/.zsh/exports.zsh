@@ -42,6 +42,9 @@ export PATH=$PATH:$HOME/gobin
 export GOPATH=$HOME
 export GOBIN=$HOME/gobin
 
+# dart
+export PATH=$PATH:$HOME/.pub-cache/bin
+
 # flutter
 export PATH=$PATH:$HOME/flutter/bin
 
