@@ -162,5 +162,7 @@
       "command": "vscode-neovim.escape"
     }
   },
-  "dart.openDevTools": "flutter"
+  "dart.openDevTools": "flutter",
+  "liveshare.accessibility.soundVolume": 0,
+  "accessibility.signalOptions.volume": 0
 }
