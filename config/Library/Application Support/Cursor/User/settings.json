@@ -18,7 +18,7 @@
   },
   "security.workspace.trust.untrustedFiles": "open",
   "ruby.intellisense": "rubyLocate",
-  "workbench.preferredLightColorTheme": "Hyper Term Black",
+  "workbench.preferredLightColorTheme": "Default Dark Modern",
   "explorer.confirmDelete": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "terminal.integrated.enableMultiLinePasteWarning": false,
