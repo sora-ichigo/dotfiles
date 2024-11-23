@@ -1,6 +1,5 @@
 aki77.rails-db-schema
 alfredbirk.tailwind-documentation
-asvetliakov.vscode-neovim
 bradlc.vscode-tailwindcss
 bung87.rails
 bung87.vscode-gemfile
@@ -18,6 +17,7 @@ github.copilot-chat
 github.vscode-github-actions
 github.vscode-pull-request-github
 golang.go
+hashicorp.terraform
 hridoy.rails-snippets
 jpoissonnier.vscode-styled-components
 kaiwood.endwise
@@ -46,6 +46,7 @@ tabajara-krausburg.jacamo4code
 thadeu.vscode-run-rspec-file
 tomoki1207.pdf
 vayan.haml
+vscodevim.vim
 wingrunr21.vscode-ruby
 withfig.fig
 yzane.markdown-pdf
