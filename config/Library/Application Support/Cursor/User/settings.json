@@ -164,5 +164,6 @@
   },
   "dart.openDevTools": "flutter",
   "liveshare.accessibility.soundVolume": 0,
-  "accessibility.signalOptions.volume": 0
+  "accessibility.signalOptions.volume": 0,
+  "github.copilot.editor.enableCodeActions": false
 }

@@ -63,8 +63,8 @@ export PATH="/Users/ichigo/.deno/bin:$PATH"
 export PATH="/opt/homebrew/opt/mysql@5.7/bin:$PATH"
 
 # postgresql@14
-export PATH="/opt/homebrew/opt/postgresql@14/bin:$PATH"
-export PGDATA=/opt/homebrew/bin/postgres
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+export PGDATA="/opt/homebrew/bin/postgres@17"
 
 # direnv
 eval "$(direnv hook zsh)"
