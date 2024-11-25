@@ -152,7 +152,7 @@
   },
   "makefile.configureOnOpen": true,
   "github.copilot.enable": {
-    "*": false,
+    "*": true,
     "plaintext": false,
     "markdown": false,
     "scminput": false
