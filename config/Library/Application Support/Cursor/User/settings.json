@@ -82,7 +82,6 @@
   "editor.autoClosingBrackets": "always",
   "editor.autoClosingComments": "always",
   "editor.autoClosingQuotes": "always",
-  "rubyLsp.enableExperimentalFeatures": true,
   "vim.statusBarColorControl": true,
   "workbench.colorCustomizations": {
     "statusBar.background": "#005f5f",
@@ -165,5 +164,8 @@
   "dart.openDevTools": "flutter",
   "liveshare.accessibility.soundVolume": 0,
   "accessibility.signalOptions.volume": 0,
-  "github.copilot.editor.enableCodeActions": false
+  "github.copilot.editor.enableCodeActions": false,
+  "rubyLsp.featureFlags": {
+    "all": true
+  }
 }
