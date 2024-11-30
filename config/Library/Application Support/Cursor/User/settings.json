@@ -167,5 +167,6 @@
   "github.copilot.editor.enableCodeActions": false,
   "rubyLsp.featureFlags": {
     "all": true
-  }
+  },
+  "terminal.integrated.defaultLocation": "editor"
 }

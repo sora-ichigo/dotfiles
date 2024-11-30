@@ -24,5 +24,10 @@
   {
     "key": "ctrl+shift+l",
     "command": "aichat.open-ai-chat-side-pane"
+  },
+  {
+    "key": "cmd+j",
+    "command": "workbench.action.terminal.new",
+    "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
   }
 ]
