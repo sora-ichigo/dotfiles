@@ -29,5 +29,13 @@
     "key": "cmd+j",
     "command": "workbench.action.terminal.new",
     "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+  },
+  {
+    "key": "cmd+`",
+    "command": "workbench.action.closePanel"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "aichat.focuschatpaneaction"
   }
 ]
