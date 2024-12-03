@@ -5,9 +5,7 @@ prompt: enabled
 pager:
 aliases:
     co: pr checkout
-    pv: pr view --web
-    b: browse -c
-    prv: pr view --web
-    prc: pr create --fill --draft --assignee @me && gh pr view --web
+    v: pr view --web
+    c: pr create --fill --draft --assignee @me
 http_unix_socket:
 browser:
