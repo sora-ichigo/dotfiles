@@ -1,1 +1,13 @@
 version: "1"
+git_protocol: ssh
+editor: !!null vim
+prompt: enabled
+pager:
+aliases:
+    co: pr checkout
+    pv: pr view --web
+    b: browse -c
+    prv: pr view --web
+    prc: pr create --fill --draft --assignee @me && gh pr view --web
+http_unix_socket:
+browser:
