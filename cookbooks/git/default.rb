@@ -19,4 +19,4 @@ end
 dotfile '.gitconfig'
 dotfile '.gitignore'
 dotfile '.git_template'
-dotfile '.config/gh'
+dotfile '.config/gh/config.yml'
