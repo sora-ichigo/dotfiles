@@ -21,14 +21,12 @@
   "workbench.preferredLightColorTheme": "Default Dark Modern",
   "explorer.confirmDelete": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "terminal.integrated.enableMultiLinePasteWarning": false,
   "vim.useSystemClipboard": true,
   "git.confirmSync": false,
   "editor.accessibilitySupport": "on",
   "vim.neovimPath": "/opt/homebrew/bin/nvim",
   "vim.neovimConfigPath": "$HOME/.config/nvim/init.lua",
   "workbench.editor.autoLockGroups": {
-    "vscode.markdown.preview.editor": true,
     "jsProfileVisualizer.heapprofile.table": true
   },
   "[html]": {
@@ -156,11 +154,6 @@
     "markdown": false,
     "scminput": false
   },
-  "vscode-neovim.compositeKeys": {
-    "jj": {
-      "command": "vscode-neovim.escape"
-    }
-  },
   "dart.openDevTools": "flutter",
   "liveshare.accessibility.soundVolume": 0,
   "accessibility.signalOptions.volume": 0,
@@ -168,5 +161,6 @@
   "rubyLsp.featureFlags": {
     "all": true
   },
-  "terminal.integrated.defaultLocation": "editor"
+  "terminal.integrated.defaultLocation": "editor",
+  "jest.runMode": "on-demand"
 }
