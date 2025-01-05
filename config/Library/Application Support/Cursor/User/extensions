@@ -1,6 +1,7 @@
 aki77.rails-db-schema
 alfredbirk.tailwind-documentation
 bradlc.vscode-tailwindcss
+brandonkirbyson.vscode-animations
 bung87.rails
 bung87.vscode-gemfile
 christian-kohler.path-intellisense
@@ -8,7 +9,9 @@ dart-code.dart-code
 dart-code.flutter
 dbaeumer.vscode-eslint
 donjayamanne.githistory
+drcika.apc-extension
 eamodio.gitlens
+enhancedjax.vscode-ayu-zed
 esbenp.prettier-vscode
 foxundermoon.next-js
 github.codespaces
@@ -46,6 +49,8 @@ sporto.rails-go-to-spec
 tabajara-krausburg.jacamo4code
 thadeu.vscode-run-rspec-file
 tomoki1207.pdf
+tompollak.lazygit-vscode
+tomrijndorp.find-it-faster
 vayan.haml
 vscodevim.vim
 wingrunr21.vscode-ruby

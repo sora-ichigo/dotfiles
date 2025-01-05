@@ -18,7 +18,7 @@
   },
   "security.workspace.trust.untrustedFiles": "open",
   "ruby.intellisense": "rubyLocate",
-  "workbench.preferredLightColorTheme": "Default Dark Modern",
+  "workbench.preferredLightColorTheme": "Ayu Mirage Zed",
   "explorer.confirmDelete": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vim.useSystemClipboard": true,
@@ -162,5 +162,13 @@
     "all": true
   },
   "terminal.integrated.defaultLocation": "editor",
-  "jest.runMode": "on-demand"
+  "jest.runMode": "on-demand",
+  "git.openRepositoryInParentFolders": "never",
+  "animations.Install-Method": "Apc Customize UI++",
+  "apc.imports": [
+    "file://${userHome}/.cursor/extensions/brandonkirbyson.vscode-animations-2.0.7/dist/updateHandler.js"
+  ],
+  "editor.cursorSmoothCaretAnimation": "on",
+  "find-it-faster.general.showMaximizedTerminal": true,
+  "workbench.editor.showTabs": "single"
 }
