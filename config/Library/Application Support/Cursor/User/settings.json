@@ -170,5 +170,5 @@
   ],
   "editor.cursorSmoothCaretAnimation": "on",
   "find-it-faster.general.showMaximizedTerminal": true,
-  "workbench.editor.showTabs": "single"
+  "workbench.editor.showTabs": "none"
 }
