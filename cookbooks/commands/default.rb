@@ -9,6 +9,8 @@
   fzf
   gnu-sed
   fd
+  bat
+  lazygit
 ).each do |v|
   package v do
     if node[:platform] == 'darwin'
