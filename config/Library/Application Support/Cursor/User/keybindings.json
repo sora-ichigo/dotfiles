@@ -41,13 +41,5 @@
   {
     "key": "ctrl+shift+g",
     "command": "lazygit-vscode.toggle"
-  },
-  {
-    "key": "cmd+p",
-    "command": "find-it-faster.findFiles"
-  },
-  {
-    "key": "shift+cmd+f",
-    "command": "find-it-faster.findWithinFiles"
   }
 ]
