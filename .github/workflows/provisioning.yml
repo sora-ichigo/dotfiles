@@ -11,7 +11,7 @@ jobs:
       - name: setup mitamae
         run: ./bin/setup
       - name: mitamae local
-        run: make mitamae-dry
+        run: make mitamae
   macos:
     runs-on: macos-latest
     name: MacOS Big Sur Latest
@@ -20,4 +20,4 @@ jobs:
       - name: setup mitamae
         run: ./bin/setup
       - name: mitamae local
-        run: make mitamae-dry
+        run: make mitamae
