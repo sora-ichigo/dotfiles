@@ -170,5 +170,6 @@
   ],
   "editor.cursorSmoothCaretAnimation": "on",
   "find-it-faster.general.showMaximizedTerminal": true,
-  "workbench.editor.showTabs": "none"
+  "workbench.editor.showTabs": "multiple",
+  "cursor.cpp.enablePartialAccepts": true
 }
