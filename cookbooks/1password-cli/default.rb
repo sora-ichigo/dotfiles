@@ -1,1 +1,1 @@
-package '1password-cli'
+brew_cask_package '1password-cli'

@@ -1,1 +1,1 @@
-package 'shottr'
+brew_cask_package 'shottr'

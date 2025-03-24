@@ -1,1 +1,1 @@
-package 'rubymine'
+brew_cask_package 'rubymine'
