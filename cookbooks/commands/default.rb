@@ -22,7 +22,7 @@
 end
 
 if node[:platform] == 'darwin'
-  package 'rg'
+  package 'ripgrep'
 else
   package 'ripgrep' do
     user 'root'

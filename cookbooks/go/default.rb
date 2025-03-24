@@ -1,5 +1,5 @@
 if node[:platform] == 'darwin'
-  package 'golang'
+  package 'go'
 elsif node[:platform] == 'ubuntu'
   execute "install go" do
     command "
