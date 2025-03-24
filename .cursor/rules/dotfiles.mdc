@@ -1,0 +1,41 @@
+---
+description: dotfilesの使い方と設定方法に関するドキュメント
+globs: 
+alwaysApply: false
+---
+
+# dotfilesの使い方
+
+## 新しいパッケージをインストールする方法
+
+1. `cookbooks/[パッケージ名]` ディレクトリを作成する
+   ```
+   mkdir -p cookbooks/[パッケージ名]
+   ```
+
+2. `cookbooks/[パッケージ名]/default.rb` ファイルを作成し、パッケージのインストール設定を追加する
+   ```ruby
+   package '[パッケージ名]'
+   ```
+
+3. `roles/darwin/default.rb` (macOSの場合) または対応するプラットフォームのroleファイルに、パッケージを追加する
+   ```ruby
+   include_cookbook '[パッケージ名]'
+   ```
+
+## 例: ChatGPTパッケージのインストール設定
+
+1. cookbooks/chatgptディレクトリを作成
+   ```
+   mkdir -p cookbooks/chatgpt
+   ```
+
+2. cookbooks/chatgpt/default.rbファイルを作成
+   ```ruby
+   package 'chatgpt'
+   ```
+
+3. roles/darwin/default.rbファイルに以下の行を追加
+   ```ruby
+   include_cookbook 'chatgpt'
+   ```
