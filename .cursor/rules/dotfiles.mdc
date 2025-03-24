@@ -3,10 +3,11 @@ description: dotfilesの使い方と設定方法に関するドキュメント
 globs: 
 alwaysApply: false
 ---
-
 # dotfilesの使い方
 
 ## 新しいパッケージをインストールする方法
+
+### 通常のHomebrew パッケージ (Formula) をインストールする場合
 
 1. `cookbooks/[パッケージ名]` ディレクトリを作成する
    ```
@@ -17,25 +18,65 @@ alwaysApply: false
    ```ruby
    package '[パッケージ名]'
    ```
+   
+   **重要**: パッケージ名は `brew info [パッケージ名]` で確認できる正確な名前を使用してください。
+   例えば、`rg` コマンドは実際には `ripgrep` パッケージです。
 
 3. `roles/darwin/default.rb` (macOSの場合) または対応するプラットフォームのroleファイルに、パッケージを追加する
    ```ruby
    include_cookbook '[パッケージ名]'
    ```
 
-## 例: ChatGPTパッケージのインストール設定
+### Homebrew Cask (GUI アプリケーション) をインストールする場合
 
-1. cookbooks/chatgptディレクトリを作成
+1. `cookbooks/[パッケージ名]` ディレクトリを作成する
    ```
-   mkdir -p cookbooks/chatgpt
+   mkdir -p cookbooks/[パッケージ名]
    ```
 
-2. cookbooks/chatgpt/default.rbファイルを作成
+2. `cookbooks/[パッケージ名]/default.rb` ファイルを作成し、Caskパッケージのインストール設定を追加する
    ```ruby
-   package 'chatgpt'
+   brew_cask_package '[パッケージ名]'
+   ```
+   
+   **重要**: パッケージ名は `brew info --cask [パッケージ名]` で確認できる正確な名前を使用してください。
+   また、アプリケーション名が通常と異なる場合は、`lib/recipe_helper.rb` の `app_name_map` にマッピングを追加してください。
+
+3. `roles/darwin/default.rb` (macOSの場合) または対応するプラットフォームのroleファイルに、パッケージを追加する
+   ```ruby
+   include_cookbook '[パッケージ名]'
+   ```
+
+## 例: neovimパッケージのインストール設定 (Formula)
+
+1. cookbooks/neovimディレクトリを作成
+   ```
+   mkdir -p cookbooks/neovim
+   ```
+
+2. cookbooks/neovim/default.rbファイルを作成
+   ```ruby
+   package 'neovim'
    ```
 
 3. roles/darwin/default.rbファイルに以下の行を追加
    ```ruby
-   include_cookbook 'chatgpt'
+   include_cookbook 'neovim'
    ```
+
+## 例: Visual Studio Codeのインストール設定 (Cask)
+
+1. cookbooks/vscodeディレクトリを作成
+   ```
+   mkdir -p cookbooks/vscode
+   ```
+
+2. cookbooks/vscode/default.rbファイルを作成
+   ```ruby
+   brew_cask_package 'visual-studio-code'
+   ```
+
+3. roles/darwin/default.rbファイルに以下の行を追加
+   ```ruby
+   include_cookbook 'vscode'
+   ``` 
