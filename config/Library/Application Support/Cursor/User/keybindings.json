@@ -41,5 +41,9 @@
   {
     "key": "ctrl+shift+g",
     "command": "lazygit-vscode.toggle"
+  },
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
   }
 ]
