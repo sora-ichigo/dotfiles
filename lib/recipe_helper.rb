@@ -119,7 +119,8 @@ MItamae::RecipeContext.class_eval do
       '1password-cli' => 'op',
       'shottr' => 'Shottr',
       'rubymine' => 'RubyMine',
-      'chatgpt' => 'ChatGPT'
+      'chatgpt' => 'ChatGPT',
+      'claude' => 'Claude'
     }
 
     # デフォルトではパッケージ名を大文字にしたものをアプリケーション名とする

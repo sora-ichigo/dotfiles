@@ -1,7 +1,7 @@
 ---
-description: dotfilesの使い方と設定方法に関するドキュメント
-globs: 
-alwaysApply: false
+description:
+globs:
+alwaysApply: true
 ---
 # dotfilesの使い方
 
@@ -18,7 +18,7 @@ alwaysApply: false
    ```ruby
    package '[パッケージ名]'
    ```
-   
+
    **重要**: パッケージ名は `brew info [パッケージ名]` で確認できる正確な名前を使用してください。
    例えば、`rg` コマンドは実際には `ripgrep` パッケージです。
 
@@ -38,7 +38,7 @@ alwaysApply: false
    ```ruby
    brew_cask_package '[パッケージ名]'
    ```
-   
+
    **重要**: パッケージ名は `brew info --cask [パッケージ名]` で確認できる正確な名前を使用してください。
    また、アプリケーション名が通常と異なる場合は、`lib/recipe_helper.rb` の `app_name_map` にマッピングを追加してください。
 
@@ -79,4 +79,4 @@ alwaysApply: false
 3. roles/darwin/default.rbファイルに以下の行を追加
    ```ruby
    include_cookbook 'vscode'
-   ``` 
+   ```
