@@ -171,5 +171,6 @@
   "editor.cursorSmoothCaretAnimation": "on",
   "find-it-faster.general.showMaximizedTerminal": true,
   "workbench.editor.showTabs": "multiple",
-  "cursor.cpp.enablePartialAccepts": true
+  "cursor.cpp.enablePartialAccepts": true,
+  "update.releaseTrack": "prerelease"
 }
