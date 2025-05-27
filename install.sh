@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -eux
-GITHUB_REPO="ghq/github.com/igsr5/dotfiles"
+GITHUB_REPO="ghq/github.com/sora-ichigo/dotfiles"
 WORKDIR="${HOME}/${GITHUB_REPO}"
 
 installRepository() {
