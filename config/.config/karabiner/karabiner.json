@@ -366,16 +366,6 @@
                                     "key_code": "japanese_kana"
                                 }
                             ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "right_option"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "caps_lock"
-                                }
-                            ]
                         }
                     ]
                 },
