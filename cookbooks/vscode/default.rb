@@ -1,3 +1,6 @@
+# Install Cursor application first
+brew_cask_package 'cursor'
+
 # Cursor extension management
 # Simple and efficient implementation
 extensions_path = "#{ENV['HOME']}/Library/Application Support/Cursor/User/extensions"
