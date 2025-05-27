@@ -120,7 +120,8 @@ MItamae::RecipeContext.class_eval do
       'shottr' => 'Shottr',
       'rubymine' => 'RubyMine',
       'chatgpt' => 'ChatGPT',
-      'claude' => 'Claude'
+      'claude' => 'Claude',
+      'raindropio' => 'Raindrop.io'
     }
 
     # デフォルトではパッケージ名を大文字にしたものをアプリケーション名とする
