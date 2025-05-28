@@ -11,6 +11,8 @@
   fd
   bat
   lazygit
+  coreutils
+  libffi
 ).each do |v|
   package v do
     if node[:platform] == 'darwin'
