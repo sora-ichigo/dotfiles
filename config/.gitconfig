@@ -14,16 +14,16 @@
         ci = commit --allow-empty -m 'initial commit'
         p = push
         ph = push origin HEAD
-        pm = push origin master
         m = merge
-        mm = merge master
+        mm = "!git merge $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
         f = fetch origin
         s = status
         d = diff
         l = log
         co = checkout
         cb = checkout -b
-        cm = checkout master
+        cm = "!git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
+        pl = "!git pull origin $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
 [push]
         default = simple
 	autoSetupRemote = true
