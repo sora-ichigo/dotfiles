@@ -25,6 +25,7 @@ eval "$(rbenv init -)"
 export PATH="$HOME/.nodenv/bin:$PATH"
 export PATH="$HOME/.nodenv/shims:$PATH"
 eval "$(nodenv init -)"
+export PATH="$(npm prefix -g)/bin:$PATH"
 
 # nodebrew
 # export PATH=$HOME/.nodebrew/current/bin:$PATH

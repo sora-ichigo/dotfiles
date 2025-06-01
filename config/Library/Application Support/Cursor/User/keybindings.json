@@ -45,5 +45,13 @@
   {
     "key": "cmd+i",
     "command": "composerMode.agent"
-  }
+},
+{
+    "key": "shift+enter",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+        "text": "\\\r\n"
+    },
+    "when": "terminalFocus"
+}
 ]
