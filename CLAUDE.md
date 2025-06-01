@@ -69,3 +69,6 @@ make list-extensions
 - Uses `node[:platform]` to determine OS (darwin, ubuntu, debian)
 - Architecture detection in `brew_prefix` helper supports both x86_64 and arm64
 - Platform-specific roles handle OS-specific package management
+
+## Conversation Guidelines
+- Claude Codeは常に日本語で会話する
