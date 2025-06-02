@@ -2,6 +2,7 @@
   "permissions": {
     "allow": [
       "List(*)",
+      "Fetch(https://*)",
       "Bash(ls:*)",
       "Bash(rg:*)",
       "Bash(mv:*)",
