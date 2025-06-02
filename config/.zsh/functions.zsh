@@ -57,4 +57,4 @@ select_worktree() {
     cd "$selected"
   fi
 }
-register_keycommand "^i" select_worktree
+register_keycommand "^j" select_worktree
