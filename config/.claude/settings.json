@@ -1,6 +1,10 @@
 {
   "permissions": {
     "allow": [
+      "Bash(ls:*)",
+      "Bash(make:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
       "Bash(find:*)",
       "Bash(grep:*)",
       "Bash(go test:*)",
@@ -15,6 +19,9 @@
       "Bash(git checkout:*)",
       "Bash(git add:*)",
       "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git pull:*)",
       "mcp__github__create_pull_request",
       "mcp__github__get_issue",
       "mcp__github__add_issue_comment",
