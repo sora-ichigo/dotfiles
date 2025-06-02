@@ -10,14 +10,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: setup mitamae
         run: ./bin/setup
-      - name: mitamae local
+      - name: mitamae dry run
         run: make mitamae-dry
   macos:
     runs-on: macos-latest
-    name: MacOS Big Sur Latest
+    name: MacOS
     steps:
       - uses: actions/checkout@v4
       - name: setup mitamae
         run: ./bin/setup
-      - name: mitamae local
+      - name: mitamae dry run
         run: make mitamae-dry
