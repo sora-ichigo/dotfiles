@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "List(*)",
       "Bash(ls:*)",
       "Bash(mv:*)",
       "Bash(make:*)",
