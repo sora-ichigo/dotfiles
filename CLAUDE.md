@@ -57,6 +57,8 @@ make list-extensions
    ```ruby
    package 'package-name'
    ```
+   **Important**: Use exact package name from `brew info [package-name]`. For example, `rg` command is actually `ripgrep` package.
+
 2. Add to appropriate role file:
    ```ruby
    include_cookbook 'package-name'
@@ -68,12 +70,28 @@ make list-extensions
    ```ruby
    brew_cask_package 'package-name'
    ```
+   **Important**: Use exact package name from `brew info --cask [package-name]`.
+
 2. Add to appropriate role file
-3. If app name differs from package name, update `app_name_map` in `recipe_helper.rb`
+3. If app name differs from package name, update `app_name_map` in `recipe_helper.rb:116`
+
+### Configuration Files Management
+
+- Place application config files in `config/` directory matching the target location structure
+- Use `remote_file` resource in cookbooks to copy configurations to appropriate locations
+- Consider platform differences when handling config file paths
 
 ### Platform Detection
 
 - Uses `node[:platform]` to determine OS (darwin, ubuntu, debian)
 - Architecture detection in `brew_prefix` helper supports both x86_64 and arm64
 - Platform-specific roles handle OS-specific package management
+
+### Key Helper Methods
+
+- `brew_cask_package(name)`: Installs Homebrew Cask packages with app existence checking
+- `include_cookbook(name)`: Loads cookbook from `cookbooks/[name]/default.rb`
+- `include_role(name)`: Loads role from `roles/[name]/default.rb`
+- `has_package?(name)`: Checks if Debian package is installed
+- `brew_prefix`: Returns architecture-appropriate Homebrew prefix (`/usr/local` or `/opt/homebrew`)
 
