@@ -9,6 +9,7 @@ This is a dotfiles repository using Mitamae (Ruby-based infrastructure automatio
 ## Common Commands
 
 ### Initial Setup
+
 ```bash
 # First time installation
 curl -sSL https://raw.githubusercontent.com/igsr5/dotfiles/master/install.sh | sh
@@ -21,6 +22,7 @@ make mitamae-dry
 ```
 
 ### Development Commands
+
 ```bash
 # Run Mitamae directly
 ./bin/mitamae local ./lib/recipe.rb
@@ -32,6 +34,7 @@ make list-extensions
 ## Architecture
 
 ### Core Structure
+
 - `lib/recipe.rb`: Main entry point that includes platform-specific roles
 - `lib/recipe_helper.rb`: Helper methods and cookbook inclusion logic
 - `roles/`: Platform-specific role definitions (darwin, ubuntu, debian, base)
@@ -40,6 +43,7 @@ make list-extensions
 - `config/`: Application configuration files
 
 ### Recipe Execution Flow
+
 1. `lib/recipe.rb` determines the platform and includes the appropriate role
 2. Roles (e.g., `roles/darwin/default.rb`) include specific cookbooks
 3. Cookbooks contain installation and configuration logic for individual tools
@@ -48,6 +52,7 @@ make list-extensions
 ### Adding New Packages
 
 #### Homebrew Formula (CLI tools)
+
 1. Create `cookbooks/[package-name]/default.rb` with:
    ```ruby
    package 'package-name'
@@ -58,6 +63,7 @@ make list-extensions
    ```
 
 #### Homebrew Cask (GUI apps)
+
 1. Create `cookbooks/[package-name]/default.rb` with:
    ```ruby
    brew_cask_package 'package-name'
@@ -66,12 +72,8 @@ make list-extensions
 3. If app name differs from package name, update `app_name_map` in `recipe_helper.rb`
 
 ### Platform Detection
+
 - Uses `node[:platform]` to determine OS (darwin, ubuntu, debian)
 - Architecture detection in `brew_prefix` helper supports both x86_64 and arm64
 - Platform-specific roles handle OS-specific package management
 
-## Conversation Guidelines
-- Claude Codeは常に日本語で会話する
-
-## Development Philosophy
-- 常にTDD(テスト駆動開発)で開発をする
