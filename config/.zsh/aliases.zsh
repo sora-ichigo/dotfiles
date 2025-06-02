@@ -8,6 +8,7 @@ alias fd='fd -H'
 alias valec='AWS_SDK_LOAD_CONFIG=1 valec'
 alias rmf='rm $(fd|fzf)'
 alias lg='lazygit'
+alias cl='claude'
 
 alias ec2-ubuntu-start="
   aws ec2 start-instances --instance-ids i-045d4a6f5bf5315ed \
