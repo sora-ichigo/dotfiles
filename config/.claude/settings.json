@@ -2,6 +2,7 @@
   "permissions": {
     "allow": [
       "Bash(ls:*)",
+      "Bash(mv:*)",
       "Bash(make:*)",
       "Bash(mkdir:*)",
       "Bash(cp:*)",
