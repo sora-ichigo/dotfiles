@@ -1,4 +1,4 @@
-以下の手順で GitHub の Issue「$ARGUMENTS」を分析・修正してください。
+以下の手順で GitHub の Issue「$ARGUMENTS」を分析・修正してください。なお、現在のブランチが master の場合は、git worktree を使用して新しいブランチを作成してから作業を開始してください。
 
 1. gh issue view を使って Issue の詳細を取得する
 2. Issue で記載されている問題を正確に理解する
