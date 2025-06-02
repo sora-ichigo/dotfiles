@@ -3,3 +3,4 @@ directory "#{ENV['HOME']}/.claude" do
 end
 
 dotfile ".claude/settings.json"
+dotfile ".claude/CLAUDE.md"
