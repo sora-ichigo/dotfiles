@@ -72,3 +72,6 @@ make list-extensions
 
 ## Conversation Guidelines
 - Claude Codeは常に日本語で会話する
+
+## Development Philosophy
+- 常にTDD(テスト駆動開発)で開発をする
