@@ -1,27 +1,39 @@
 # dotfiles 🥘
 ![](https://github.com/igsr5/dotfiles/workflows/Provisioning%20Test/badge.svg)
-![](https://github.com/igsr5/dotfiles/workflows/install.sh%20Test/badge.svg)
-![](https://img.shields.io/badge/license-MIT-green)
 
+My development environment setup dotfiles
 
-my development kitchen.
+## Supported OS
+- macOS (Darwin)
+- Ubuntu
+- Debian
+
+## Tools
+This dotfiles repository uses [Mitamae](https://github.com/itamae-kitchen/mitamae), a Ruby-based infrastructure automation tool, to provision development environments across multiple platforms.
 
 ## Installation
 ```sh
-$ curl -sSL https://raw.githubusercontent.com/igsr5/dotfiles/master/install.sh | sh
-```
-After the second time, this is command.
-```sh
+$ git clone https://github.com/igsr5/dotfiles.git
+$ cd dotfiles
 $ make
 ```
-Dry run.
+
+Dry run:
 ```sh
 $ make mitamae-dry
 ```
 
-## Gratitude
-- https://github.com/k0kubun/dotfiles
-- https://github.com/izumin5210/dotfiles
-
-## License
-Licensed under the [MIT license](https://igsr5.mit-license.org/2022).
+## Directory Structure
+```
+.
+├── bin/                    # Mitamae binary and setup scripts
+├── config/                 # Application configuration files
+├── cookbooks/             # Individual tool/application configurations
+├── lib/                   # Core recipe files and helpers
+├── roles/                 # Platform-specific role definitions
+│   ├── base/             # Common configurations for all platforms
+│   ├── darwin/           # macOS-specific configurations
+│   ├── ubuntu/           # Ubuntu-specific configurations
+│   └── debian/           # Debian-specific configurations
+└── scripts/              # Utility scripts
+```
