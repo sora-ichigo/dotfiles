@@ -78,8 +78,24 @@ make list-extensions
 ### Configuration Files Management
 
 - Place application config files in `config/` directory matching the target location structure
-- Use `remote_file` resource in cookbooks to copy configurations to appropriate locations
+- **ALWAYS use `dotfile` method for managing configuration files** (defined in `cookbooks/functions/default.rb`)
+- The `dotfile` method creates symbolic links from `config/[path]` to `$HOME/[path]`
 - Consider platform differences when handling config file paths
+
+#### Using dotfile Method
+
+```ruby
+# Basic usage: config/.tmux.conf → ~/.tmux.conf
+dotfile '.tmux.conf'
+
+# Directory linking: config/.config/nvim → ~/.config/nvim  
+dotfile '.config/nvim'
+
+# macOS specific paths: config/Library/... → ~/Library/...
+dotfile "Library/Application Support/App/settings.json"
+```
+
+**Important**: Always use `dotfile` method instead of `remote_file` for configuration management.
 
 ### Platform Detection
 
@@ -89,9 +105,13 @@ make list-extensions
 
 ### Key Helper Methods
 
+- `dotfile(name)`: Creates symbolic link from `config/[name]` to `$HOME/[name]` (defined in `cookbooks/functions/default.rb`)
 - `brew_cask_package(name)`: Installs Homebrew Cask packages with app existence checking
 - `include_cookbook(name)`: Loads cookbook from `cookbooks/[name]/default.rb`
 - `include_role(name)`: Loads role from `roles/[name]/default.rb`
 - `has_package?(name)`: Checks if Debian package is installed
 - `brew_prefix`: Returns architecture-appropriate Homebrew prefix (`/usr/local` or `/opt/homebrew`)
 
+## Memories
+
+- dotfile管理を足すときはdotfile メソッドを使って設定を書いて
