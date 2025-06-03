@@ -26,23 +26,4 @@ config.leader = { key = "t", mods = "CTRL" }
 config.keys = require("keybinds").keys
 config.key_tables = require("keybinds").key_tables
 
- wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-   local background = "#000000"
-   local foreground = "#FFFFFF"
-
-   if tab.is_active then
-     background = "#5bcdcb"
-     foreground = "#FFFFFF"
-   end
-
-   local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
-
-   return {
-     { Background = { Color = background } },
-     { Foreground = { Color = foreground } },
-     { Text = title },
-   }
- end)
-
-
 return config
