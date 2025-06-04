@@ -22,8 +22,6 @@ return {
     -- Leader key binding for entering copy mode
     { key = 'y', mods = 'LEADER', action = act.ActivateCopyMode },
 
-    { key = "l",  mods = "LEADER",  action = act.ShowLauncherArgs{ flags = 'WORKSPACES',  title = "Select workspace" } },
-
     { key = 'Tab', mods = 'CTRL', action = act.ActivateTabRelative(1) },
     { key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative(-1) },
     { key = 'Enter', mods = 'ALT', action = act.ToggleFullScreen },
