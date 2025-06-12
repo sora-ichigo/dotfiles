@@ -22,6 +22,16 @@ return {
     -- Leader key binding for entering copy mode
     { key = 'y', mods = 'LEADER', action = act.ActivateCopyMode },
 
+    -- Leader key binding for renaming current tab
+    { key = ',', mods = 'LEADER', action = act.PromptInputLine {
+      description = 'Enter new name for tab',
+      action = wezterm.action_callback(function(window, pane, line)
+        if line then
+          window:active_tab():set_title(line)
+        end
+      end),
+    }},
+
     { key = 'Tab', mods = 'CTRL', action = act.ActivateTabRelative(1) },
     { key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative(-1) },
     { key = 'Enter', mods = 'ALT', action = act.ToggleFullScreen },
