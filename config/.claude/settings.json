@@ -3,6 +3,7 @@
     "allow": [
       "List(*)",
       "Fetch(*)",
+      "WebFetch(*)",
       "Bash(ls:*)",
       "Bash(rg:*)",
       "Bash(mv:*)",
@@ -97,6 +98,8 @@
       "mcp__github__get_issue",
       "mcp__github__add_issue_comment",
       "mcp__github__get_issue_comments",
+      "mcp__github__get_pull_request",
+      "mcp__github__get_pull_request_comments",
       "mcp__devinwiki__read_wiki_contents",
       "mcp__devinwiki__ask_question"
     ],
