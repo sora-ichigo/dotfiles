@@ -10,17 +10,3 @@ alias lg='lazygit'
 alias cl='claude'
 alias cld='claude --dangerously-skip-permissions'
 
-alias ec2-ubuntu-start="
-  aws ec2 start-instances --instance-ids i-045d4a6f5bf5315ed \
-  && aws ec2 wait instance-running --instance-ids i-045d4a6f5bf5315ed \
-  && aws ec2 describe-instances --instance-ids i-045d4a6f5bf5315ed \
-  | jq '.Reservations[].Instances[] | \
-  {InstanceId, InstanceState: .State.Name, PublicDnsName, PublicIpAddress}'
-"
-
-alias ec2-ubuntu-stop="
-  aws ec2 stop-instances --instance-ids i-045d4a6f5bf5315ed \
-  && aws ec2 wait instance-stopped --instance-ids  i-045d4a6f5bf5315ed \
-  && aws ec2 describe-instances --instance-ids i-045d4a6f5bf5315ed \
-  | jq '.Reservations[].Instances[] | {InstanceId, Name, InstanceState: .State}'
-  "
