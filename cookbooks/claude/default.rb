@@ -1,3 +1,5 @@
+brew_cask_package 'claude'
+
 directory "#{ENV['HOME']}/.claude" do
   mode '0755'
 end

@@ -9,7 +9,7 @@
     }
   ],
   "window.closeWhenEmpty": true,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "workbench.editor.closeEmptyGroups": false,
   "editor.inlineSuggest.enabled": true,
   "vim.neovimUseConfigFile": true,
