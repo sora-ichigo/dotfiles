@@ -4,6 +4,10 @@
 
 - 常に日本語で会話する
 
+## Code Style Guidelines
+
+- コードコメントは特別に指示された場合を除いて書かないでください
+
 ## Development Philosophy
 
 ### Test-Driven Development (TDD)
