@@ -53,5 +53,21 @@
         "text": "\\\r\n"
     },
     "when": "terminalFocus"
+},
+{
+  "key": "ctrl+shift+[",
+  "command": "workbench.action.previousEditor"
+},
+{
+  "key": "shift+cmd+[",
+  "command": "-workbench.action.previousEditor"
+},
+{
+  "key": "ctrl+shift+]",
+  "command": "workbench.action.nextEditor"
+},
+{
+  "key": "shift+cmd+]",
+  "command": "-workbench.action.nextEditor"
 }
 ]
