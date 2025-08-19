@@ -58,3 +58,16 @@ select_worktree() {
   fi
 }
 register_keycommand "^j" select_worktree
+
+# 会社の Claude Code 設定用
+function set_wantedly_env_vars() {
+  if [[ "$PWD" == "$HOME/ghq/github.com/wantedly/"* ]]; then
+    export CLAUDE_CODE_USE_BEDROCK=1
+    export AWS_REGION=us-east-1
+    export AWS_PROFILE=local-bedrock
+    export ANTHROPIC_MODEL=arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/404jh654xpbz
+  fi
+}
+autoload -U add-zsh-hook
+add-zsh-hook chpwd set_wantedly_env_vars
+set_wantedly_env_vars
