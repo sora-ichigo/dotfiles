@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Ubuntu
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: setup mitamae
         run: ./bin/setup
       - name: mitamae dry run
@@ -16,7 +16,7 @@ jobs:
     runs-on: macos-latest
     name: MacOS
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: setup mitamae
         run: ./bin/setup
       - name: mitamae dry run
