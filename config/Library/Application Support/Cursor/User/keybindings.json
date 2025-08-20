@@ -27,12 +27,7 @@
   },
   {
     "key": "cmd+j",
-    "command": "workbench.action.terminal.new",
-    "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
-  },
-  {
-    "key": "cmd+`",
-    "command": "workbench.action.closePanel"
+    "command": "workbench.action.togglePanel"
   },
   {
     "key": "ctrl+shift+l",
@@ -45,29 +40,29 @@
   {
     "key": "cmd+i",
     "command": "composerMode.agent"
-},
-{
+  },
+  {
     "key": "shift+enter",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-        "text": "\\\r\n"
+      "text": "\\\r\n"
     },
     "when": "terminalFocus"
-},
-{
-  "key": "ctrl+shift+[",
-  "command": "workbench.action.previousEditor"
-},
-{
-  "key": "shift+cmd+[",
-  "command": "-workbench.action.previousEditor"
-},
-{
-  "key": "ctrl+shift+]",
-  "command": "workbench.action.nextEditor"
-},
-{
-  "key": "shift+cmd+]",
-  "command": "-workbench.action.nextEditor"
-}
+  },
+  {
+    "key": "ctrl+shift+[",
+    "command": "workbench.action.previousEditor"
+  },
+  {
+    "key": "shift+cmd+[",
+    "command": "-workbench.action.previousEditor"
+  },
+  {
+    "key": "ctrl+shift+]",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    "key": "shift+cmd+]",
+    "command": "-workbench.action.nextEditor"
+  }
 ]

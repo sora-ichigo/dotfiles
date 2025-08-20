@@ -161,7 +161,6 @@
   "rubyLsp.featureFlags": {
     "all": true
   },
-  "terminal.integrated.defaultLocation": "editor",
   "jest.runMode": "on-demand",
   "git.openRepositoryInParentFolders": "never",
   "animations.Install-Method": "Apc Customize UI++",
