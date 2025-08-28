@@ -109,5 +109,11 @@
   },
   "feedbackSurveyState": {
     "lastShownTime": 1754560507535
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "padding": 0
   }
 }
+

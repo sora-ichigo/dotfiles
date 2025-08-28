@@ -7,3 +7,4 @@ end
 dotfile ".claude/settings.json"
 dotfile ".claude/CLAUDE.md"
 dotfile ".claude/commands"
+dotfile ".claude/statusline.sh"
