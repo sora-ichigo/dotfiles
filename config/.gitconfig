@@ -5,6 +5,7 @@
         editor = nvim
         filemode = true
         hooksPath = ~/.git_template/hooks
+        excludesfile = ~/.gitignore_global
 [color]
         ui = true
 [alias]
