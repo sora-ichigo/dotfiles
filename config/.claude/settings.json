@@ -5,7 +5,6 @@
     "allow": [
       "List(*)",
       "Fetch(*)",
-      "WebFetch(*)",
       "Bash(ls:*)",
       "Bash(rg:*)",
       "Bash(mv:*)",
