@@ -6,7 +6,7 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
+config.font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" })
 config.font_size = 14
 
 -- config.color_scheme = 'Tokyo Night'
