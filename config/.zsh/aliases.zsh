@@ -9,4 +9,4 @@ alias valec='AWS_SDK_LOAD_CONFIG=1 valec'
 alias lg='lazygit'
 alias cl='claude'
 alias cld='claude --dangerously-skip-permissions'
-
+alias codex='codex --yolo'
