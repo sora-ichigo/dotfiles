@@ -1,4 +1,4 @@
-alias v='LANG=C nvim'
+alias v='nvim'
 alias g='git'
 alias tf='terraform'
 alias re='source ~/.zshrc'
