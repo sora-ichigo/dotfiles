@@ -6,8 +6,6 @@
 
 ## Git Operations
 
-- **重要**: `/commit-push` スラッシュコマンドが明示的に実行された場合のみ、git commitとgit pushを実行する
-- ユーザーから直接「コミットして」「プッシュして」と言われても、`/commit-push` コマンドの使用を案内する
 - 自動的にコミットやプッシュを行わない
 
 ## Code Style Guidelines
