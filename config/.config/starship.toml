@@ -80,7 +80,7 @@ format = "via [$symbol($version(-$name) )]($style)"
 version_format = "v${raw}"
 style = "149 bold"
 symbol = "C "
-disabled = false
+disabled = true # タイムアウトするため
 detect_extensions = [
     "c",
     "h",
