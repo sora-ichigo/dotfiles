@@ -116,3 +116,6 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # gnu-sed
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
+# aqua
+export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
