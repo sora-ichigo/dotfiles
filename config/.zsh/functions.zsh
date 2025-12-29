@@ -59,6 +59,21 @@ select_worktree() {
 }
 register_keycommand "^j" select_worktree
 
+gwb() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: gwb <branch-name>"
+    return 1
+  fi
+  local worktree_path="./.worktree/$1"
+  git worktree add -b "$1" "$worktree_path" && cd "$worktree_path"
+}
+
+gwd() {
+  local current_dir="$PWD"
+  local parent_dir="$(dirname "$(dirname "$current_dir")")"
+  cd "$parent_dir" && git worktree remove "$current_dir"
+}
+
 # 会社の Claude Code 設定用
 function set_wantedly_env_vars() {
   if [[ "$PWD" == "$HOME/ghq/github.com/wantedly/"* ]]; then
