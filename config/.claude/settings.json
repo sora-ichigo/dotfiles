@@ -111,14 +111,15 @@
     "command": "~/.claude/statusline.sh",
     "padding": 0
   },
-  "feedbackSurveyState": {
-    "lastShownTime": 1754560507535
-  },
   "enabledPlugins": {
     "frontend-design@claude-code-plugins": true,
     "backend-development@claude-code-workflows": true,
     "code-refactoring@claude-code-workflows": true,
     "document-skills@anthropic-agent-skills": true,
-    "security-guidance@claude-code-plugins": true
+    "security-guidance@claude-code-plugins": true,
+    "gopls-lsp@claude-plugins-official": true
+  },
+  "feedbackSurveyState": {
+    "lastShownTime": 1754560507535
   }
 }
