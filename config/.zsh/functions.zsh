@@ -82,10 +82,14 @@ function set_wantedly_env_vars() {
     export AWS_PROFILE=local-bedrock
     export ANTHROPIC_MODEL=arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/w7swxvx62vum
     export ANTHROPIC_SMALL_FAST_MODEL=arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/bs36o7kf43bd
+    export ANTHROPIC_DEFAULT_OPUS_MODEL=arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/nus1dlp2n2te
+    export CLAUDE_CODE_SUBAGENT_MODEL=arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/w7swxvx62vum
   else
     unset CLAUDE_CODE_USE_BEDROCK
     unset ANTHROPIC_MODEL
     unset ANTHROPIC_SMALL_FAST_MODEL
+    export ANTHROPIC_DEFAULT_OPUS_MODEL
+    export CLAUDE_CODE_SUBAGENT_MODEL
   fi
 }
 autoload -U add-zsh-hook
