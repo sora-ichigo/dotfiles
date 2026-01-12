@@ -11,5 +11,17 @@
     ripgrep
     fd
     jq
+    wget
+    curl
+    htop
+    gnumake
+    gcc
+    direnv
+    fzf
+    gnused
+    bat
+    lazygit
+    coreutils
+    libffi
   ];
 }
