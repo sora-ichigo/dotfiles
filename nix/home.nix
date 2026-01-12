@@ -23,5 +23,15 @@
     lazygit
     coreutils
     libffi
+    nnn
+    awscli2
+    luarocks
+    libpq
+    postgresql
+    starship
+    tmux
+    git
+    gh
+    ghq
   ];
 }
