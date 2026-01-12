@@ -23,7 +23,6 @@ eval "$(mise activate zsh)"
 # export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # go
-export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/gobin
 export GOPATH=$HOME
 export GOBIN=$HOME/gobin
