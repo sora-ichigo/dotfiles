@@ -16,10 +16,8 @@ export PATH="$PATH:$HOME/.local/bin"
 # vim
 export PATH="$PATH:/usr/bin/vim"
 
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="$HOME/.rbenv/shims:$PATH"
-eval "$(rbenv init -)"
+# mise
+eval "$(mise activate zsh)"
 
 # rbenv
 export PATH="$HOME/.nodenv/bin:$PATH"
@@ -75,7 +73,6 @@ export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig"
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/usr/local/opt/openssl@1.1"
 
 # bat
 export BAT_THEME="Solarized (light)"
@@ -116,6 +113,3 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # gnu-sed
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-
-# aqua
-export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
