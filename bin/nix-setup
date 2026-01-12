@@ -1,0 +1,27 @@
+#!/bin/bash
+set -eu
+
+DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+NIX_DIR="${DOTFILES_DIR}/nix"
+
+# Nix環境を読み込む
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+
+# Nixがインストールされているか確認
+if ! command -v nix &> /dev/null; then
+  echo "Error: Nix is not installed. Run 'make mitamae' first."
+  exit 1
+fi
+
+# Flakesを有効化（まだの場合）
+mkdir -p ~/.config/nix
+if ! grep -q "experimental-features" ~/.config/nix/nix.conf 2>/dev/null; then
+  echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+fi
+
+cd "${NIX_DIR}"
+
+echo "Applying Home Manager configuration..."
+nix run home-manager -- switch --flake .#ichigo

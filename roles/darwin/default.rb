@@ -1,5 +1,6 @@
 include_role 'base'
 
+include_cookbook 'nix'
 include_cookbook 'commands'
 include_cookbook 'yabai'
 include_cookbook 'raindropio'

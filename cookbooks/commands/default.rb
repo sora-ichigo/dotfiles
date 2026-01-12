@@ -3,12 +3,10 @@
   curl
   htop
   make
-  jq
   gcc
   direnv
   fzf
   gnu-sed
-  fd
   bat
   lazygit
   coreutils
@@ -20,13 +18,5 @@
     else
       user 'root'
     end
-  end
-end
-
-if node[:platform] == 'darwin'
-  package 'ripgrep'
-else
-  package 'ripgrep' do
-    user 'root'
   end
 end
