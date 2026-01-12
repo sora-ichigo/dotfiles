@@ -1,0 +1,54 @@
+{ ... }:
+
+{
+  programs.starship = {
+    enable = true;
+    settings = {
+      # タイムアウト対策で C/C++ を無効化
+      c.disabled = true;
+      cpp.disabled = true;
+
+      # 不要なモジュールを無効化
+      azure.disabled = true;
+      direnv.disabled = true;
+      fennel.disabled = true;
+      fossil_branch.disabled = true;
+      fossil_metrics.disabled = true;
+      git_metrics.disabled = true;
+      hg_branch.disabled = true;
+      hg_state.disabled = true;
+      kubernetes.disabled = true;
+      localip.disabled = true;
+      memory_usage.disabled = true;
+      mise.disabled = true;
+      nats.disabled = true;
+      os.disabled = true;
+      pijul_channel.disabled = true;
+      shell.disabled = true;
+      shlvl.disabled = true;
+      status.disabled = true;
+      sudo.disabled = true;
+      time.disabled = true;
+
+      # カスタマイズ
+      character = {
+        success_symbol = "[❯](bold green)";
+        error_symbol = "[❯](bold red)";
+        vimcmd_symbol = "[❮](bold green)";
+        vimcmd_visual_symbol = "[❮](bold yellow)";
+        vimcmd_replace_symbol = "[❮](bold purple)";
+        vimcmd_replace_one_symbol = "[❮](bold purple)";
+      };
+
+      git_branch.symbol = " ";
+      nodejs.symbol = " ";
+
+      battery.display = [
+        {
+          threshold = 10;
+          style = "red bold";
+        }
+      ];
+    };
+  };
+}
