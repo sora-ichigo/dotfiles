@@ -22,13 +22,6 @@ eval "$(mise activate zsh)"
 # nodebrew
 # export PATH=$HOME/.nodebrew/current/bin:$PATH
 
-# pyenv
-if [ -x "$(command -v pyenv)" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$HOME/.pyenv/bin:$PATH"
-  eval "$(pyenv init -)"
-fi
-
 # go
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/gobin

@@ -2,7 +2,6 @@ include_role 'base'
 
 include_cookbook 'commands'
 include_cookbook 'yabai'
-include_cookbook 'pyenv'
 include_cookbook 'raindropio'
 include_cookbook 'obsidian'
 include_cookbook 'go'
