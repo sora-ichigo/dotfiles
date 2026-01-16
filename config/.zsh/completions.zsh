@@ -17,3 +17,6 @@ eval "$(gh completion -s zsh)"
 
 # dart
 [[ -f /Users/ichigo/.dart-cli-completion/zsh-config.zsh ]] && . /Users/ichigo/.dart-cli-completion/zsh-config.zsh || true
+
+# mise
+eval "$(mise completion zsh)"
