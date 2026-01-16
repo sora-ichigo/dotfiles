@@ -117,7 +117,8 @@
     "code-refactoring@claude-code-workflows": true,
     "document-skills@anthropic-agent-skills": true,
     "security-guidance@claude-code-plugins": true,
-    "gopls-lsp@claude-plugins-official": true
+    "gopls-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true
   },
   "feedbackSurveyState": {
     "lastShownTime": 1754560507535
