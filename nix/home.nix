@@ -5,6 +5,7 @@
     ./programs/git.nix
     ./programs/gh.nix
     ./programs/starship.nix
+    ./programs/tmux.nix
   ];
 
   home.username = "ichigo";
@@ -34,7 +35,6 @@
     luarocks
     libpq
     postgresql
-    tmux
     ghq
   ];
 }

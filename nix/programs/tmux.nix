@@ -1,0 +1,65 @@
+{ pkgs, ... }:
+
+{
+  programs.tmux = {
+    enable = true;
+    prefix = "C-t";
+    keyMode = "vi";
+    mouse = true;
+    terminal = "screen-256color";
+
+    extraConfig = ''
+      # color
+      set -g terminal-overrides 'xterm:colors=256'
+      set -g pane-active-border-style fg=colour66
+      set-option -g status-style bg=default
+      set-option -g status-style fg=default
+
+      # status line
+      set-option -g status on
+      set-option -g status-position "top"
+      set-option -g status-interval 2
+      set-option -g status-justify "centre"
+      set-option -g status-left-length 120
+      set-option -g status-right-length 120
+      set-window-option -g window-status-current-format "#[fg=#ffffff,bg=#5f5f5f] #I: #W #[default]"
+      set-window-option -g window-status-format "#[fg=#c6c8d1,bg=#1e2132,default] #I: #W #[default]"
+      set -g status-left "#[fg=#c6c8d1,bg=#1e2132,default]#S #(pwd) /->"
+      set -g status-right "#[fg=#c6c8d1,bg=#1e2132,default] /-> #(~/.tmux/lib/battery) #(~/.tmux/lib/wifi)"
+
+      # bind key
+      bind v split-window -h
+      bind s split-window -v
+
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
+
+      bind -r H resize-pane -L 5
+      bind -r J resize-pane -D 5
+      bind -r K resize-pane -U 5
+      bind -r L resize-pane -R 5
+
+      # copy mode
+      bind -T copy-mode-vi v send -X begin-selection
+      bind -T copy-mode-vi V send -X select-line
+      bind -T copy-mode-vi C-v send -X rectangle-toggle
+      bind -T copy-mode-vi y send -X copy-pipe-and-cancel "pbcopy"
+      bind -T copy-mode-vi Y send -X copy-line
+      bind -T copy-mode-vi Enter send -X copy-pipe-and-cancel "pbcopy"
+      bind -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel "pbcopy"
+      bind-key C-p paste-buffer
+    '';
+  };
+
+  home.file.".tmux/lib/battery" = {
+    executable = true;
+    source = ../scripts/tmux-battery;
+  };
+
+  home.file.".tmux/lib/wifi" = {
+    executable = true;
+    source = ../scripts/tmux-wifi;
+  };
+}

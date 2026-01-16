@@ -1,0 +1,40 @@
+#!/bin/bash
+
+airport_path="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport"
+
+if [[ ! -x $airport_path ]]; then
+    echo "$airport_path: not found" 1>&2
+    exit 1
+fi
+
+signals=(▂ ▅ ▇)
+
+info=( $(eval "$airport_path" --getinfo | grep -E "^ *(agrCtlRSSI|state|lastTxRate|SSID):" | awk '{print $2}') )
+if [[ ${#info[@]} -eq 0 ]]; then
+    echo "offline"
+    exit 1
+fi
+
+rssi="${info[0]}"
+stat="${info[1]}"
+rate="${info[2]}"
+ssid="${info[3]}"
+
+signal=""
+for ((j = 0; j < "${#signals[@]}"; j++))
+do
+    if ((  $j == 0 && $rssi > -100 )) ||
+        (( $j == 1 && $rssi > -80  )) ||
+        (( $j == 2 && $rssi > -50  )); then
+        signal="${signal}${signals[$j]} "
+    else
+        signal="${signal}  "
+    fi
+done
+
+if [ "$rate" = 0 ]; then
+    echo "no_wifi"
+    exit 1
+fi
+
+echo -e "${ssid} ${rate}Mbs ${signal}"
