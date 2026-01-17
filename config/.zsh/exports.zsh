@@ -21,7 +21,7 @@ export PATH=$PATH:$HOME/gobin
 export GOPATH=$HOME
 export GOBIN=$HOME/gobin
 
-# dart
+# flutterfile
 export PATH=$PATH:$HOME/.pub-cache/bin
 
 # Java
