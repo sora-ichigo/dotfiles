@@ -36,5 +36,6 @@
     libpq
     postgresql
     ghq
+    fvm
   ];
 }
