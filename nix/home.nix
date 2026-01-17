@@ -14,6 +14,7 @@
     ./programs/codex.nix
     ./programs/wezterm.nix
     ./programs/yabai.nix
+    ./programs/git-worktree-runner.nix
   ];
 
   home.stateVersion = "24.05";

@@ -43,3 +43,9 @@
 
 [submodule]
 	recurse = true
+
+[gtr "editor"]
+	default = nvim
+
+[gtr "ai"]
+	default = git-worktree-runner-ai
