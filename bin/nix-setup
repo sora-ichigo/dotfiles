@@ -3,15 +3,22 @@ set -eu
 
 DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 NIX_DIR="${DOTFILES_DIR}/nix"
+NIX_BIN="/nix/var/nix/profiles/default/bin/nix"
+
+# Nixがインストールされていなければインストール
+if [ ! -x "${NIX_BIN}" ]; then
+  echo "Installing Nix..."
+  curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
+fi
 
 # Nix環境を読み込む
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 
-# Nixがインストールされているか確認
+# Nixが使えるか確認
 if ! command -v nix &> /dev/null; then
-  echo "Error: Nix is not installed. Run 'make mitamae' first."
+  echo "Error: Nix installation failed."
   exit 1
 fi
 
