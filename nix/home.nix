@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./programs/bash.nix
     ./programs/git.nix
     ./programs/gh.nix
     ./programs/starship.nix
