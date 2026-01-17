@@ -38,4 +38,4 @@ cleanup() {
 trap cleanup EXIT
 
 echo "Applying Home Manager configuration for ${USER}@${CURRENT_SYSTEM}..."
-nix run home-manager -- switch --flake .#default
+nix run home-manager -- switch -b backup --flake .#default
