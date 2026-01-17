@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 NIX_DIR="${DOTFILES_DIR}/nix"
 NIX_BIN="/nix/var/nix/profiles/default/bin/nix"
 FLAKE_FILE="${NIX_DIR}/flake.nix"
