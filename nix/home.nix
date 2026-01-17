@@ -37,5 +37,6 @@
     postgresql
     ghq
     fvm
+    mise
   ];
 }
