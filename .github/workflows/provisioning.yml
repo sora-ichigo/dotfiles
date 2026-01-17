@@ -1,23 +1,21 @@
-name: Provisioning Test
-on: 
+name: Nix Flake Check
+on:
   push:
 
 jobs:
-  ubuntu:
-    runs-on: ubuntu-latest
-    name: Ubuntu
+  nix-check:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            config: ci-x86_64-linux
+          - os: macos-latest
+            config: ci-x86_64-darwin
+    runs-on: ${{ matrix.os }}
+    name: Nix (${{ matrix.os }})
     steps:
-      - uses: actions/checkout@v6
-      - name: setup mitamae
-        run: ./bin/setup
-      - name: mitamae dry run
-        run: make mitamae-dry
-  macos:
-    runs-on: macos-latest
-    name: MacOS
-    steps:
-      - uses: actions/checkout@v6
-      - name: setup mitamae
-        run: ./bin/setup
-      - name: mitamae dry run
-        run: make mitamae-dry
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Build Home Manager configuration
+        run: nix build ./nix#homeConfigurations.${{ matrix.config }}.activationPackage --show-trace

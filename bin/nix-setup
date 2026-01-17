@@ -4,31 +4,38 @@ set -eu
 DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 NIX_DIR="${DOTFILES_DIR}/nix"
 NIX_BIN="/nix/var/nix/profiles/default/bin/nix"
+FLAKE_FILE="${NIX_DIR}/flake.nix"
 
-# Nixがインストールされていなければインストール
 if [ ! -x "${NIX_BIN}" ]; then
   echo "Installing Nix..."
   curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
 fi
 
-# Nix環境を読み込む
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 
-# Nixが使えるか確認
-if ! command -v nix &> /dev/null; then
+if ! command -v nix &>/dev/null; then
   echo "Error: Nix installation failed."
   exit 1
 fi
 
-# Flakesを有効化（まだの場合）
 mkdir -p ~/.config/nix
 if ! grep -q "experimental-features" ~/.config/nix/nix.conf 2>/dev/null; then
-  echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+  echo "experimental-features = nix-command flakes" >>~/.config/nix/nix.conf
 fi
+
+CURRENT_SYSTEM="$(nix eval --raw --impure --expr 'builtins.currentSystem')"
 
 cd "${NIX_DIR}"
 
-echo "Applying Home Manager configuration..."
-nix run home-manager -- switch --flake .#ichigo
+cp "${FLAKE_FILE}" "${FLAKE_FILE}.bak"
+sed -e "s/@USERNAME@/${USER}/g" -e "s/@SYSTEM@/${CURRENT_SYSTEM}/g" "${FLAKE_FILE}.bak" >"${FLAKE_FILE}"
+
+cleanup() {
+  mv "${FLAKE_FILE}.bak" "${FLAKE_FILE}"
+}
+trap cleanup EXIT
+
+echo "Applying Home Manager configuration for ${USER}@${CURRENT_SYSTEM}..."
+nix run home-manager -- switch --flake .#default
