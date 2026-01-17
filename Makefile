@@ -1,6 +1,6 @@
 .PHONY: nix
 nix:
-	./bin/nix-setup
+	./install.sh
 
 .PHONY: brew
 brew:
