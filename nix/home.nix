@@ -10,6 +10,9 @@
     ./programs/zsh.nix
     ./programs/mise.nix
     ./programs/direnv.nix
+    ./programs/codex.nix
+    ./programs/wezterm.nix
+    ./programs/yabai.nix
   ];
 
   home.stateVersion = "24.05";
