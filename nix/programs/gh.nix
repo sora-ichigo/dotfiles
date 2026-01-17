@@ -1,18 +1,9 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.gh = {
     enable = true;
-    settings = {
-      version = "1";
-      git_protocol = "ssh";
-      prompt = "enabled";
-      aliases = {
-        co = "pr checkout";
-        r = "repo view --web";
-        v = "pr view --web";
-        c = "pr create --fill --draft --assignee @me";
-      };
-    };
   };
+
+  home.file.".config/gh/config.yml".source = ../../config/.config/gh/config.yml;
 }
