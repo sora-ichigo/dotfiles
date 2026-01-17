@@ -1,9 +1,7 @@
 { pkgs, ... }:
 
 {
-  programs.git = {
-    enable = true;
-  };
+  home.packages = [ pkgs.git ];
 
   home.file.".gitconfig".source = ../../config/.gitconfig;
   home.file.".gitignore_global".source = ../../config/.gitignore_global;
