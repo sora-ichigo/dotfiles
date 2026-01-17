@@ -6,6 +6,7 @@
     ./programs/gh.nix
     ./programs/starship.nix
     ./programs/tmux.nix
+    ./programs/neovim.nix
   ];
 
   home.username = "ichigo";
