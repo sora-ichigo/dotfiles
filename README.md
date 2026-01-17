@@ -1,39 +1,34 @@
-# dotfiles 🥘
-![](https://github.com/igsr5/dotfiles/workflows/Provisioning%20Test/badge.svg)
+# dotfiles
 
 My development environment setup dotfiles
 
 ## Supported OS
+
 - macOS (Darwin)
-- Ubuntu
-- Debian
 
 ## Tools
-This dotfiles repository uses [Mitamae](https://github.com/itamae-kitchen/mitamae), a Ruby-based infrastructure automation tool, to provision development environments across multiple platforms.
+
+- [Nix](https://nixos.org/) with [Home Manager](https://github.com/nix-community/home-manager) for declarative package and configuration management
+- [Homebrew](https://brew.sh/) with Brewfile for macOS GUI applications
 
 ## Installation
-```sh
-$ git clone https://github.com/igsr5/dotfiles.git
-$ cd dotfiles
-$ make
-```
 
-Dry run:
 ```sh
-$ make mitamae-dry
+git clone https://github.com/igsr5/dotfiles.git
+cd dotfiles
+make nix    # Install Nix packages and apply Home Manager configuration
+make brew   # Install Homebrew packages from Brewfile
 ```
 
 ## Directory Structure
+
 ```
 .
-├── bin/                    # Mitamae binary and setup scripts
-├── config/                 # Application configuration files
-├── cookbooks/             # Individual tool/application configurations
-├── lib/                   # Core recipe files and helpers
-├── roles/                 # Platform-specific role definitions
-│   ├── base/             # Common configurations for all platforms
-│   ├── darwin/           # macOS-specific configurations
-│   ├── ubuntu/           # Ubuntu-specific configurations
-│   └── debian/           # Debian-specific configurations
-└── scripts/              # Utility scripts
+├── bin/                    # Setup scripts
+├── config/                 # Application configuration files (symlinked to $HOME)
+├── nix/                    # Nix flake and Home Manager configuration
+│   ├── flake.nix          # Nix flake definition
+│   ├── home.nix           # Home Manager configuration
+│   └── programs/          # Per-program Nix configurations
+└── Brewfile               # Homebrew packages (GUI apps)
 ```
