@@ -11,6 +11,12 @@ if [ ! -x "${NIX_BIN}" ]; then
   curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
 fi
 
+if [ "${CODESPACES:-}" = "true" ]; then
+  if [ -e /nix/var/nix/profiles/default/bin/nix-daemon ] && ! pgrep -x nix-daemon > /dev/null; then
+    sudo /nix/var/nix/profiles/default/bin/nix-daemon > /dev/null 2>&1 &
+  fi
+fi
+
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
