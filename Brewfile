@@ -1,0 +1,23 @@
+tap "homebrew/bundle"
+tap "koekeishiya/formulae"
+
+cask "1password"
+cask "1password-cli"
+cask "chatgpt"
+cask "dash"
+cask "discord"
+cask "figma"
+cask "karabiner-elements"
+cask "meetingbar"
+cask "obsidian"
+cask "raindropio"
+cask "raycast"
+cask "rubymine"
+cask "shottr"
+cask "spotify"
+cask "webcatalog"
+cask "wezterm"
+
+brew "koekeishiya/formulae/yabai"
+brew "koekeishiya/formulae/skhd"
+
