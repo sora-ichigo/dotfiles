@@ -13,7 +13,20 @@ fi
 
 if [ "${CODESPACES:-}" = "true" ]; then
   if [ -e /nix/var/nix/profiles/default/bin/nix-daemon ] && ! pgrep -x nix-daemon > /dev/null; then
+    echo "Starting nix-daemon..."
     sudo /nix/var/nix/profiles/default/bin/nix-daemon > /dev/null 2>&1 &
+    echo "Waiting for nix-daemon socket..."
+    for i in $(seq 1 30); do
+      if [ -S /nix/var/nix/daemon-socket/socket ]; then
+        echo "nix-daemon is ready."
+        break
+      fi
+      sleep 1
+    done
+    if [ ! -S /nix/var/nix/daemon-socket/socket ]; then
+      echo "Error: nix-daemon socket not available after 30 seconds."
+      exit 1
+    fi
   fi
 fi
 
