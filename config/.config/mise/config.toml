@@ -5,3 +5,4 @@ go = "1.25"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby", "node"]
+trusted_config_paths = ["~"]
