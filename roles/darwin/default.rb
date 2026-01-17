@@ -1,4 +1,4 @@
-include_role 'base'
+include_cookbook 'functions'
 
 include_cookbook 'yabai'
 include_cookbook 'raindropio'
