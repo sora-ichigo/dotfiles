@@ -7,6 +7,8 @@
     ./programs/starship.nix
     ./programs/tmux.nix
     ./programs/neovim.nix
+    ./programs/zsh.nix
+    ./programs/mise.nix
   ];
 
   home.stateVersion = "24.05";
@@ -36,11 +38,5 @@
     postgresql
     ghq
     fvm
-    mise
-    zsh
   ];
-
-  home.file.".config/mise/config.toml".source = ../config/.config/mise/config.toml;
-  home.file.".zshrc".source = ../config/.zshrc;
-  home.file.".zsh".source = ../config/.zsh;
 }
