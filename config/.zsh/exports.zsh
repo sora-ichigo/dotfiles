@@ -13,14 +13,8 @@ export PATH=$PATH:$HOME/.bin
 # nvim
 export PATH="$PATH:$HOME/.local/bin"
 
-# vim
-export PATH="$PATH:/usr/bin/vim"
-
 # mise
 eval "$(mise activate zsh)"
-
-# nodebrew
-# export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # go
 export PATH=$PATH:$HOME/gobin
@@ -30,13 +24,11 @@ export GOBIN=$HOME/gobin
 # dart
 export PATH=$PATH:$HOME/.pub-cache/bin
 
-# flutter
-export PATH=$PATH:$HOME/flutter/bin
-
 # Java
 if (/usr/libexec/java_home > /dev/null 2>&1); then
   export JAVA_HOME=$(/usr/libexec/java_home)
 fi
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 # Haskell
 [ -f "/Users/ichigo/.ghcup/env" ] && source "/Users/ichigo/.ghcup/env" # ghcup-env
@@ -44,21 +36,14 @@ fi
 # Deno
 export PATH="/Users/ichigo/.deno/bin:$PATH"
 
-# mysql
-export PATH="/opt/homebrew/opt/mysql@5.7/bin:$PATH"
-
-# postgresql@14
+# postgresql
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
-export PGDATA="/opt/homebrew/bin/postgres@17"
 
 # direnv
 eval "$(direnv hook zsh)"
 
 # openssl
 export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig"
 
 # bat
 export BAT_THEME="Solarized (light)"
@@ -75,27 +60,17 @@ fi
 # github
 export GIT_SSH_COMMAND="ssh -i ~/.ssh/github.pem"
 
+# libpq
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
 
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-
-export PATH="$PATH:/Users/wantedly546/Library/Android/sdk/cmdline-tools/latest/bin"
-
-export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
-
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home"
-
-# libffi
-export LDFLAGS="-L/opt/homebrew/opt/libffi/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/libffi/include"
-
-export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
+# Build flags (openssl, libpq, libffi)
+export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib -L/opt/homebrew/opt/libpq/lib -L/opt/homebrew/opt/libffi/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include -I/opt/homebrew/opt/libpq/include -I/opt/homebrew/opt/libffi/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig:/opt/homebrew/opt/libffi/lib/pkgconfig"
 
 # https://stackoverflow.com/questions/52671926/rails-may-have-been-in-progress-in-another-thread-when-fork-was-called
 export DISABLE_SPRING=true
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # gnu-sed
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
