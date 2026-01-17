@@ -9,6 +9,7 @@
     ./programs/neovim.nix
     ./programs/zsh.nix
     ./programs/mise.nix
+    ./programs/direnv.nix
   ];
 
   home.stateVersion = "24.05";
@@ -24,7 +25,6 @@
     htop
     gnumake
     gcc
-    direnv
     fzf
     gnused
     bat
