@@ -51,4 +51,4 @@
 	default = git-worktree-runner-ai
 
 [gtr "copy"]
-	exclude = .worktree
+	excludeDirs = .worktree
