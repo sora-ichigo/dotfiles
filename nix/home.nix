@@ -39,7 +39,10 @@
     ghq
     fvm
     mise
+    zsh
   ];
 
   home.file.".config/mise/config.toml".source = ../config/.config/mise/config.toml;
+  home.file.".zshrc".source = ../config/.zshrc;
+  home.file.".zsh".source = ../config/.zsh;
 }
