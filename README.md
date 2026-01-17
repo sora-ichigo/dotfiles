@@ -24,7 +24,7 @@ make brew   # Install Homebrew packages from Brewfile
 
 ```
 .
-├── bin/                    # Setup scripts
+├── install.sh              # Setup script for Nix and Home Manager
 ├── config/                 # Application configuration files (symlinked to $HOME)
 ├── nix/                    # Nix flake and Home Manager configuration
 │   ├── flake.nix          # Nix flake definition

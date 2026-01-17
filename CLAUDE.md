@@ -25,7 +25,7 @@ make brew
 - `nix/programs/`: Per-program Nix configurations
 - `config/`: Application configuration files (symlinked to `$HOME`)
 - `Brewfile`: Homebrew packages (primarily GUI applications)
-- `bin/nix-setup`: Script to install Nix and apply Home Manager configuration
+- `install.sh`: Script to install Nix and apply Home Manager configuration
 
 ### Adding New Packages
 
