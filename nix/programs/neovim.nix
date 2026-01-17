@@ -1,10 +1,7 @@
 { pkgs, ... }:
 
 {
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
+  home.packages = [ pkgs.neovim ];
 
   home.file.".config/nvim".source = ../../config/.config/nvim;
 }
