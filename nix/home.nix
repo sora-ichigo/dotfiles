@@ -41,5 +41,10 @@
     postgresql
     ghq
     fvm
+
+    # Docker (Colima + CLI)
+    docker
+    docker-compose
+    colima
   ];
 }
