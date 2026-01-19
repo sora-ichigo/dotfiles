@@ -23,6 +23,14 @@
 
 ## Development Philosophy
 
+### Before Implementation
+
+- 新しい機能を実装する前に、以下を必ず確認する：
+  1. 既存のコードベース内に同様の実装やユーティリティがないか検索する
+  2. 使用しているライブラリ/フレームワークに該当する API や機能がないか確認する
+  3. Context7 MCP（`mcp__context7__`）を使ってライブラリのドキュメントを参照する
+- 「自分で実装する」より「既存の解決策を使う」を優先する
+
 ### Test-Driven Development (TDD)
 
 - 原則としてテスト駆動開発（TDD）で進める
