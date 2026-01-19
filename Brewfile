@@ -1,4 +1,3 @@
-tap "homebrew/bundle"
 tap "koekeishiya/formulae"
 
 cask "1password"
