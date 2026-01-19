@@ -122,5 +122,17 @@
   },
   "feedbackSurveyState": {
     "lastShownTime": 1754560507535
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "terminal-notifier -title 'Claude Code' -message 'タスク完了しました' -sound Ping"
+          }
+        ]
+      }
+    ]
   }
 }

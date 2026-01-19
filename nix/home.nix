@@ -46,5 +46,8 @@
     docker
     docker-compose
     colima
+
+    # Notification
+    terminal-notifier
   ];
 }
