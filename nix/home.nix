@@ -28,8 +28,6 @@
     wget
     curl
     htop
-    gnumake
-    gcc
     fzf
     gnused
     bat
