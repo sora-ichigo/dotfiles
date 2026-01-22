@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -47,7 +47,8 @@
     docker-compose
     colima
 
-    # Notification
+  ] ++ lib.optionals pkgs.stdenv.isDarwin [
+    # macOS only
     terminal-notifier
   ];
 }
