@@ -1,3 +1,8 @@
+---
+description: 現在の branch の PR Description を指定フォーマットで記載する
+disable-model-invocation: true
+---
+
 現在の branch の PR の PR Description を以下のフォーマットで記載してください。
 
 ## フォーマット
