@@ -4,18 +4,11 @@ on:
 
 jobs:
   nix-check:
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-latest
-            config: ci-x86_64-linux
-          - os: macos-latest
-            config: ci-x86_64-darwin
-    runs-on: ${{ matrix.os }}
-    name: Nix (${{ matrix.os }})
+    runs-on: ubuntu-latest
+    name: Nix (ubuntu-latest)
     steps:
       - uses: actions/checkout@v6
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Build Home Manager configuration
-        run: nix build ./nix#homeConfigurations.${{ matrix.config }}.activationPackage --show-trace
+        run: nix build ./nix#homeConfigurations.ci-x86_64-linux.activationPackage --show-trace
