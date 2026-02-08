@@ -69,3 +69,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # gnu-sed
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+
+# Android SDK
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin
