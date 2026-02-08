@@ -65,6 +65,7 @@ PRがない場合は以下のフォーマットで作成する:
 - PR body にH1タイトルを含めない
 - issue/PR URL は `#<id>` 形式ではなくフル URL を使用
 - Why/What の分類を正しく行う
+- PR作成時は自分自身を assignee に追加する（`--assignee @me`）
 
 ## 重要な注意事項
 
