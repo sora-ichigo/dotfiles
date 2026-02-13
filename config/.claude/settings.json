@@ -24,8 +24,5 @@
     "type": "command",
     "command": "~/.claude/statusline.sh",
     "padding": 0
-  },
-  "feedbackSurveyState": {
-    "lastShownTime": 1754560507535
   }
 }
