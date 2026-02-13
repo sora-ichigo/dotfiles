@@ -10,6 +10,8 @@ CLAUDE_SETTINGS := config/.claude/settings.json
 CLAUDE_MCP := config/.claude/mcp.json
 SECRETS_CONFIG := config/secrets.json
 
+# secrets.json の 1Password 参照パスから実際の値を取得し、~/.envrc に環境変数として書き出す
+# direnv により自動で環境変数がロードされる
 .PHONY: secrets
 secrets:
 	@echo "Fetching secrets from 1Password..."
@@ -19,6 +21,9 @@ secrets:
 	@direnv allow ~
 	@echo "Secrets written to ~/.envrc"
 
+# settings.json と mcp.json の定義に基づき、Claude Code のプラグインと MCP サーバーをセットアップする
+# 注意: claude mcp add は同名の MCP が既に登録されているとスキップされる
+#       mcp.json の設定を変更した場合は、先に `claude mcp remove <name>` で削除してから再実行すること
 .PHONY: claude-code
 claude-code:
 	@jq -r '.extraKnownMarketplaces | to_entries[] | .value.source.repo' $(CLAUDE_SETTINGS) | while read repo; do \
