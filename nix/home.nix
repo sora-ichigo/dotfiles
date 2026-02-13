@@ -43,6 +43,7 @@
     postgresql
     ghq
     fvm
+    uv
 
     # Docker (Colima + CLI)
     docker
