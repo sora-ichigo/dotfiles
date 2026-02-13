@@ -1,3 +1,4 @@
+[ -f ~/.secrets ] && source ~/.secrets
 source ~/.zsh/exports.zsh
 source ~/.zsh/aliases.zsh
 source ~/.zsh/basic.zsh
