@@ -26,6 +26,7 @@
     ripgrep
     fd
     jq
+    yq
     wget
     curl
     htop
