@@ -12,8 +12,8 @@
 
 ## GitHub Operations
 
-- GitHubのリソース（リポジトリ、Issue、PR、コード等）を取得する際は、常にGitHub MCP（`mcp__github__`で始まるツール）を使用する
-- WebFetchやWebSearchではなく、専用のMCPツールを優先する
+- GitHubのリソース（リポジトリ、Issue、PR、コード等）を操作する際は、`gh` コマンド（GitHub CLI）を使用する
+- WebFetchやWebSearchではなく、`gh` コマンドを優先する
 
 ## Development Philosophy
 
