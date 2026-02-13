@@ -8,6 +8,14 @@
     "allow": [],
     "deny": []
   },
+  "extraKnownMarketplaces": {
+    "context7": {
+      "source": {
+        "source": "github",
+        "repo": "upstash/context7"
+      }
+    }
+  },
   "hooks": {
     "Stop": [
       {
