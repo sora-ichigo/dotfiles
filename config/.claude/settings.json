@@ -5,8 +5,30 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
-    "allow": [],
-    "deny": []
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "Task",
+      "Bash(*)",
+      "mcp__context7__*",
+      "mcp__plugin_context7-plugin_context7__*",
+      "mcp__honeybadger__*",
+      "mcp__claude_ai_github__*"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force *)",
+      "Bash(git push --force-with-lease *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean -f *)",
+      "Bash(git checkout -- .)",
+      "Bash(git restore .)"
+    ]
   },
   "extraKnownMarketplaces": {
     "context7": {
