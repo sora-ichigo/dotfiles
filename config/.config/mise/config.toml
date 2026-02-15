@@ -1,7 +1,7 @@
 [tools]
 ruby = "3.3.1"
 node = "22.22.0"
-go = "1.25"
+go = "1.26.0"
 python = "3.9"
 
 [settings]
