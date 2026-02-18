@@ -2,6 +2,7 @@ tap "koekeishiya/formulae"
 
 cask "1password"
 cask "1password-cli"
+cask "aqua-voice"
 cask "chatgpt"
 cask "dash"
 cask "discord"
