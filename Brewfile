@@ -1,9 +1,11 @@
 tap "koekeishiya/formulae"
+tap "manaflow-ai/cmux"
 
 cask "1password"
 cask "1password-cli"
 cask "aqua-voice"
 cask "chatgpt"
+cask "manaflow-ai/cmux/cmux"
 cask "dash"
 cask "discord"
 cask "figma"
