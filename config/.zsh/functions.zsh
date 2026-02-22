@@ -35,6 +35,8 @@ register_keycommand "^w" fzf_files
 
 fzf_jump_g() {
   cd ~/ghq/github.com
+  BUFFER=""
+  zle accept-line
 }
 register_keycommand "^g" fzf_jump_g
 
@@ -53,9 +55,10 @@ select_worktree() {
   local selected
   selected=$(echo "$worktrees" | fzf)
   if [[ -n "$selected" ]]; then
-    echo "$selected"
     cd "$selected"
   fi
+  BUFFER=""
+  zle accept-line
 }
 register_keycommand "^j" select_worktree
 
