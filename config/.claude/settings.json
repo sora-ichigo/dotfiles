@@ -42,18 +42,6 @@
   "enabledPlugins": {
     "context7-plugin@context7-marketplace": true
   },
-  "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -message 'タスク完了しました' -sound Ping"
-          }
-        ]
-      }
-    ]
-  },
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh",
