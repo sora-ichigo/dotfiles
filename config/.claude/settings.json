@@ -14,6 +14,7 @@
       "WebFetch",
       "WebSearch",
       "Task",
+      "Skill",
       "Bash(*)",
       "mcp__context7__*",
       "mcp__plugin_context7-plugin_context7__*",
