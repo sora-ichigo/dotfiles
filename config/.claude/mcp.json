@@ -21,14 +21,6 @@
         "mcp-remote@latest",
         "https://mcp.atlassian.com/v1/sse"
       ]
-    },
-    "google-workspace": {
-      "command": "uvx",
-      "args": ["workspace-mcp", "--read-only"],
-      "env": {
-        "GOOGLE_OAUTH_CLIENT_ID": "${GOOGLE_OAUTH_CLIENT_ID}",
-        "GOOGLE_OAUTH_CLIENT_SECRET": "${GOOGLE_OAUTH_CLIENT_SECRET}"
-      }
     }
   }
 }

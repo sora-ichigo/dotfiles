@@ -21,8 +21,7 @@
       "mcp__honeybadger__*",
       "mcp__claude_ai_github__*",
       "mcp__pencil__*",
-      "mcp__atlassian__*",
-      "mcp__google-workspace__*"
+      "mcp__atlassian__*"
     ],
     "deny": [
       "Bash(rm -rf *)",
