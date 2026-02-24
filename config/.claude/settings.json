@@ -20,7 +20,8 @@
       "mcp__plugin_context7-plugin_context7__*",
       "mcp__honeybadger__*",
       "mcp__claude_ai_github__*",
-      "mcp__pencil__*"
+      "mcp__pencil__*",
+      "mcp__atlassian__*"
     ],
     "deny": [
       "Bash(rm -rf *)",
