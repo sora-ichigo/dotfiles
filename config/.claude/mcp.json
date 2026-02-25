@@ -21,6 +21,10 @@
         "mcp-remote@latest",
         "https://mcp.atlassian.com/v1/sse"
       ]
+    },
+    "figma-desktop": {
+      "type": "http",
+      "url": "http://127.0.0.1:3845/mcp"
     }
   }
 }

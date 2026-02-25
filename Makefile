@@ -31,6 +31,9 @@ claude-code:
 	@jq -r '.enabledPlugins | to_entries[] | select(.value == true) | .key' $(CLAUDE_SETTINGS) | while read plugin; do \
 		claude plugin install "$$plugin" 2>/dev/null || true; \
 	done
-	@jq -r '.mcpServers | to_entries[] | "\(.key) \(.value.command) \(.value.args | join(" "))"' $(CLAUDE_MCP) | while read name cmd args; do \
+	@jq -r '.mcpServers | to_entries[] | select(.value | has("command")) | "\(.key) \(.value.command) \(.value.args | join(" "))"' $(CLAUDE_MCP) | while read name cmd args; do \
 		claude mcp add "$$name" --scope user -- $$cmd $$args 2>/dev/null || true; \
+	done
+	@jq -r '.mcpServers | to_entries[] | select(.value.type == "http") | "\(.key) \(.value.url)"' $(CLAUDE_MCP) | while read name url; do \
+		claude mcp add "$$name" --transport http --scope user "$$url" 2>/dev/null || true; \
 	done
