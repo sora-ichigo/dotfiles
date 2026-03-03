@@ -25,6 +25,13 @@
     "figma-desktop": {
       "type": "http",
       "url": "http://127.0.0.1:3845/mcp"
+    },
+    "circleci": {
+      "command": "npx",
+      "args": ["-y", "@circleci/mcp-server-circleci@latest"],
+      "env": {
+        "CIRCLECI_TOKEN": "${CIRCLECI_TOKEN}"
+      }
     }
   }
 }
