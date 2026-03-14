@@ -36,8 +36,8 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # Deno
 export PATH="/Users/ichigo/.deno/bin:$PATH"
 
-# postgresql
-export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+# postgresql (Postgres.app)
+export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 # direnv
 eval "$(direnv hook zsh)"
@@ -59,9 +59,6 @@ fi
 
 # github
 export GIT_SSH_COMMAND="ssh -i ~/.ssh/github.pem"
-
-# libpq
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # https://stackoverflow.com/questions/52671926/rails-may-have-been-in-progress-in-another-thread-when-fork-was-called
 export DISABLE_SPRING=true

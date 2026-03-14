@@ -16,7 +16,9 @@ cask "obsidian"
 cask "raindropio"
 cask "raycast"
 cask "shottr"
+cask "postgres-unofficial"
 cask "spotify"
 
 brew "libyaml"
+brew "xcodes"
 

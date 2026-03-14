@@ -41,7 +41,6 @@
     awscli2
     luarocks
     libpq
-    postgresql
     ghq
     fvm
     uv
