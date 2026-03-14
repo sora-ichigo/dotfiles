@@ -1,7 +1,6 @@
 config-version = 2
 
 start-at-login = true
-auto-reload-config = true
 
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
@@ -13,13 +12,17 @@ default-root-container-orientation = 'auto'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 automatically-unhide-macos-hidden-apps = false
 
+[[on-window-detected]]
+    if.app-id = 'com.electron.aqua-voice'
+    run = 'layout floating'
+
 [gaps]
-    inner.horizontal = 0
-    inner.vertical =   0
-    outer.left =       0
-    outer.bottom =     0
-    outer.top =        0
-    outer.right =      0
+    inner.horizontal = 6
+    inner.vertical =   6
+    outer.left =       12
+    outer.bottom =     12
+    outer.top =        12
+    outer.right =      12
 
 [mode.main.binding]
     alt-slash = 'layout tiles horizontal vertical'
@@ -34,6 +37,9 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-j = 'move down'
     alt-shift-k = 'move up'
     alt-shift-l = 'move right'
+
+    alt-f = 'fullscreen'
+    alt-t = 'layout floating tiling'
 
     alt-minus = 'resize smart -50'
     alt-equal = 'resize smart +50'
