@@ -14,6 +14,7 @@
     ./programs/codex.nix
     ./programs/claude-code.nix
     ./programs/wezterm.nix
+    ./programs/aerospace.nix
     ./programs/yabai.nix
     ./programs/git-worktree-runner.nix
   ];
