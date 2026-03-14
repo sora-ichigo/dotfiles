@@ -1,7 +1,9 @@
 tap "manaflow-ai/cmux"
+tap "nikitabobko/tap"
 
 cask "1password"
 cask "1password-cli"
+cask "nikitabobko/tap/aerospace"
 cask "aqua-voice"
 cask "manaflow-ai/cmux/cmux"
 cask "dash"
