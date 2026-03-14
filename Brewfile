@@ -18,3 +18,5 @@ cask "raycast"
 cask "shottr"
 cask "spotify"
 
+brew "libyaml"
+
