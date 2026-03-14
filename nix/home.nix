@@ -44,6 +44,7 @@
     ghq
     fvm
     uv
+    google-cloud-sdk
 
     # Docker (Colima + CLI)
     docker
