@@ -16,6 +16,7 @@ cask "obsidian"
 cask "raindropio"
 cask "raycast"
 cask "shottr"
+cask "slack"
 cask "postgres-unofficial"
 cask "spotify"
 
