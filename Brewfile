@@ -19,7 +19,7 @@ cask "raindropio"
 cask "raycast"
 cask "shottr"
 cask "slack"
-cask "postgres-unofficial"
+cask "postgres-app"
 cask "spotify"
 
 brew "libyaml"
