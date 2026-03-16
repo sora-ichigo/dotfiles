@@ -41,10 +41,17 @@
         "source": "github",
         "repo": "upstash/context7"
       }
+    },
+    "wantedly-cc-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "wantedly/claude-code-plugins"
+      }
     }
   },
   "enabledPlugins": {
-    "context7-plugin@context7-marketplace": true
+    "context7-plugin@context7-marketplace": true,
+    "marp-wantedly@wantedly-cc-plugins": true
   },
   "statusLine": {
     "type": "command",
