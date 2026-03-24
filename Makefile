@@ -34,6 +34,6 @@ claude-code:
 	@jq -r '.mcpServers | to_entries[] | select(.value | has("command")) | "\(.key) \(.value.command) \(.value.args | join(" "))"' $(CLAUDE_MCP) | while read name cmd args; do \
 		claude mcp add "$$name" --scope user -- $$cmd $$args 2>/dev/null || true; \
 	done
-	@jq -r '.mcpServers | to_entries[] | select(.value.type == "http") | "\(.key) \(.value.url)"' $(CLAUDE_MCP) | while read name url; do \
-		claude mcp add "$$name" --transport http --scope user "$$url" 2>/dev/null || true; \
+	@jq -r '.mcpServers | to_entries[] | select(.value.type == "http") | "\(.key) \(.value.url) \(.value.headers // {} | to_entries | map("-H \"\(.key): \(.value)\"") | join(" "))"' $(CLAUDE_MCP) | while read name url headers; do \
+		eval claude mcp add "$$name" --transport http --scope user "$$url" $$headers 2>/dev/null || true; \
 	done
