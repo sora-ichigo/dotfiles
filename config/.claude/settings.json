@@ -24,7 +24,8 @@
       "mcp__honeybadger__*",
       "mcp__claude_ai_github__*",
       "mcp__pencil__*",
-      "mcp__figma-desktop__*"
+      "mcp__figma-desktop__*",
+      "mcp__devin__*"
     ],
     "deny": [
       "Bash(rm -rf *)",
