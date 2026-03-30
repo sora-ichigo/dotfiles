@@ -27,7 +27,8 @@
       "mcp__figma-desktop__*",
       "mcp__devin__*",
       "mcp__figma__*",
-      "mcp__sentry__*"
+      "mcp__sentry__*",
+      "mcp__miro__*"
     ],
     "deny": [
       "Bash(rm -rf *)",

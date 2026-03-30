@@ -42,6 +42,10 @@
       "headers": {
         "Authorization": "Bearer ${DEVIN_API_KEY}"
       }
+    },
+    "miro": {
+      "type": "http",
+      "url": "https://mcp.miro.com"
     }
   }
 }
