@@ -45,6 +45,7 @@
     fvm
     uv
     google-cloud-sdk
+    cloudflared
 
     # Docker (Colima + CLI)
     docker
