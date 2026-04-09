@@ -22,6 +22,8 @@ cask "slack"
 cask "postgres-app"
 cask "spotify"
 
+brew "googleworkspace-cli"
+
 brew "libyaml"
 brew "xcodes"
 
