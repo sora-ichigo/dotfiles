@@ -15,6 +15,10 @@
 - GitHubのリソース（リポジトリ、Issue、PR、コード等）を操作する際は、`gh` コマンド（GitHub CLI）を使用する
 - WebFetchやWebSearchではなく、`gh` コマンドを優先する
 
+## Google Workspace Operations
+
+- Google Workspace の操作（Gmail、Google Calendar 等）を行う際は、`gws` コマンドを使用する
+
 ## Development Philosophy
 
 ### Before Implementation
