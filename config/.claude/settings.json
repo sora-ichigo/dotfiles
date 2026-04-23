@@ -22,6 +22,7 @@
       "Bash(*)",
       "mcp__context7__*",
       "mcp__plugin_context7-plugin_context7__*",
+      "mcp__plugin_slack_slack__*",
       "mcp__honeybadger__*",
       "mcp__claude_ai_github__*",
       "mcp__pencil__*",
