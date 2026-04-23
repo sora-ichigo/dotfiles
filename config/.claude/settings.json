@@ -53,11 +53,18 @@
         "source": "github",
         "repo": "wantedly/claude-code-plugins"
       }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
     }
   },
   "enabledPlugins": {
     "context7-plugin@context7-marketplace": true,
-    "marp-wantedly@wantedly-cc-plugins": true
+    "marp-wantedly@wantedly-cc-plugins": true,
+    "slack@claude-plugins-official": true
   },
   "statusLine": {
     "type": "command",
