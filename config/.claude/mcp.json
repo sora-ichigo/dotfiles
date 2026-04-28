@@ -40,7 +40,8 @@
       "type": "http",
       "url": "https://mcp.devin.ai/mcp",
       "headers": {
-        "Authorization": "Bearer ${DEVIN_API_KEY}"
+        "Authorization": "Bearer ${DEVIN_API_KEY}",
+        "X-Org-Id": "${DEVIN_ORG_ID}"
       }
     },
     "miro": {
