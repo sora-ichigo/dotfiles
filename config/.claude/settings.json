@@ -40,6 +40,9 @@
       "Bash(git clean -f *)",
       "Bash(git checkout -- .)",
       "Bash(git restore .)"
+    ],
+    "ask": [
+      "Bash(kube*)"
     ]
   },
   "extraKnownMarketplaces": {
