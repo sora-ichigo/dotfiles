@@ -2,7 +2,6 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": false,
   "model": "opus",
-  "effortLevel": "high",
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
@@ -42,9 +41,7 @@
       "Bash(git checkout -- .)",
       "Bash(git restore .)"
     ],
-    "ask": [
-      "Bash(kube*)"
-    ]
+    "ask": ["Bash(kube*)"]
   },
   "extraKnownMarketplaces": {
     "context7": {
