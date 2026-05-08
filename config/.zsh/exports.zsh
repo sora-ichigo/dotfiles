@@ -48,6 +48,9 @@ export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
 # bat
 export BAT_THEME="Solarized (light)"
 
+# lazygit
+export LG_CONFIG_FILE=$HOME/.config/lazygit/config.yml
+
 # wantedly
 export PATH=$HOME/.wantedly/bin:$PATH
 

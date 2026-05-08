@@ -17,6 +17,7 @@
     ./programs/aerospace.nix
     ./programs/yabai.nix
     ./programs/git-worktree-runner.nix
+    ./programs/lazygit.nix
   ];
 
   home.stateVersion = "24.05";
@@ -34,7 +35,7 @@
     fzf
     gnused
     bat
-    lazygit
+    delta
     coreutils
     libffi
     nnn
