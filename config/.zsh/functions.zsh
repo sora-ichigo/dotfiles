@@ -76,23 +76,3 @@ gwd() {
   local parent_dir="$(dirname "$(dirname "$current_dir")")"
   cd "$parent_dir" && git worktree remove "$current_dir"
 }
-
-# 会社の Claude Code 設定用
-function set_wantedly_env_vars() {
-  if [[ "$PWD" == "$HOME/ghq/github.com/wantedly/"* ]]; then
-    export CLAUDE_CODE_USE_BEDROCK=1
-    export AWS_REGION=us-east-1
-    export AWS_PROFILE=local-bedrock
-    export ANTHROPIC_DEFAULT_HAIKU_MODEL=arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/bs36o7kf43bd
-    export ANTHROPIC_DEFAULT_OPUS_MODEL=arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/dx0gs0lcygch
-    export ANTHROPIC_DEFAULT_SONNET_MODEL=arn:aws:bedrock:us-east-1:096233016669:application-inference-profile/bf3xkfn2r5ja
-  else
-    unset CLAUDE_CODE_USE_BEDROCK
-    unset ANTHROPIC_DEFAULT_HAIKU_MODEL
-    export ANTHROPIC_DEFAULT_OPUS_MODEL
-    export ANTHROPIC_DEFAULT_SONNET_MODEL
-  fi
-}
-autoload -U add-zsh-hook
-add-zsh-hook chpwd set_wantedly_env_vars
-set_wantedly_env_vars
