@@ -39,6 +39,7 @@
     coreutils
     libffi
     nnn
+    zoxide
     awscli2
     luarocks
     libpq

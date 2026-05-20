@@ -5,4 +5,5 @@ source ~/.zsh/basic.zsh
 source ~/.zsh/functions.zsh
 source ~/.zsh/completions.zsh
 
+eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"

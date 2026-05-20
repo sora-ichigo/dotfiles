@@ -74,7 +74,13 @@
       run-shell ${pkgs.tmuxPlugins.online-status.rtp}
 
       bind v split-window -h -c "#{pane_current_path}"
-      bind s split-window -v -c "#{pane_current_path}"
+      bind "|" split-window -h -c "#{pane_current_path}"
+      bind "-" split-window -v -c "#{pane_current_path}"
+
+      unbind s
+      bind S choose-tree -Zs
+
+      bind T run-shell "sesh connect \"\$({ sesh list -i; ghq list -p | grep -v -- '-worktrees/' | sed \"s|^\$HOME|~|\"; } | awk '!seen[\$NF]++' | fzf-tmux -p 60%,60% --ansi --no-sort --reverse --border-label ' sesh ')\""
 
       bind h select-pane -L
       bind j select-pane -D
