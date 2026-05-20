@@ -22,6 +22,7 @@ cask "shottr"
 cask "slack"
 cask "postgres-app"
 cask "spotify"
+cask "wezterm"
 
 brew "googleworkspace-cli"
 

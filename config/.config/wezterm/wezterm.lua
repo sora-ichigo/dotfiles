@@ -6,13 +6,16 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
+config.font = wezterm.font("Hack Nerd Font Mono", { weight = "Regular" })
 config.font_size = 14
 
--- config.color_scheme = 'Tokyo Night'
+config.color_scheme = "Catppuccin Mocha"
+config.colors = {
+	background = "#0a1a2f",
+}
 
-config.window_background_opacity = 1
--- config.macos_window_background_blur = 20
+config.window_background_opacity = 0.90
+config.macos_window_background_blur = 30
 
 -- config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
