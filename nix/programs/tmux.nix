@@ -52,6 +52,8 @@
       set -g status-style "bg=default,fg=default"
       set -g window-status-style "bg=default"
       set -g window-status-current-style "bg=default"
+      set -g popup-style "bg=default"
+      set -g popup-border-style "fg=#{@thm_blue}"
 
       set -g status-left-length 120
       set -g status-right-length 200
@@ -74,7 +76,13 @@
       run-shell ${pkgs.tmuxPlugins.online-status.rtp}
 
       bind v split-window -h -c "#{pane_current_path}"
-      bind s split-window -v -c "#{pane_current_path}"
+      bind "|" split-window -h -c "#{pane_current_path}"
+      bind "-" split-window -v -c "#{pane_current_path}"
+
+      unbind s
+      bind S choose-tree -Zs
+
+      bind T run-shell "sesh connect \"\$({ sesh list -i; ghq list -p | grep -v -- '-worktrees/' | sed \"s|^\$HOME|~|\"; } | awk '!seen[\$NF]++' | fzf-tmux -p 60%,60% --ansi --no-sort --reverse --border-label ' sesh ' --color=bg:-1,bg+:-1,gutter:-1,hl:#cba6f7,hl+:#cba6f7:bold,fg:#cdd6f4,fg+:#cdd6f4:bold,prompt:#89b4fa,pointer:#f38ba8,marker:#a6e3a1,border:#89b4fa,label:#89b4fa)\""
 
       bind h select-pane -L
       bind j select-pane -D
