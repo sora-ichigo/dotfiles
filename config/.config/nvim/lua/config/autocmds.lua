@@ -13,3 +13,24 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.diagnostic.enable(false, { bufnr = 0 })
   end,
 })
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    for _, group in ipairs({
+      "Normal",
+      "NormalNC",
+      "NormalFloat",
+      "FloatBorder",
+      "SignColumn",
+      "EndOfBuffer",
+      "LineNr",
+      "CursorLineNr",
+      "StatusLine",
+      "StatusLineNC",
+      "SnacksDashboardNormal",
+    }) do
+      vim.api.nvim_set_hl(0, group, { bg = "NONE", ctermbg = "NONE" })
+    end
+  end,
+})
