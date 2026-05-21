@@ -22,6 +22,28 @@ return {
           "NvimTreeNormal",
           "TelescopeNormal",
           "TelescopeBorder",
+          "TelescopePromptNormal",
+          "TelescopePromptBorder",
+          "TelescopeResultsNormal",
+          "TelescopeResultsBorder",
+          "TelescopePreviewNormal",
+          "TelescopePreviewBorder",
+          "TelescopePromptTitle",
+          "TelescopeResultsTitle",
+          "TelescopePreviewTitle",
+          "SnacksPicker",
+          "SnacksPickerBorder",
+          "SnacksPickerTitle",
+          "SnacksPickerInput",
+          "SnacksPickerInputBorder",
+          "SnacksPickerInputTitle",
+          "SnacksPickerList",
+          "SnacksPickerListBorder",
+          "SnacksPickerListTitle",
+          "SnacksPickerPreview",
+          "SnacksPickerPreviewBorder",
+          "SnacksPickerPreviewTitle",
+          "SnacksDashboardNormal",
           "WhichKeyFloat",
           "LazyNormal",
           "MasonNormal",
@@ -39,7 +61,7 @@ return {
           "TabLineSel",
         },
       })
-      for _, prefix in ipairs({ "lualine", "Snacks", "Mini", "NeoTree", "Telescope", "Lazy" }) do
+      for _, prefix in ipairs({ "lualine", "Mini", "NeoTree", "Lazy" }) do
         require("transparent").clear_prefix(prefix)
       end
       vim.g.transparent_enabled = true
