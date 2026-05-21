@@ -1,5 +1,28 @@
 { pkgs, ... }:
 
+let
+  ssidScript = pkgs.writeShellScript "tmux-ssid" ''
+    ssid=$(ipconfig getsummary en0 2>/dev/null \
+      | awk -F ' SSID : ' '/ SSID : / {print $2; exit}')
+    [ -z "$ssid" ] && ssid="--"
+    printf '%s' "$ssid" | head -c 18
+  '';
+
+  gitStatusScript = pkgs.writeShellScript "tmux-git-status" ''
+    cd "$1" 2>/dev/null || { printf '%s' "--"; exit; }
+    branch=$(git symbolic-ref --short HEAD 2>/dev/null \
+      || git rev-parse --short HEAD 2>/dev/null)
+    if [ -z "$branch" ]; then
+      printf '%s' "--"
+      exit
+    fi
+    if [ -n "$(git status --porcelain 2>/dev/null)" ]; then
+      printf '%s*' "$branch"
+    else
+      printf '%s' "$branch"
+    fi
+  '';
+in
 {
   programs.tmux = {
     enable = true;
@@ -63,13 +86,12 @@
 
       set -g status-left "#[fg=#{@thm_crust},bg=#{@thm_green}] ◉ #S #[fg=#{@thm_green},bg=default]█ "
 
-      set -g status-right "#[fg=#{@thm_teal},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_teal}] HOST #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #h "
-      set -ag status-right "#[fg=#{@thm_blue},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_blue}] IPv4 #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #(ipconfig getifaddr en0 || echo --) "
-      set -ag status-right "#[fg=#{@thm_sky},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_sky}] SSID #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #(networksetup -getairportnetwork en0 2>/dev/null | sed 's/^.*: //' | head -c 18) "
+      set -g status-right "#[fg=#{@thm_sky},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_sky}] SSID #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #(${ssidScript}) "
       set -ag status-right "#[fg=#{@thm_green},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_green}] LINK #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #{online_status} "
       set -ag status-right "#[fg=#{@thm_yellow},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_yellow}] CPU #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #{cpu_percentage} "
-      set -ag status-right "#[fg=#{@thm_lavender},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_lavender}] PWR #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #{battery_percentage} "
-      set -ag status-right "#[fg=#{@thm_overlay_0},bg=default]█#[fg=#{@thm_fg},bg=#{@thm_overlay_0}] %H:%M "
+      set -ag status-right "#[fg=#{@thm_lavender},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_lavender}] PWR #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #{battery_icon_status} #{battery_percentage} "
+      set -ag status-right "#[fg=#{@thm_mauve},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_mauve}] GIT #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #(${gitStatusScript} '#{pane_current_path}') "
+      set -ag status-right "#[fg=#{@thm_overlay_0},bg=default]█#[fg=#{@thm_fg},bg=#{@thm_overlay_0}] %m/%d (%a) %H:%M "
 
       run-shell ${pkgs.tmuxPlugins.cpu.rtp}
       run-shell ${pkgs.tmuxPlugins.battery.rtp}
