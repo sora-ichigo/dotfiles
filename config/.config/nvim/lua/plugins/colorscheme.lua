@@ -52,8 +52,6 @@ return {
           "MsgArea",
           "MsgSeparator",
           "FloatBorder",
-          "StatusLine",
-          "StatusLineNC",
           "WinBar",
           "WinBarNC",
           "TabLine",
@@ -61,7 +59,7 @@ return {
           "TabLineSel",
         },
       })
-      for _, prefix in ipairs({ "lualine", "Mini", "NeoTree", "Lazy" }) do
+      for _, prefix in ipairs({ "Mini", "NeoTree", "Lazy" }) do
         require("transparent").clear_prefix(prefix)
       end
       vim.g.transparent_enabled = true

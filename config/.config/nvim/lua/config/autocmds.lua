@@ -26,8 +26,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       "EndOfBuffer",
       "LineNr",
       "CursorLineNr",
-      "StatusLine",
-      "StatusLineNC",
       "SnacksDashboardNormal",
     }) do
       vim.api.nvim_set_hl(0, group, { bg = "NONE", ctermbg = "NONE" })
