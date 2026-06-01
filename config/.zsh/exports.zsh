@@ -16,6 +16,9 @@ export PATH="$PATH:$HOME/.local/bin"
 # mise
 eval "$(mise activate zsh)"
 
+# aqua
+export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
+
 # go
 export PATH=$PATH:$HOME/gobin
 export GOPATH=$HOME
