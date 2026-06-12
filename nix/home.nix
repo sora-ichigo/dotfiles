@@ -43,6 +43,7 @@
     awscli2
     luarocks
     libpq
+    redis
     ghq
     fvm
     uv
