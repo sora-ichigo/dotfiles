@@ -18,6 +18,7 @@
     ./programs/yabai.nix
     ./programs/git-worktree-runner.nix
     ./programs/lazygit.nix
+    ./programs/redis.nix
   ];
 
   home.stateVersion = "24.05";
