@@ -47,6 +47,10 @@
     "miro": {
       "type": "http",
       "url": "https://mcp.miro.com"
+    },
+    "notion": {
+      "type": "http",
+      "url": "https://mcp.notion.com/mcp"
     }
   }
 }
