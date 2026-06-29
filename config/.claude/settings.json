@@ -30,7 +30,8 @@
       "mcp__devin__*",
       "mcp__figma__*",
       "mcp__sentry__*",
-      "mcp__miro__*"
+      "mcp__miro__*",
+      "mcp__notion__*"
     ],
     "deny": [
       "Bash(rm -rf *)",
