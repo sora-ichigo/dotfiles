@@ -42,7 +42,8 @@
       "Bash(git checkout -- .)",
       "Bash(git restore .)"
     ],
-    "ask": ["Bash(kube*)"]
+    "ask": ["Bash(kube*)"],
+    "additionalDirectories": ["~/.obsidian/igsr5/01_dailynotes"]
   },
   "extraKnownMarketplaces": {
     "context7": {

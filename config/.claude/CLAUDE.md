@@ -19,6 +19,24 @@
 
 - Google Workspace の操作（Gmail、Google Calendar 等）を行う際は、`gws` コマンドを使用する
 
+## Obsidian Daily Notes
+
+- 毎日のタスク管理は Obsidian Vault のデイリーノートで行っている
+- 場所: `~/.obsidian/igsr5/01_dailynotes/`
+- ファイル名は `YYYY-MM-DD.md` 形式
+- フォーマット（既存ノートに合わせる）:
+  ```markdown
+  ---
+  created: YYYY-MM-DDTHH:MM (UTC +09:00)
+  tags: [dailynotes]
+  ---
+
+  ---
+
+  [[YYYY-MM-DD Pomodoro]]
+  ```
+- タスクの読み書きを頼まれたらこのフォルダを直接 Read/Edit/Write する
+
 ## Development Philosophy
 
 ### Before Implementation
