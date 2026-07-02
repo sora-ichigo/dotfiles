@@ -77,5 +77,17 @@
   },
   "worktree": {
     "bgIsolation": "worktree"
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "TZ=Asia/Tokyo date '+[Current time: %Y-%m-%d %H:%M:%S %Z (%A)]'"
+          }
+        ]
+      }
+    ]
   }
 }
