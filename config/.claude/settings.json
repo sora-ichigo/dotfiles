@@ -31,7 +31,8 @@
       "mcp__figma__*",
       "mcp__sentry__*",
       "mcp__miro__*",
-      "mcp__notion__*"
+      "mcp__notion__*",
+      "mcp__circleci__*"
     ],
     "deny": [
       "Bash(rm -rf *)",
