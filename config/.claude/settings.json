@@ -1,7 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": false,
-  "model": "opus",
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
@@ -30,7 +29,9 @@
       "mcp__devin__*",
       "mcp__figma__*",
       "mcp__sentry__*",
-      "mcp__miro__*"
+      "mcp__miro__*",
+      "mcp__notion__*",
+      "mcp__circleci__*"
     ],
     "deny": [
       "Bash(rm -rf *)",
@@ -41,7 +42,8 @@
       "Bash(git checkout -- .)",
       "Bash(git restore .)"
     ],
-    "ask": ["Bash(kube*)"]
+    "ask": ["Bash(kube*)"],
+    "additionalDirectories": ["~/.obsidian/igsr5/01_dailynotes"]
   },
   "extraKnownMarketplaces": {
     "context7": {
@@ -75,5 +77,17 @@
   },
   "worktree": {
     "bgIsolation": "worktree"
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "TZ=Asia/Tokyo date '+[Current time: %Y-%m-%d %H:%M:%S %Z (%A)]'"
+          }
+        ]
+      }
+    ]
   }
 }

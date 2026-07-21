@@ -16,8 +16,10 @@ My development environment setup dotfiles
 ```sh
 git clone https://github.com/igsr5/dotfiles.git
 cd dotfiles
-make nix    # Install Nix packages and apply Home Manager configuration
-make brew   # Install Homebrew packages from Brewfile
+make nix          # Install Nix packages and apply Home Manager configuration
+make brew         # Install Homebrew packages from Brewfile
+make secrets      # Generate ~/.secrets from 1Password references
+make claude-code  # Set up Claude Code plugins and MCP servers
 ```
 
 ## Directory Structure
