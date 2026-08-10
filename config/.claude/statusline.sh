@@ -8,7 +8,7 @@ set -u
 input=$(cat)
 
 R=$'\033[0m'
-DIM=$'\033[2m'
+GRAY=$'\033[37m'
 BOLD=$'\033[1m'
 CYAN=$'\033[36m'
 BLUE=$'\033[34m'
@@ -238,10 +238,10 @@ if [ -n "$PR_NUM" ]; then
   approved) PR_MARK="${GREEN} ✓${R}" ;;
   changes_requested) PR_MARK="${RED} ✗${R}" ;;
   pending) PR_MARK="${YELLOW} ●${R}" ;;
-  draft) PR_MARK="${DIM} ◌${R}" ;;
+  draft) PR_MARK="${GRAY} ◌${R}" ;;
   *) PR_MARK="" ;;
   esac
-  PR_SEG="${DIM}PR${R} #${PR_NUM}${PR_MARK}"
+  PR_SEG="${GRAY}PR${R} #${PR_NUM}${PR_MARK}"
 fi
 
 build_line1() {
@@ -249,7 +249,7 @@ build_line1() {
   SEG_TEXT=()
   seg 0 "${BOLD}${CYAN}◆ ${MODEL}${R}"
   [ -n "$FAST" ] && seg 2 "${YELLOW}⚡${R}"
-  [ -n "$EFFORT" ] && seg 2 "${DIM}${EFFORT}${R}"
+  [ -n "$EFFORT" ] && seg 2 "${GRAY}${EFFORT}${R}"
   [ -n "$DIR" ] && seg 0 "${BLUE}$(shorten_dir "$DIR" "$1")${R}"
   [ -n "$WORKTREE" ] && seg 3 "${MAGENTA}⑂ ${WORKTREE}${R}"
   seg 1 "$GIT_SEG"
@@ -279,14 +279,14 @@ PCT=$(printf '%.0f' "${CTX_PCT:-0}" 2>/dev/null) || PCT=0
 seg 0 "$(context_bar "$PCT")"
 
 if [ -n "$CTX_USED" ] && [ -n "$CTX_SIZE" ]; then
-  seg 1 "${DIM}$(fmt_tokens "${CTX_USED%%.*}")/$(fmt_tokens "${CTX_SIZE%%.*}")${R}"
+  seg 1 "${GRAY}$(fmt_tokens "${CTX_USED%%.*}")/$(fmt_tokens "${CTX_SIZE%%.*}")${R}"
 fi
 
-[ -n "$DURATION_MS" ] && seg 1 "${DIM}⏱ $(fmt_duration "${DURATION_MS%%.*}")${R}"
-[ -n "$COST" ] && seg 1 "${DIM}\$$(printf '%.2f' "$COST")${R}"
+[ -n "$DURATION_MS" ] && seg 1 "${GRAY}⏱ $(fmt_duration "${DURATION_MS%%.*}")${R}"
+[ -n "$COST" ] && seg 1 "${GRAY}\$$(printf '%.2f' "$COST")${R}"
 
 if [ "${ADDED:-0}" -gt 0 ] 2>/dev/null || [ "${REMOVED:-0}" -gt 0 ] 2>/dev/null; then
-  seg 2 "${GREEN}+${ADDED}${R}${DIM}/${R}${RED}-${REMOVED}${R}"
+  seg 2 "${GREEN}+${ADDED}${R}${GRAY}/${R}${RED}-${REMOVED}${R}"
 fi
 
 seg 2 "$(rate_segment 5h "$RL5")"
