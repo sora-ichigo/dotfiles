@@ -6,6 +6,10 @@ nix:
 brew:
 	brew bundle --file=Brewfile
 
+.PHONY: test
+test:
+	bash config/.claude/statusline_test.sh
+
 CLAUDE_SETTINGS := config/.claude/settings.json
 CLAUDE_MCP := config/.claude/mcp.json
 SECRETS_CONFIG := config/secrets.json
