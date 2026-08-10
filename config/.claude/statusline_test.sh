@@ -96,7 +96,7 @@ out=$(run "$FULL_JSON")
 line1=$(printf '%s' "$out" | sed -n 1p | strip_ansi)
 line2=$(printf '%s' "$out" | sed -n 2p | strip_ansi)
 
-assert_eq "2 行で出力する" "$(printf '%s' "$out" | wc -l | tr -d ' ')" "2"
+assert_eq "2 行で出力する" "$(printf '%s\n' "$out" | wc -l | tr -d ' ')" "2"
 assert_contains "モデル名を表示する" "$line1" "Opus 5"
 assert_contains "reasoning effort を表示する" "$line1" "xhigh"
 assert_contains "カレントディレクトリ名を表示する" "$line1" "not-a-repo"
@@ -110,7 +110,7 @@ assert_contains "差分行数を表示する" "$line2" "+12/-3"
 assert_not_contains "null を出力しない" "$out" "null"
 
 out=$(run "$(mock '{cwd: .cwd, model: .model, workspace: .workspace}')")
-assert_eq "最小入力でも 2 行を保つ" "$(printf '%s' "$out" | wc -l | tr -d ' ')" "2"
+assert_eq "最小入力でも 2 行を保つ" "$(printf '%s\n' "$out" | wc -l | tr -d ' ')" "2"
 assert_not_contains "最小入力で null を出力しない" "$out" "null"
 assert_contains "コンテキスト不明時は 0% とする" "$(printf '%s' "$out" | strip_ansi)" "0%"
 
@@ -174,6 +174,16 @@ assert_not_contains "クリーンなリポジトリに dirty マークを付け�
 touch "$repo/dirty.txt"
 out=$(run "$repo_json" | strip_ansi)
 assert_contains "変更があれば dirty マークを付ける" "$out" "main*"
+
+out=$(run "$repo_json" 50 | strip_ansi)
+assert_contains "幅が狭くてもディレクトリ名は残す" "$out" "repo"
+assert_contains "幅が狭くても git ブランチは残す" "$out" "main"
+
+# キャッシュを消さずに連続実行し、キャッシュ読み出し経路を検証する
+first=$(run "$repo_json" 2>/dev/null | strip_ansi)
+second=$(printf '%s' "$repo_json" | COLUMNS=200 bash "$STATUSLINE" 2>"$TMPDIR/stderr" | strip_ansi)
+assert_eq "キャッシュ再利用時も同じ出力になる" "$second" "$first"
+assert_eq "キャッシュ再利用時に警告を出さない" "$(cat "$TMPDIR/stderr")" ""
 
 echo
 printf 'pass: %d  fail: %d\n' "$PASS" "$FAIL"
