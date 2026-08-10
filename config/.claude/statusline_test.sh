@@ -151,6 +151,10 @@ assert_contains "コンテキストに余裕があれば緑で描画する" "$ou
 out=$(run "$(mock '.context_window.used_percentage = 70')")
 assert_contains "コンテキスト中程度なら黄で描画する" "$out" $'\033[33m'
 
+out=$(run "$FULL_JSON")
+assert_contains "副次情報はライトグレーで描画する" "$out" $'\033[37m'
+assert_not_contains "視認性の低い dim は使わない" "$out" $'\033[2m'
+
 out=$(run "$(mock '.fast_mode = true')" | strip_ansi)
 assert_contains "fast mode を ⚡ で示す" "$out" "⚡"
 
