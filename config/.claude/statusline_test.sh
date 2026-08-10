@@ -163,17 +163,18 @@ assert_contains "1 分未満は秒で表示する" "$out" "45s"
 out=$(run "$(mock '.cost.total_duration_ms = 300000')" | strip_ansi)
 assert_contains "1 時間未満は分で表示する" "$out" "5m"
 
-home_json=$(printf '%s' "$FULL_JSON" | jq -c --arg d "$HOME/ghq/github.com/sora-ichigo/dotfiles" '.cwd = $d | .workspace.current_dir = $d')
+# git 状態に左右されないよう、存在しないパスを使う
+home_json=$(printf '%s' "$FULL_JSON" | jq -c --arg d "$HOME/ghq/github.com/example/no-such-repo" '.cwd = $d | .workspace.current_dir = $d')
 out=$(run "$home_json" 200 | strip_ansi)
 assert_contains "ホーム配下は ~ に短縮する" "$out" "~/ghq/"
-assert_contains "幅に余裕があればパスを畳まない" "$out" "~/ghq/github.com/sora-ichigo/dotfiles"
+assert_contains "幅に余裕があればパスを畳まない" "$out" "~/ghq/github.com/example/no-such-repo"
 
-out=$(run "$home_json" 78 | strip_ansi)
-assert_contains "幅が足りなければ中間を省略する" "$out" "…/dotfiles"
+out=$(run "$home_json" 55 | strip_ansi)
+assert_contains "幅が足りなければ中間を省略する" "$out" "…/no-such-repo"
 assert_not_contains "中間省略時はフルパスを出さない" "$out" "github.com"
 
-out=$(run "$home_json" 46 | strip_ansi)
-assert_contains "さらに狭ければ末尾のみにする" "$out" "dotfiles"
+out=$(run "$home_json" 40 | strip_ansi)
+assert_contains "さらに狭ければ末尾のみにする" "$out" "no-such-repo"
 assert_not_contains "末尾のみのときは ~ を出さない" "$out" "~/"
 
 narrow=$(run "$FULL_JSON" 40)
