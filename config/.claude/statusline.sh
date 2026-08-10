@@ -22,7 +22,7 @@ COLS=${COLUMNS:-120}
 SEP="  "
 
 # 区切りは US(0x1f)。IFS がタブだと空フィールドが畳まれてしまう
-IFS=$'\037' read -r MODEL EFFORT FAST DIR WORKTREE CTX_PCT COST DURATION_MS ADDED REMOVED RL5 RL7 PR_NUM PR_STATE <<<"$(
+IFS=$'\037' read -r MODEL EFFORT FAST DIR WORKTREE CTX_PCT CTX_USED CTX_SIZE COST DURATION_MS ADDED REMOVED RL5 RL7 PR_NUM PR_STATE <<<"$(
   printf '%s' "$input" | jq -r '
     [
       (.model.display_name // "?"),
@@ -31,6 +31,10 @@ IFS=$'\037' read -r MODEL EFFORT FAST DIR WORKTREE CTX_PCT COST DURATION_MS ADDE
       (.workspace.current_dir // .cwd // ""),
       (.workspace.git_worktree // .worktree.name // ""),
       (.context_window.used_percentage // 0),
+      (if .context_window.total_input_tokens or .context_window.total_output_tokens
+       then (.context_window.total_input_tokens // 0) + (.context_window.total_output_tokens // 0)
+       else "" end),
+      (.context_window.context_window_size // ""),
       (.cost.total_cost_usd // ""),
       (.cost.total_duration_ms // ""),
       (.cost.total_lines_added // 0),
@@ -100,18 +104,19 @@ render() {
   SEG_TEXT=()
 }
 
-# ホーム配下は ~ に、4 階層以上は中間を … に畳む。幅が狭ければ末尾だけにする
+# レベル 0: ホーム配下を ~ に置き換えただけ / 1: 4 階層以上なら中間を … に畳む / 2: 末尾のみ
 shorten_dir() {
-  if [ "$COLS" -lt 80 ]; then
+  local level=$2 p=${1/#$HOME/\~} parts n
+
+  if [ "$level" -ge 2 ]; then
     printf '%s' "${1##*/}"
     return 0
   fi
 
-  local p=${1/#$HOME/\~} parts n
   local IFS=/
   read -ra parts <<<"$p"
   n=${#parts[@]}
-  if [ "$n" -gt 3 ]; then
+  if [ "$level" -ge 1 ] && [ "$n" -gt 3 ]; then
     printf '%s/%s/…/%s' "${parts[0]}" "${parts[1]}" "${parts[n - 1]}"
   else
     printf '%s' "$p"
@@ -208,13 +213,26 @@ rate_segment() {
   printf '%s%s %d%%%s' "$color" "$label" "$pct" "$R"
 }
 
-seg 0 "${BOLD}${CYAN}◆ ${MODEL}${R}"
-[ -n "$FAST" ] && seg 2 "${YELLOW}⚡${R}"
-[ -n "$EFFORT" ] && seg 2 "${DIM}${EFFORT}${R}"
-[ -n "$DIR" ] && seg 1 "${BLUE}$(shorten_dir "$DIR")${R}"
-[ -n "$WORKTREE" ] && seg 3 "${MAGENTA}⑂ ${WORKTREE}${R}"
-seg 1 "$(git_segment "$DIR")"
+fmt_tokens() {
+  local n=$1
+  if [ "$n" -lt 1000 ]; then
+    printf '%d' "$n"
+  elif [ "$n" -lt 1000000 ]; then
+    if [ "$((n % 1000))" -lt 100 ]; then
+      printf '%dk' "$((n / 1000))"
+    else
+      printf '%d.%dk' "$((n / 1000))" "$(((n % 1000) / 100))"
+    fi
+  elif [ "$((n % 1000000))" -lt 100000 ]; then
+    printf '%dM' "$((n / 1000000))"
+  else
+    printf '%d.%dM' "$((n / 1000000))" "$(((n % 1000000) / 100000))"
+  fi
+}
 
+GIT_SEG=$(git_segment "$DIR")
+
+PR_SEG=""
 if [ -n "$PR_NUM" ]; then
   case "$PR_STATE" in
   approved) PR_MARK="${GREEN} ✓${R}" ;;
@@ -223,13 +241,46 @@ if [ -n "$PR_NUM" ]; then
   draft) PR_MARK="${DIM} ◌${R}" ;;
   *) PR_MARK="" ;;
   esac
-  seg 3 "${DIM}PR${R} #${PR_NUM}${PR_MARK}"
+  PR_SEG="${DIM}PR${R} #${PR_NUM}${PR_MARK}"
 fi
 
-render
+build_line1() {
+  SEG_PRIO=()
+  SEG_TEXT=()
+  seg 0 "${BOLD}${CYAN}◆ ${MODEL}${R}"
+  [ -n "$FAST" ] && seg 2 "${YELLOW}⚡${R}"
+  [ -n "$EFFORT" ] && seg 2 "${DIM}${EFFORT}${R}"
+  [ -n "$DIR" ] && seg 0 "${BLUE}$(shorten_dir "$DIR" "$1")${R}"
+  [ -n "$WORKTREE" ] && seg 3 "${MAGENTA}⑂ ${WORKTREE}${R}"
+  seg 1 "$GIT_SEG"
+  seg 3 "$PR_SEG"
+}
+
+# セグメントを落とすより先にパスを縮めて、余った幅を使い切る
+LINE1=""
+for p in 3 2 1 0; do
+  for d in 0 1 2; do
+    build_line1 "$d"
+    join_segs "$p"
+    vlen "$JOINED"
+    if [ "$VLEN" -le "$COLS" ]; then
+      LINE1=$JOINED
+      break 2
+    fi
+  done
+done
+[ -n "$LINE1" ] || LINE1="${STRIPPED:0:$((COLS - 1))}…"
+printf '%s\n' "$LINE1"
+
+SEG_PRIO=()
+SEG_TEXT=()
 
 PCT=$(printf '%.0f' "${CTX_PCT:-0}" 2>/dev/null) || PCT=0
 seg 0 "$(context_bar "$PCT")"
+
+if [ -n "$CTX_USED" ] && [ -n "$CTX_SIZE" ]; then
+  seg 1 "${DIM}$(fmt_tokens "${CTX_USED%%.*}")/$(fmt_tokens "${CTX_SIZE%%.*}")${R}"
+fi
 
 [ -n "$DURATION_MS" ] && seg 1 "${DIM}⏱ $(fmt_duration "${DURATION_MS%%.*}")${R}"
 [ -n "$COST" ] && seg 1 "${DIM}\$$(printf '%.2f' "$COST")${R}"
