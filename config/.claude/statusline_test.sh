@@ -68,7 +68,12 @@ FULL_JSON=$(
   "workspace": { "current_dir": "/tmp/not-a-repo", "project_dir": "/tmp/not-a-repo" },
   "effort": { "level": "xhigh" },
   "fast_mode": false,
-  "context_window": { "used_percentage": 42.3, "context_window_size": 200000 },
+  "context_window": {
+    "used_percentage": 42.3,
+    "context_window_size": 200000,
+    "total_input_tokens": 80000,
+    "total_output_tokens": 4200
+  },
   "cost": {
     "total_cost_usd": 1.234,
     "total_duration_ms": 4320000,
@@ -107,7 +112,18 @@ assert_contains "コンテキストバーを表示する" "$line2" "█"
 assert_contains "コストを表示する" "$line2" '$1.23'
 assert_contains "経過時間を h/m 形式で表示する" "$line2" "1h12m"
 assert_contains "差分行数を表示する" "$line2" "+12/-3"
+assert_contains "トークン数を実数で表示する" "$line2" "84.2k/200k"
 assert_not_contains "null を出力しない" "$out" "null"
+
+out=$(run "$(mock '.context_window.context_window_size = 1000000')" | strip_ansi)
+assert_contains "100 万トークンは M 表記にする" "$out" "/1M"
+
+out=$(run "$(mock '.context_window.total_output_tokens = 0 | .context_window.total_input_tokens = 512')" | strip_ansi)
+assert_contains "1000 未満はそのまま表示する" "$out" "512/200k"
+
+out=$(run "$(mock '.context_window = {used_percentage: 42.3}')" | strip_ansi)
+assert_not_contains "トークン数が不明なら出さない" "$out" "/200k"
+assert_contains "トークン数が不明でも使用率は出す" "$out" "42%"
 
 out=$(run "$(mock '{cwd: .cwd, model: .model, workspace: .workspace}')")
 assert_eq "最小入力でも 2 行を保つ" "$(printf '%s\n' "$out" | wc -l | tr -d ' ')" "2"
@@ -148,9 +164,17 @@ out=$(run "$(mock '.cost.total_duration_ms = 300000')" | strip_ansi)
 assert_contains "1 時間未満は分で表示する" "$out" "5m"
 
 home_json=$(printf '%s' "$FULL_JSON" | jq -c --arg d "$HOME/ghq/github.com/sora-ichigo/dotfiles" '.cwd = $d | .workspace.current_dir = $d')
-out=$(run "$home_json" | strip_ansi)
+out=$(run "$home_json" 200 | strip_ansi)
 assert_contains "ホーム配下は ~ に短縮する" "$out" "~/ghq/"
-assert_contains "深いパスは中間を省略する" "$out" "…/dotfiles"
+assert_contains "幅に余裕があればパスを畳まない" "$out" "~/ghq/github.com/sora-ichigo/dotfiles"
+
+out=$(run "$home_json" 78 | strip_ansi)
+assert_contains "幅が足りなければ中間を省略する" "$out" "…/dotfiles"
+assert_not_contains "中間省略時はフルパスを出さない" "$out" "github.com"
+
+out=$(run "$home_json" 46 | strip_ansi)
+assert_contains "さらに狭ければ末尾のみにする" "$out" "dotfiles"
+assert_not_contains "末尾のみのときは ~ を出さない" "$out" "~/"
 
 narrow=$(run "$FULL_JSON" 40)
 too_long=0
