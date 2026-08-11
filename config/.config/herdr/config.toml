@@ -1,3 +1,7 @@
+[keys]
+navigate_workspace_up = ["up", "k"]
+navigate_workspace_down = ["down", "j"]
+
 [[keys.command]]
 key = "prefix+t"
 type = "popup"
