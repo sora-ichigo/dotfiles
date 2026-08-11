@@ -1,0 +1,17 @@
+[keys]
+navigate_workspace_up = ["up", "k"]
+navigate_workspace_down = ["down", "j"]
+
+[[keys.command]]
+key = "prefix+t"
+type = "popup"
+command = "sesh connect \"$({ sesh list -i; ghq list -p | grep -v -- '-worktrees/' | sed \"s|^$HOME|~|\"; } | awk '!seen[$NF]++' | fzf --ansi --no-sort --reverse --border-label ' sesh ' --color=bg:-1,bg+:-1,gutter:-1,hl:#cba6f7,hl+:#cba6f7:bold,fg:#cdd6f4,fg+:#cdd6f4:bold,prompt:#89b4fa,pointer:#f38ba8,marker:#a6e3a1,border:#89b4fa,label:#89b4fa)\""
+description = "sesh"
+width = "60%"
+height = "60%"
+
+[ui]
+mouse_capture = true
+
+[theme]
+name = "catppuccin"
