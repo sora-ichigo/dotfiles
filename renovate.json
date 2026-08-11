@@ -4,6 +4,9 @@
     "config:recommended"
   ],
   "nix": {
-    "enabled": true
+    "enabled": true,
+    "lockFileMaintenance": {
+      "enabled": true
+    }
   }
 }
