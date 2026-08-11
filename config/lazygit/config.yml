@@ -1,5 +1,3 @@
 git:
-  pagers:
-    - colorArg: always
-      pager: delta --paging=never
-      useConfig: false
+  diffRenderers:
+    - command: delta --paging=never
