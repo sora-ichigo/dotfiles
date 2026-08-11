@@ -65,12 +65,19 @@
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
       }
+    },
+    "tmux-agent-sidebar": {
+      "source": {
+        "source": "directory",
+        "path": "~/.tmux/plugins/tmux-agent-sidebar"
+      }
     }
   },
   "enabledPlugins": {
     "context7-plugin@context7-marketplace": true,
     "marp-wantedly@wantedly-cc-plugins": true,
-    "slack@claude-plugins-official": true
+    "slack@claude-plugins-official": true,
+    "tmux-agent-sidebar@hiroppy": true
   },
   "statusLine": {
     "type": "command",

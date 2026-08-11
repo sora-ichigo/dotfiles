@@ -29,7 +29,7 @@ secrets:
 #       mcp.json の設定を変更した場合は、先に `claude mcp remove <name>` で削除してから再実行すること
 .PHONY: claude-code
 claude-code:
-	@jq -r '.extraKnownMarketplaces | to_entries[] | .value.source.repo' $(CLAUDE_SETTINGS) | while read repo; do \
+	@jq -r '.extraKnownMarketplaces | to_entries[] | .value.source | (.repo // .path)' $(CLAUDE_SETTINGS) | while read repo; do \
 		claude plugin marketplace add "$$repo" 2>/dev/null || true; \
 	done
 	@jq -r '.enabledPlugins | to_entries[] | select(.value == true) | .key' $(CLAUDE_SETTINGS) | while read plugin; do \
