@@ -1,6 +1,3 @@
-[keys]
-prefix = "ctrl+t"
-
 [[keys.command]]
 key = "prefix+t"
 type = "popup"
