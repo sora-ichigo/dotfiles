@@ -7,7 +7,6 @@
     ./programs/gh.nix
     ./programs/starship.nix
     ./programs/tmux.nix
-    ./programs/herdr.nix
     ./programs/neovim.nix
     ./programs/zsh.nix
     ./programs/mise.nix
