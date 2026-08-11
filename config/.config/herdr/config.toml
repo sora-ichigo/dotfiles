@@ -1,9 +1,6 @@
 [keys]
 navigate_workspace_up = ["up", "k"]
 navigate_workspace_down = ["down", "j"]
-next_agent = "prefix+shift+j"
-previous_agent = "prefix+shift+k"
-focus_agent = "prefix+alt+1..9"
 
 [[keys.command]]
 key = "prefix+t"
