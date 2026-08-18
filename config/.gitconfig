@@ -30,6 +30,10 @@
 [color]
 	ui = true
 
+[delta]
+	dark = true
+	syntax-theme = Solarized (dark)
+
 [push]
 	default = simple
 	autoSetupRemote = true
