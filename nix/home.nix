@@ -18,6 +18,7 @@
     ./programs/yabai.nix
     ./programs/git-worktree-runner.nix
     ./programs/lazygit.nix
+    ./programs/hunk.nix
     ./programs/redis.nix
   ];
 
