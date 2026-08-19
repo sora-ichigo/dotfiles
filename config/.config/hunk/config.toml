@@ -1,1 +1,9 @@
 theme = "solarized-dark"
+mode = "stack"
+wrap_lines = true
+agent_notes = true
+cursor_line = "number"
+watch = true
+
+# Home Manager が read-only symlink を張るため、TUI からは保存できない
+prompt_save_view_preferences = false
