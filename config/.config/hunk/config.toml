@@ -7,3 +7,8 @@ watch = true
 
 # Home Manager が read-only symlink を張るため、TUI からは保存できない
 prompt_save_view_preferences = false
+
+# built-in はキー競合に勝つため、"/" を extension に渡すには明示的な指定が必要
+[keybindings]
+"hunk-less-search.find" = "/"
+"hunk.review.focusFilter" = "F"
