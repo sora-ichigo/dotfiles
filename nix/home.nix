@@ -20,7 +20,6 @@
     ./programs/lazygit.nix
     ./programs/hunk.nix
     ./programs/redis.nix
-    ./programs/ollama.nix
   ];
 
   home.stateVersion = "24.05";
