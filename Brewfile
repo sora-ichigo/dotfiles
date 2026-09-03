@@ -27,6 +27,7 @@ cask "wezterm"
 brew "googleworkspace-cli"
 
 brew "aqua"
+brew "crit"
 brew "libyaml"
 brew "xcodes"
 
