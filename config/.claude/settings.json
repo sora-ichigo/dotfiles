@@ -64,12 +64,19 @@
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
       }
+    },
+    "crit": {
+      "source": {
+        "source": "github",
+        "repo": "tomasz-tomczyk/crit"
+      }
     }
   },
   "enabledPlugins": {
     "context7-plugin@context7-marketplace": true,
     "marp-wantedly@wantedly-cc-plugins": true,
-    "slack@claude-plugins-official": true
+    "slack@claude-plugins-official": true,
+    "crit@crit": true
   },
   "statusLine": {
     "type": "command",
