@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "crit": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1788269803,
+        "narHash": "sha256-QkpHy0BHjLLqlr7W+rbkl3BicQZIoMZClKrW9bZSKL8=",
+        "owner": "tomasz-tomczyk",
+        "repo": "crit",
+        "rev": "31d6a6a9195bdda735c1e8f68a75359839f8d3c8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tomasz-tomczyk",
+        "repo": "crit",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -38,6 +58,7 @@
     },
     "root": {
       "inputs": {
+        "crit": "crit",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
       }
