@@ -19,6 +19,7 @@
     ./programs/git-worktree-runner.nix
     ./programs/lazygit.nix
     ./programs/hunk.nix
+    ./programs/crit.nix
     ./programs/redis.nix
   ];
 

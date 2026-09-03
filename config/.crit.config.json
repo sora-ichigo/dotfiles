@@ -1,0 +1,3 @@
+{
+  "agent_cmd": "claude --permission-mode auto -p"
+}
