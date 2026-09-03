@@ -7,13 +7,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    crit = {
-      url = "github:tomasz-tomczyk/crit";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { nixpkgs, home-manager, crit, ... }:
+  outputs = { nixpkgs, home-manager, ... }:
     let
       mkHomeConfiguration = { system, username }:
         let
@@ -23,9 +19,6 @@
         in
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = {
-            critPackage = crit.packages.${system}.default;
-          };
           modules = [
             ./home.nix
             {
