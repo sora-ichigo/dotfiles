@@ -21,6 +21,7 @@
     ./programs/hunk.nix
     ./programs/crit.nix
     ./programs/redis.nix
+    ./programs/chrome.nix
   ];
 
   home.stateVersion = "24.05";
