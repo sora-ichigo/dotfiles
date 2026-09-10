@@ -78,6 +78,8 @@ cask "app-name"
 - Place application config files in `config/` directory matching the target location structure
 - Files in `config/` are symlinked to `$HOME/` by Home Manager or manually
 - For Nix-managed programs, prefer using Home Manager's native configuration options
+- ツール自身が設定ファイルに書き戻す場合は `home.file` を使わない。Nix store へのシンボリックリンクは読み取り専用のため書き込みが失敗する。`home.activation` で書き込み可能な実ファイルとしてコピーし、ツールが書き込む区画だけ引き継ぐ
+  - `nix/programs/codex.nix` がこの形。codex は trust したディレクトリを `[projects."<絶対パス>"]` として `config.toml` に書き込むため、コピー時に既存の `[projects]` ブロックを引き継いでいる（trust は完全一致のみで、親ディレクトリからの継承や再帰指定はできない）
 
 ## Memories
 
