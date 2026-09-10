@@ -1,4 +1,5 @@
 ---
+name: commit
 description: 現在の変更を適切にコミットする（プッシュはしない）
 disable-model-invocation: true
 ---

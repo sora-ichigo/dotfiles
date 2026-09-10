@@ -1,4 +1,5 @@
 ---
+name: cleanup
 description: PRマージ後にワークツリーを削除してセッションを片付ける
 disable-model-invocation: true
 ---

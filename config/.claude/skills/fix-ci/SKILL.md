@@ -1,4 +1,5 @@
 ---
+name: fix-ci
 description: CIとDevin Reviewが通っているかチェックし、失敗していれば修正&プッシュを繰り返す
 ---
 

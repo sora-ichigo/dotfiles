@@ -1,4 +1,5 @@
 ---
+name: open-pr
 description: 現在のブランチのPRをブラウザで開く
 allowed-tools: Bash(gh pr view:*)
 disable-model-invocation: true
