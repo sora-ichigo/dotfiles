@@ -13,7 +13,6 @@
     ./programs/direnv.nix
     ./programs/codex.nix
     ./programs/claude-code.nix
-    ./programs/gemini.nix
     ./programs/wezterm.nix
     ./programs/aerospace.nix
     ./programs/yabai.nix
