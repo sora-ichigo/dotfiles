@@ -1,4 +1,5 @@
 ---
+name: english-mode
 description: ユーザーの英語学習のため、以降の会話を英語で行い英語のアドバイスをするモードに切り替える
 disable-model-invocation: true
 ---

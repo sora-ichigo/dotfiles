@@ -1,4 +1,5 @@
 ---
+name: delegate
 description: 作業を委譲する独立した background Claude Code セッションを起動する（claude --background、agent view で管理）
 disable-model-invocation: true
 ---

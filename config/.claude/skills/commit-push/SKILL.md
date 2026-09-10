@@ -1,4 +1,5 @@
 ---
+name: commit-push
 description: 現在の変更を適切にコミットしてプッシュし、PRがなければ作成する
 disable-model-invocation: true
 ---

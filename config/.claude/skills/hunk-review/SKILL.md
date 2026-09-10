@@ -1,4 +1,5 @@
 ---
+name: hunk-review
 description: 起動中の Hunk セッションを操作して diff をレビューする
 ---
 
