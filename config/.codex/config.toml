@@ -2,7 +2,7 @@ model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
 hide_agent_reasoning = true
 
-approval_policy = "never"
+approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 
 notify = ["bash", "-lc", "afplay /System/Library/Sounds/Ping.aiff"]
@@ -13,10 +13,6 @@ writable_roots = ["~/.obsidian/igsr5/01_dailynotes"]
 
 [tools]
 web_search = true
-
-[mcp_servers.serena]
-command = "uvx"
-args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "codex"]
 
 [mcp_servers.context7]
 command = "npx"
