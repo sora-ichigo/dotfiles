@@ -92,6 +92,7 @@ cask "app-name"
   - Claude Code: `config/.claude/mcp.json` を `make claude-code` が `claude mcp add` に流し込む
   - codex: `config/.codex/config.toml` の `[mcp_servers.*]`
   - Gemini CLI: `config/.gemini/settings.json` の `mcpServers`。`${VAR}` 形式の環境変数展開が使えるため、シークレットは `~/.secrets` の環境変数を参照する
+    - Gemini CLI は untrusted なフォルダでは user スコープの MCP サーバーもまとめて無効化する。使うリポジトリでは `/trust` で信頼する必要がある（信頼情報は `settings.json` ではなく `~/.gemini/trustedFolders.json` に保存されるため、activation のマージ対象外）
 
 ## Memories
 
