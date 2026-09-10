@@ -1,12 +1,14 @@
-# CLAUDE.md
+# AGENTS.md
 
 ## Conversation Guidelines
 
 - 常に日本語で会話する
+- 応答も、作業中の進捗報告も、ファイルに書き出す成果物（PR description、レポート等）も簡潔に保つ。前置きや注意書きは短くまとめ、本題に文量を割く。詳細を明示的に求められない限り要点のみを述べる
+- ドキュメントや Issue / PR のコメントを更新するときは「追記）」のようなつぎはぎの差分を足さない。既存の記述と矛盾する部分は書き換え、不要になった記述は削除して、常に全体が最新版として読める状態に保つ
 
 ## Git Operations
 
-- 自動的にコミットやプッシュを行わない
+- 明示的に指示されない限り、自動的にコミットやプッシュを行わない
 
 ## Code Style Guidelines
 
@@ -16,10 +18,22 @@
 
 ## GitHub Operations
 
-- GitHubのリソース（リポジトリ、Issue、PR、コード等）を取得する際は、常にGitHub MCP（`mcp__github__`で始まるツール）を使用する
-- WebFetchやWebSearchではなく、専用のMCPツールを優先する
+- GitHubのリソース（リポジトリ、Issue、PR、コード等）を操作する際は、`gh` コマンド（GitHub CLI）を使用する
+- Web 検索やページ取得ではなく、`gh` コマンドを優先する
+
+## Google Workspace Operations
+
+- Google Workspace の操作（Gmail、Google Calendar 等）を行う際は、`gws` コマンドを使用する
 
 ## Development Philosophy
+
+### Before Implementation
+
+- 新しい機能を実装する前に、以下を必ず確認する：
+  1. 既存のコードベース内に同様の実装やユーティリティがないか検索する
+  2. 使用しているライブラリ/フレームワークに該当する API や機能がないか確認する
+  3. Context7 MCP を使ってライブラリのドキュメントを参照する
+- 「自分で実装する」より「既存の解決策を使う」を優先する
 
 ### Test-Driven Development (TDD)
 
