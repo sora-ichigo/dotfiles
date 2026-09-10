@@ -1,9 +1,15 @@
-model = "gpt-5-codex"
+model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
 hide_agent_reasoning = true
-network_access = true
+
+approval_policy = "never"
+sandbox_mode = "workspace-write"
 
 notify = ["bash", "-lc", "afplay /System/Library/Sounds/Ping.aiff"]
+
+[sandbox_workspace_write]
+network_access = true
+writable_roots = ["~/.obsidian/igsr5/01_dailynotes"]
 
 [tools]
 web_search = true
@@ -11,3 +17,39 @@ web_search = true
 [mcp_servers.serena]
 command = "uvx"
 args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "codex"]
+
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp@latest"]
+
+[mcp_servers.circleci]
+command = "npx"
+args = ["-y", "@circleci/mcp-server-circleci@latest"]
+env_vars_to_forward = ["CIRCLECI_TOKEN"]
+
+[mcp_servers.sentry]
+command = "npx"
+args = ["-y", "@sentry/mcp-server"]
+env_vars_to_forward = ["SENTRY_ACCESS_TOKEN"]
+
+[mcp_servers.honeybadger]
+command = "docker"
+args = ["run", "-i", "--rm", "-e", "HONEYBADGER_PERSONAL_AUTH_TOKEN", "ghcr.io/honeybadger-io/honeybadger-mcp-server"]
+env_vars_to_forward = ["HONEYBADGER_PERSONAL_AUTH_TOKEN"]
+
+[mcp_servers.devin]
+url = "https://mcp.devin.ai/mcp"
+bearer_token_env_var = "DEVIN_API_KEY"
+env_http_headers = { "X-Org-Id" = "DEVIN_ORG_ID" }
+
+[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+
+[mcp_servers.notion]
+url = "https://mcp.notion.com/mcp"
+
+[mcp_servers.miro]
+url = "https://mcp.miro.com"
+
+[mcp_servers.datadog]
+url = "https://mcp.datadoghq.com/v1/mcp"
