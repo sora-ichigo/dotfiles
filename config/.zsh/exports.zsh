@@ -13,11 +13,11 @@ export PATH=$PATH:$HOME/.bin
 # nvim
 export PATH="$PATH:$HOME/.local/bin"
 
-# mise
-eval "$(mise activate zsh)"
-
 # aqua
 export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
+
+# mise
+eval "$(mise activate zsh)"
 
 # go
 export PATH=$PATH:$HOME/gobin
@@ -76,6 +76,3 @@ export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 # Android SDK
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin
-
-# aqua
-export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
