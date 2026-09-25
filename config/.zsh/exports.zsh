@@ -10,11 +10,11 @@ fi
 
 export PATH=$PATH:$HOME/.bin
 
-# nvim
-export PATH="$PATH:$HOME/.local/bin"
-
 # aqua
 export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
+
+# .local/bin (claude など。aqua より優先する)
+export PATH="$HOME/.local/bin:$PATH"
 
 # mise
 eval "$(mise activate zsh)"
