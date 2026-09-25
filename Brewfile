@@ -1,4 +1,3 @@
-tap "manaflow-ai/cmux"
 tap "nikitabobko/tap"
 
 cask "1password"
@@ -7,7 +6,6 @@ cask "nikitabobko/tap/aerospace"
 cask "android-studio"
 cask "aqua-voice"
 cask "claude"
-cask "manaflow-ai/cmux/cmux"
 cask "discord"
 cask "figma"
 cask "font-hack-nerd-font"
