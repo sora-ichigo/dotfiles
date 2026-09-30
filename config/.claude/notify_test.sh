@@ -8,7 +8,7 @@ WORKDIR=$(mktemp -d)
 trap 'rm -rf "$WORKDIR"' EXIT
 
 mkdir -p "$WORKDIR/bin"
-for cmd in osascript curl; do
+for cmd in terminal-notifier curl tmux; do
   cat >"$WORKDIR/bin/$cmd" <<EOF
 #!/usr/bin/env bash
 printf '%s\n' "\$@" >"$WORKDIR/$cmd.log"
@@ -21,7 +21,7 @@ FAIL=0
 
 run() {
   rm -f "$WORKDIR"/*.log
-  printf '%s' "$1" | PATH="$WORKDIR/bin:$PATH" CLAUDE_NTFY_TOPIC="${2:-}" bash "$NOTIFY"
+  printf '%s' "$1" | PATH="$WORKDIR/bin:$PATH" CLAUDE_NTFY_TOPIC="${2:-}" TMUX_PANE="${3:-}" bash "$NOTIFY"
 }
 
 log() {
@@ -47,6 +47,14 @@ assert_contains() {
   esac
 }
 
+assert_not_contains() {
+  local name=$1 haystack=$2 needle=$3
+  case "$haystack" in
+  *"$needle"*) ng "$name" "expected not to contain: $needle" ;;
+  *) ok "$name" ;;
+  esac
+}
+
 assert_empty() {
   local name=$1 value=$2
   if [ -z "$value" ]; then ok "$name"; else ng "$name" "expected empty, got: $value"; fi
@@ -54,14 +62,21 @@ assert_empty() {
 
 echo "Stop"
 run '{"hook_event_name":"Stop","cwd":"/Users/me/ghq/github.com/foo/bar"}'
-assert_contains "タイトルにプロジェクト名を含む" "$(log osascript)" "Claude Code (bar)"
-assert_contains "完了メッセージを通知する" "$(log osascript)" "応答が完了しました"
+assert_contains "タイトルにプロジェクト名を含む" "$(log terminal-notifier)" "Claude Code (bar)"
+assert_contains "完了メッセージを通知する" "$(log terminal-notifier)" "応答が完了しました"
 assert_empty "トピック未設定なら ntfy に送らない" "$(log curl)"
 
 echo "Notification"
 run '{"hook_event_name":"Notification","cwd":"/tmp/baz","message":"Claude needs your permission to use Bash"}'
-assert_contains "hook のメッセージをそのまま通知する" "$(log osascript)" "Claude needs your permission to use Bash"
-assert_contains "タイトルにプロジェクト名を含む" "$(log osascript)" "Claude Code (baz)"
+assert_contains "hook のメッセージをそのまま通知する" "$(log terminal-notifier)" "Claude needs your permission to use Bash"
+assert_contains "タイトルにプロジェクト名を含む" "$(log terminal-notifier)" "Claude Code (baz)"
+
+echo "tmux"
+run '{"hook_event_name":"Stop","cwd":"/tmp/qux"}' "" "%12"
+assert_contains "クリックで元の pane に切り替える" "$(log terminal-notifier)" "$WORKDIR/bin/tmux switch-client -t %12"
+assert_contains "クリックで WezTerm を前面に出す" "$(log terminal-notifier)" "com.github.wez.wezterm"
+run '{"hook_event_name":"Stop","cwd":"/tmp/qux"}'
+assert_not_contains "tmux 外ではクリック時のコマンドを付けない" "$(log terminal-notifier)" "-execute"
 
 echo "ntfy"
 run '{"hook_event_name":"Stop","cwd":"/tmp/qux"}' "secret-topic"
