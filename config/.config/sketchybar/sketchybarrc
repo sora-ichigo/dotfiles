@@ -60,12 +60,22 @@ for sid in $(aerospace list-workspaces --all); do
   sketchybar --add item "space.$sid" left \
     --set "space.$sid" icon="$sid" \
     icon.font="$FONT:Bold:12.0" \
-    label.font="$APP_FONT" \
+    label.drawing=off \
+    padding_left=10 \
     background.color="$ITEM_BG_COLOR" \
     background.corner_radius=8 \
-    background.height=26 \
+    background.height=22 \
     background.drawing=off \
     click_script="aerospace workspace $sid"
+  for slot in 1 2 3; do
+    sketchybar --add item "space.$sid.$slot" left \
+      --set "space.$sid.$slot" icon.font="$APP_FONT" \
+      label.drawing=off \
+      padding_left=0 \
+      padding_right=0 \
+      drawing=off \
+      click_script="aerospace workspace $sid"
+  done
 done
 
 sketchybar --add item aerospace left \
@@ -73,7 +83,7 @@ sketchybar --add item aerospace left \
   --set aerospace drawing=off \
   updates=on \
   update_freq=10 \
-  script="SPACE_ICON_LIMIT=1 $PLUGIN_DIR/aerospace.sh"
+  script="SPACE_APP_SLOTS=3 $PLUGIN_DIR/aerospace.sh"
 
 sketchybar --add bracket spaces '/space\..*/' \
   --set spaces background.color="$BAR_BORDER_COLOR" \
