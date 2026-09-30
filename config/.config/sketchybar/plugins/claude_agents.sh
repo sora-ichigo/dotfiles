@@ -33,8 +33,6 @@ row() {
   wanted+="$name"$'\n'
 }
 
-row claude.agent.new icon=󰐕 icon.color="$BLUE" label="New session" click_script="$PLUGIN_DIR/claude_new.sh"
-
 waiting=0
 working=0
 done_count=0
