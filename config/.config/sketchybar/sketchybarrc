@@ -10,7 +10,7 @@ source "$CONFIG_DIR/colors.sh"
 sketchybar --bar position=left \
   height=56 \
   margin=6 \
-  y_offset=6 \
+  y_offset=12 \
   corner_radius=12 \
   blur_radius=30 \
   color="$BAR_COLOR" \
