@@ -18,6 +18,8 @@ for sid in $(aerospace list-workspaces --all); do
   done <<<"$windows"
 
   first=${icons[0]:-}
+  background=off
+  [ "$sid" = "$focused" ] && background=on
   if [ "$sid" = "$focused" ]; then
     args+=(--set "space.$sid" drawing=on background.drawing=on icon.color="$ACCENT_COLOR" label="$first")
   elif [ -n "$first" ]; then
@@ -28,7 +30,7 @@ for sid in $(aerospace list-workspaces --all); do
 
   for ((i = 1; i <= slots; i++)); do
     if [ "$i" -lt ${#icons[@]} ]; then
-      args+=(--set "space.$sid.$i" drawing=on icon="${icons[$i]}")
+      args+=(--set "space.$sid.$i" drawing=on background.drawing="$background" icon="${icons[$i]}")
     else
       args+=(--set "space.$sid.$i" drawing=off)
     fi
