@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-export PATH="$HOME/.local/bin:$HOME/.nix-profile/bin:/opt/homebrew/bin:$PATH"
-
 CONFIG_DIR=$(cd "$(dirname "$0")" && pwd)
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 FONT="Hack Nerd Font"

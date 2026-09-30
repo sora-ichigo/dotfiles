@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   config = lib.mkIf pkgs.stdenv.isDarwin {
@@ -8,8 +8,14 @@
         source = ../../config/.config/sketchybar;
         recursive = true;
       };
-      extraPackages = [ pkgs.jq ];
+      extraPackages = [
+        pkgs.jq
+        pkgs.sketchybar-app-font
+      ];
     };
+
+    launchd.agents.sketchybar.config.EnvironmentVariables.PATH =
+      "${config.home.homeDirectory}/.local/bin:${config.home.homeDirectory}/.nix-profile/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin";
 
     home.packages = [ pkgs.sketchybar-app-font ];
 
