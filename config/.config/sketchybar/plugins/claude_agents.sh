@@ -3,10 +3,6 @@
 PLUGIN_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 source "$PLUGIN_DIR/../colors.sh"
 
-if [ "$SENDER" = "mouse.clicked" ]; then
-  sketchybar --set "$NAME" popup.drawing=toggle
-fi
-
 if ! json=$(claude agents --json 2>/dev/null) || ! rows=$(jq -r '
   map(select(.kind == "background"))
   | map(. + {rank: (if .state == "working" then 1 elif .state == "done" then 2 else 0 end)})

@@ -16,8 +16,8 @@ sketchybar --bar position=left \
   color="$BAR_COLOR" \
   border_width=1 \
   border_color="$BAR_BORDER_COLOR" \
-  padding_left=8 \
-  padding_right=8 \
+  padding_left=12 \
+  padding_right=12 \
   shadow=on \
   sticky=on \
   topmost=off
@@ -27,8 +27,8 @@ sketchybar --default updates=when_shown \
   icon.color="$WHITE" \
   label.font="$FONT:Bold:13.0" \
   label.color="$WHITE" \
-  padding_left=3 \
-  padding_right=3 \
+  padding_left=6 \
+  padding_right=6 \
   icon.padding_left=2 \
   icon.padding_right=2 \
   label.padding_left=2 \
@@ -85,12 +85,13 @@ sketchybar --add item front_app left \
 
 sketchybar --add event claude_agents_update \
   --add item claude center \
-  --subscribe claude claude_agents_update mouse.clicked \
+  --subscribe claude claude_agents_update \
   --set claude icon=󰚩 \
   icon.font="$FONT:Bold:18.0" \
   icon.color="$GREY" \
   label.font="$FONT:Bold:11.0" \
   popup.align=center \
+  click_script="sketchybar --set claude popup.drawing=toggle --trigger claude_agents_update" \
   update_freq=15 \
   updates=on \
   script="CLAUDE_AGENTS_COMPACT=1 $PLUGIN_DIR/claude_agents.sh"
