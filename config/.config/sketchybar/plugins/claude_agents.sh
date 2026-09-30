@@ -52,7 +52,14 @@ else
   color=$GREY
 fi
 
-if [ ${#parts[@]} -gt 0 ]; then
+if [ -n "${CLAUDE_AGENTS_COMPACT:-}" ]; then
+  active=$((waiting + working))
+  if [ "$active" -gt 0 ]; then
+    args+=(--set "$NAME" icon.color="$color" label="$active" label.drawing=on)
+  else
+    args+=(--set "$NAME" icon.color="$color" label.drawing=off)
+  fi
+elif [ ${#parts[@]} -gt 0 ]; then
   label=$(printf ' · %s' "${parts[@]}")
   args+=(--set "$NAME" icon.color="$color" label="${label:3}" label.drawing=on)
 else
