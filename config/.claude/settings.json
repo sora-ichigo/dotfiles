@@ -94,6 +94,10 @@
           {
             "type": "command",
             "command": "TZ=Asia/Tokyo date '+[Current time: %Y-%m-%d %H:%M:%S %Z (%A)]'"
+          },
+          {
+            "type": "command",
+            "command": "{ sleep 1; sketchybar --trigger claude_agents_update; } >/dev/null 2>&1 &"
           }
         ]
       }
@@ -104,6 +108,10 @@
           {
             "type": "command",
             "command": "~/.claude/notify.sh"
+          },
+          {
+            "type": "command",
+            "command": "{ sleep 1; sketchybar --trigger claude_agents_update; } >/dev/null 2>&1 &"
           }
         ]
       }
@@ -114,6 +122,10 @@
           {
             "type": "command",
             "command": "~/.claude/notify.sh"
+          },
+          {
+            "type": "command",
+            "command": "{ sleep 1; sketchybar --trigger claude_agents_update; } >/dev/null 2>&1 &"
           }
         ]
       }

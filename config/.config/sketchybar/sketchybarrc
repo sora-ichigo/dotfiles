@@ -1,0 +1,138 @@
+#!/usr/bin/env bash
+
+export PATH="$HOME/.local/bin:$HOME/.nix-profile/bin:/opt/homebrew/bin:$PATH"
+
+CONFIG_DIR=$(cd "$(dirname "$0")" && pwd)
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+FONT="Hack Nerd Font"
+APP_FONT="sketchybar-app-font:Regular:15.0"
+
+source "$CONFIG_DIR/colors.sh"
+
+sketchybar --bar position=top \
+  height=36 \
+  margin=10 \
+  y_offset=6 \
+  corner_radius=12 \
+  blur_radius=30 \
+  color="$BAR_COLOR" \
+  border_width=1 \
+  border_color="$BAR_BORDER_COLOR" \
+  padding_left=8 \
+  padding_right=8 \
+  shadow=on \
+  sticky=on \
+  topmost=window
+
+sketchybar --default updates=when_shown \
+  icon.font="$FONT:Bold:15.0" \
+  icon.color="$WHITE" \
+  label.font="$FONT:Bold:13.0" \
+  label.color="$WHITE" \
+  padding_left=4 \
+  padding_right=4 \
+  icon.padding_left=4 \
+  icon.padding_right=4 \
+  label.padding_left=4 \
+  label.padding_right=4 \
+  popup.background.color="$POPUP_BG_COLOR" \
+  popup.background.border_width=2 \
+  popup.background.border_color="$POPUP_BORDER_COLOR" \
+  popup.background.corner_radius=9 \
+  popup.background.shadow.drawing=on \
+  popup.blur_radius=20
+
+sketchybar --add item apple left \
+  --set apple icon= \
+  icon.font="$FONT:Bold:18.0" \
+  icon.color="$GREEN" \
+  label.drawing=off \
+  click_script="sketchybar --set apple popup.drawing=toggle"
+
+for entry in "󰒓|Preferences|open -a 'System Settings'" "󰍉|Activity|open -a 'Activity Monitor'" "󰌾|Lock Screen|pmset displaysleepnow"; do
+  IFS='|' read -r icon label command <<<"$entry"
+  name="apple.${label// /_}"
+  sketchybar --add item "$name" popup.apple \
+    --set "$name" icon="$icon" label="$label" \
+    click_script="$command; sketchybar --set apple popup.drawing=off"
+done
+
+sketchybar --add event aerospace_workspace_change
+for sid in $(aerospace list-workspaces --all); do
+  sketchybar --add item "space.$sid" left \
+    --subscribe "space.$sid" aerospace_workspace_change front_app_switched space_windows_change \
+    --set "space.$sid" icon="$sid" \
+    label.font="$APP_FONT" \
+    label.padding_right=10 \
+    background.color="$ITEM_BG_COLOR" \
+    background.corner_radius=8 \
+    background.height=26 \
+    background.drawing=off \
+    click_script="aerospace workspace $sid" \
+    script="$PLUGIN_DIR/aerospace.sh $sid"
+done
+
+sketchybar --add bracket spaces '/space\..*/' \
+  --set spaces background.color="$BAR_BORDER_COLOR" \
+  background.corner_radius=10 \
+  background.height=30 \
+  background.border_width=1 \
+  background.border_color="$ITEM_BG_COLOR"
+
+sketchybar --add item chevron left \
+  --set chevron icon= label.drawing=off \
+  --add item front_app left \
+  --subscribe front_app front_app_switched \
+  --set front_app icon.font="$APP_FONT" \
+  icon.color="$ORANGE" \
+  script="$PLUGIN_DIR/front_app.sh"
+
+sketchybar --add event claude_agents_update \
+  --add item claude center \
+  --subscribe claude claude_agents_update mouse.clicked \
+  --set claude icon=󰚩 \
+  icon.font="$FONT:Bold:18.0" \
+  icon.color="$GREY" \
+  popup.align=center \
+  update_freq=15 \
+  updates=on \
+  script="$PLUGIN_DIR/claude_agents.sh"
+
+sketchybar --add item calendar right \
+  --set calendar icon.drawing=off \
+  update_freq=30 \
+  click_script="open -a Calendar" \
+  script="$PLUGIN_DIR/calendar.sh"
+
+sketchybar --add item battery right \
+  --subscribe battery system_woke power_source_change \
+  --set battery update_freq=120 \
+  label.drawing=off \
+  script="$PLUGIN_DIR/battery.sh" \
+  --add item volume right \
+  --subscribe volume volume_change \
+  --set volume label.drawing=off \
+  script="$PLUGIN_DIR/volume.sh" \
+  --add bracket status battery volume \
+  --set status background.color="$BAR_BORDER_COLOR" \
+  background.corner_radius=10 \
+  background.height=30 \
+  background.border_width=1 \
+  background.border_color="$ITEM_BG_COLOR"
+
+sketchybar --add graph cpu right 80 \
+  --set cpu update_freq=2 \
+  icon.drawing=off \
+  label.font="$FONT:Bold:10.0" \
+  label.y_offset=6 \
+  label.align=right \
+  label.width=0 \
+  graph.color="$BLUE" \
+  graph.fill_color=0x338aadf4 \
+  graph.line_width=1 \
+  background.height=26 \
+  background.drawing=on \
+  background.color="$TRANSPARENT" \
+  script="$PLUGIN_DIR/cpu.sh"
+
+sketchybar --update

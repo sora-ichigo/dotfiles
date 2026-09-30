@@ -23,6 +23,7 @@
     ./programs/chrome.nix
     ./programs/ghq.nix
     ./programs/menubar.nix
+    ./programs/sketchybar.nix
   ];
 
   home.stateVersion = "24.05";

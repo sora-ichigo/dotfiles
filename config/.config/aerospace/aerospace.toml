@@ -12,6 +12,8 @@ default-root-container-orientation = 'auto'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 automatically-unhide-macos-hidden-apps = false
 
+exec-on-workspace-change = ['/bin/bash', '-c', '$HOME/.nix-profile/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE']
+
 [[on-window-detected]]
     if.app-id = 'com.electron.aqua-voice'
     run = 'layout floating'
@@ -21,7 +23,7 @@ automatically-unhide-macos-hidden-apps = false
     inner.vertical =   6
     outer.left =       12
     outer.bottom =     12
-    outer.top =        12
+    outer.top =        54
     outer.right =      12
 
 [mode.main.binding]

@@ -144,7 +144,10 @@ assert_empty "プロンプトが空なら作らない" "$(log claude)"
 echo "claude_attach"
 reset_logs
 PATH="$WORKDIR/bin:$PATH" bash "$SCRIPT_DIR/claude_attach.sh" aaaa1111
-sleep 0.2
+for _ in $(seq 1 20); do
+  [ -s "$WORKDIR/wezterm.log" ] && break
+  sleep 0.1
+done
 assert_contains "WezTerm の新しいウィンドウで attach する" "$(log wezterm)" "$(printf 'start\n--\nclaude\nattach\naaaa1111')"
 assert_contains "attach 後にポップアップを閉じる" "$(log sketchybar)" "popup.drawing=off"
 
