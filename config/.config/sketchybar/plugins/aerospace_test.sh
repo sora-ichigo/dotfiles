@@ -33,7 +33,7 @@ FAIL=0
 
 run() {
   rm -f "$WORKDIR"/*.log
-  FAKE_WINDOWS="$1" FAKE_FOCUSED="${2:-1}" PATH="$WORKDIR/bin:$PATH" "${@:3}" bash "$SCRIPT_DIR/aerospace.sh"
+  FAKE_WINDOWS="$1" FAKE_FOCUSED="${2:-1}" SPACE_APP_SLOTS=2 PATH="$WORKDIR/bin:$PATH" "${@:3}" bash "$SCRIPT_DIR/aerospace.sh"
 }
 
 log() {
@@ -89,17 +89,16 @@ assert_contains "ウィンドウがあるワークスペースは出す" "$(spac
 assert_contains "フォーカスしていないワークスペースは背景を消す" "$(space 2)" "background.drawing=off"
 assert_contains "空でフォーカスしていないワークスペースは隠す" "$(space 3)" "drawing=off"
 
-echo "aerospace: アイコン枠"
+echo "aerospace: アイコン"
 run "$windows" 1
-assert_contains "アプリのアイコンを枠に出す" "$(space 1.1)" "icon=:WezTerm:"
-assert_contains "アイコンを出した枠は表示する" "$(space 1.1)" "drawing=on"
-assert_contains "使わない枠は隠す" "$(space 1.2)" "drawing=off"
-assert_contains "複数のアプリは枠を分けて出す" "$(space 2.1)" "icon=:Google Chrome:"
-assert_contains "2 つ目のアプリは 2 つ目の枠に出す" "$(space 2.2)" "icon=:Slack:"
-assert_contains "同じアプリは 1 つの枠にまとめる" "$(space 2.3)" "drawing=off"
-assert_contains "空のワークスペースの枠は隠す" "$(space 3.1)" "drawing=off"
-assert_contains "枠の数までアプリを出す" "$(space 5.3)" "icon=:Notes:"
-assert_not_contains "枠の数を超えるアプリは出さない" "$(log sketchybar)" "space.5.4"
+assert_contains "先頭のアプリのアイコンは番号の横に出す" "$(space 1)" "label=:WezTerm:"
+assert_contains "アプリが 1 つなら枠は使わない" "$(space 1.1)" "drawing=off"
+assert_contains "空のワークスペースは番号の横を空にする" "$(space 3)" "label="
+assert_contains "2 つ目のアプリは番号の下の枠に出す" "$(space 2.1)" "icon=:Slack:"
+assert_contains "アイコンを出した枠は表示する" "$(space 2.1)" "drawing=on"
+assert_contains "同じアプリは 1 つにまとめる" "$(space 2.2)" "drawing=off"
+assert_contains "枠の数までアプリを出す" "$(space 5.2)" "icon=:Notes:"
+assert_not_contains "枠の数を超えるアプリは出さない" "$(log sketchybar)" "space.5.3"
 
 echo "aerospace: フォーカス"
 run "$windows" 3
