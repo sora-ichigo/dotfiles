@@ -19,10 +19,13 @@ for sid in $(aerospace list-workspaces --all); do
     count=$((count + 1))
   done <<<"$windows"
 
+  font="sketchybar-app-font:Regular:15.0"
+  [ "$count" -ge 2 ] && font="sketchybar-app-font:Regular:13.0"
+
   if [ "$sid" = "$focused" ]; then
-    args+=(--set "space.$sid" drawing=on background.drawing=on icon.color="$ACCENT_COLOR" label="$icons")
+    args+=(--set "space.$sid" drawing=on background.drawing=on icon.color="$ACCENT_COLOR" label="$icons" label.font="$font")
   elif [ -n "$icons" ]; then
-    args+=(--set "space.$sid" drawing=on background.drawing=off icon.color="$WHITE" label="$icons")
+    args+=(--set "space.$sid" drawing=on background.drawing=off icon.color="$WHITE" label="$icons" label.font="$font")
   else
     args+=(--set "space.$sid" drawing=off label="")
   fi
