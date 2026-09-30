@@ -3,12 +3,12 @@
 CONFIG_DIR=$(cd "$(dirname "$0")" && pwd)
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 FONT="Hack Nerd Font"
-APP_FONT="sketchybar-app-font:Regular:15.0"
+APP_FONT="sketchybar-app-font:Regular:13.0"
 
 source "$CONFIG_DIR/colors.sh"
 
 sketchybar --bar position=left \
-  height=64 \
+  height=56 \
   margin=6 \
   y_offset=6 \
   corner_radius=12 \

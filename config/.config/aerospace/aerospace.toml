@@ -22,7 +22,7 @@ on-focus-changed = ['exec-and-forget $HOME/.nix-profile/bin/sketchybar --trigger
 [gaps]
     inner.horizontal = 6
     inner.vertical =   6
-    outer.left =       76
+    outer.left =       68
     outer.bottom =     12
     outer.top =        12
     outer.right =      12
