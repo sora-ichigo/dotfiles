@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 PLUGIN_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+PANE_SCRIPT=${CLAUDE_TMUX_PANE_SCRIPT:-$HOME/.claude/tmux_pane.sh}
 source "$PLUGIN_DIR/../colors.sh"
 
 if ! json=$(claude agents --json 2>/dev/null) || ! rows=$(jq -r '
@@ -8,7 +9,7 @@ if ! json=$(claude agents --json 2>/dev/null) || ! rows=$(jq -r '
   | map(. + {rank: (if .state == "working" then 1 elif .state == "done" then 2 else 0 end)})
   | sort_by(.rank)
   | .[]
-  | [.id, .rank, (.name // "untitled"), (.cwd | sub("/\\.claude/worktrees/.*$"; "") | split("/") | last)]
+  | [.id, .rank, (.name // "untitled"), (.cwd | sub("/\\.claude/worktrees/.*$"; "") | split("/") | last), .cwd]
   | @tsv
 ' <<<"$json" 2>/dev/null); then
   sketchybar --set "$NAME" icon.color="$RED" label.drawing=off
@@ -17,61 +18,71 @@ fi
 
 popup=$(sketchybar --query "$NAME" 2>/dev/null | jq -r '(.popup.drawing // "off"), (.popup.items[]?)' 2>/dev/null)
 drawing=$(head -n 1 <<<"$popup")
-existing=$'\n'$(tail -n +2 <<<"$popup")$'\n'
-wanted=$'\n'
-changed=
-names=()
+existing=$(tail -n +2 <<<"$popup")
+
+ids=()
+keys=()
 icons=()
 colors=()
 labels=()
-clicks=()
 
 waiting=0
 working=0
 done_count=0
-while IFS=$'\t' read -r id rank title repo; do
+while IFS=$'\t' read -r id rank title repo cwd; do
   [ -n "$id" ] || continue
   case "$rank" in
   0) waiting=$((waiting + 1)); icon=󰋗; color=$YELLOW ;;
   1) working=$((working + 1)); icon=󰔟; color=$GREEN ;;
   *) done_count=$((done_count + 1)); icon=󰄬; color=$GREY ;;
   esac
-  names+=("claude.agent.$id")
+  pane=$(bash "$PANE_SCRIPT" "$cwd")
+  ids+=("$id")
+  keys+=("${pane:-none}")
   icons+=("$icon")
   colors+=("$color")
   labels+=("$title · $repo")
-  clicks+=("$PLUGIN_DIR/claude_attach.sh $id")
-  wanted+="claude.agent.$id"$'\n'
 done <<<"$rows"
 
+groups=$( (printf '%s\n' "${keys[@]}" | grep -E '^%[0-9]+$' | sed 's/^%//' | sort -n -u | sed 's/^/%/'; printf '%s\n' "${keys[@]}" | grep -m 1 '^none$') 2>/dev/null)
+
 args=()
-order=()
-while IFS= read -r name; do
-  [ -n "$name" ] || continue
-  case "$wanted" in
-  *$'\n'"$name"$'\n'*)
-    for i in "${!names[@]}"; do
-      [ "${names[$i]}" = "$name" ] && order+=("$i")
-    done
-    ;;
-  *) args+=(--remove "$name"); changed=1 ;;
-  esac
-done <<<"$existing"
-
-for i in "${!names[@]}"; do
-  case "$existing" in
-  *$'\n'"${names[$i]}"$'\n'*) ;;
-  *) args+=(--add item "${names[$i]}" popup."$NAME"); order+=("$i"); changed=1 ;;
-  esac
-done
-
+desired=()
 number=0
-for i in "${order[@]}"; do
-  number=$((number + 1))
-  label=${labels[$i]}
-  [ "$number" -le 9 ] && label="$number $label"
-  args+=(--set "${names[$i]}" icon="${icons[$i]}" icon.color="${colors[$i]}" label="$label" click_script="${clicks[$i]}")
-done
+while IFS= read -r key; do
+  [ -n "$key" ] || continue
+  header="claude.group.${key#%}"
+  desired+=("$header")
+  first=
+  for i in "${!ids[@]}"; do
+    [ "${keys[$i]}" = "$key" ] || continue
+    [ -n "$first" ] || first=${ids[$i]}
+    desired+=("claude.agent.${ids[$i]}")
+    args+=(--set "claude.agent.${ids[$i]}" icon="${icons[$i]}" icon.color="${colors[$i]}" icon.padding_left=14 label="${labels[$i]}" click_script="$PLUGIN_DIR/claude_attach.sh ${ids[$i]}")
+  done
+  if [ "$key" = "none" ]; then
+    args+=(--set "$header" icon.drawing=off label="tmux pane なし" label.color="$GREY" click_script="")
+  else
+    number=$((number + 1))
+    name=$(tmux -u display-message -p -t "$key" '#S · #{b:pane_current_path}' 2>/dev/null)
+    label=${name:-$key}
+    [ "$number" -le 9 ] && label="$number $label"
+    args+=(--set "$header" icon.drawing=off label="$label" label.color="$BLUE" click_script="$PLUGIN_DIR/claude_attach.sh $first")
+  fi
+done <<<"$groups"
+
+changed=
+if [ "$(printf '%s\n' "${desired[@]}")" != "$existing" ]; then
+  changed=1
+  structure=()
+  while IFS= read -r name; do
+    [ -n "$name" ] && structure+=(--remove "$name")
+  done <<<"$existing"
+  for name in "${desired[@]}"; do
+    structure+=(--add item "$name" popup."$NAME")
+  done
+  args=("${structure[@]}" "${args[@]}")
+fi
 
 parts=()
 [ "$waiting" -gt 0 ] && parts+=("$waiting waiting")

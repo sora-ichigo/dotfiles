@@ -90,6 +90,7 @@ sketchybar --add event claude_agents_update \
   icon.color="$GREY" \
   label.font="$FONT:Bold:11.0" \
   popup.align=center \
+  popup.height=26 \
   click_script="sketchybar --set claude popup.drawing=toggle --trigger claude_agents_update" \
   update_freq=15 \
   updates=on \
