@@ -10,6 +10,10 @@ trap 'rm -rf "$WORKDIR"' EXIT
 mkdir -p "$WORKDIR/bin" "$WORKDIR/root/github.com/foo/bar"
 cat >"$WORKDIR/bin/sketchybar" <<EOF
 #!/usr/bin/env bash
+if [ "\$1" = "--query" ]; then
+  printf '%s' "\${FAKE_QUERY:-{\"popup\":{\"drawing\":\"off\",\"items\":[]}}}"
+  exit 0
+fi
 printf '%s\n' "\$@" >>"$WORKDIR/sketchybar.log"
 EOF
 cat >"$WORKDIR/bin/claude" <<EOF
@@ -111,12 +115,25 @@ echo "claude_agents: 一覧"
 agents "$sessions"
 assert_contains "状態ごとの件数をラベルに出す" "$(log sketchybar)" "label=1 working · 2 done"
 assert_contains "作業中があればアイコンを緑にする" "$(log sketchybar)" "icon.color=$GREEN"
-assert_contains "古い行を消してから描き直す" "$(log sketchybar)" '/claude\.agent\..*/'
 assert_contains "バックグラウンドセッションごとにポップアップ行を足す" "$(log sketchybar)" "$(printf 'claude.agent.aaaa1111\npopup.claude')"
 assert_contains "行にセッション名とリポジトリ名を出す" "$(log sketchybar)" "label=fix login bug · bar"
 assert_contains "行のクリックで attach する" "$(log sketchybar)" "claude_attach.sh aaaa1111"
 assert_not_contains "インタラクティブセッションは出さない" "$(log sketchybar)" "dddd4444"
 assert_contains "新規作成の行を出す" "$(log sketchybar)" "claude_new.sh"
+
+echo "claude_agents: 差分更新"
+FAKE_QUERY='{"popup":{"drawing":"off","items":["claude.agent.new","claude.agent.aaaa1111","claude.agent.zzzz9999"]}}' agents "$sessions"
+assert_contains "無くなったセッションの行だけ消す" "$(log sketchybar)" "$(printf -- '--remove\nclaude.agent.zzzz9999')"
+assert_not_contains "既にある行は作り直さない" "$(log sketchybar)" "$(printf 'item\nclaude.agent.aaaa1111')"
+assert_not_contains "既にある新規作成の行は作り直さない" "$(log sketchybar)" "$(printf 'item\nclaude.agent.new')"
+assert_contains "既にある行の中身は更新する" "$(log sketchybar)" "label=fix login bug · bar"
+assert_contains "新しいセッションの行は足す" "$(log sketchybar)" "$(printf 'item\nclaude.agent.bbbb2222')"
+assert_not_contains "閉じているポップアップは開かない" "$(log sketchybar)" "popup.drawing"
+FAKE_QUERY='{"popup":{"drawing":"on","items":["claude.agent.new","claude.agent.aaaa1111"]}}' agents "$sessions"
+assert_contains "開いている間に行が増えたら開き直して表示する" "$(log sketchybar)" "$(printf 'popup.drawing=off\n--set\nclaude\npopup.drawing=on')"
+FAKE_QUERY='{"popup":{"drawing":"on","items":["claude.agent.new","claude.agent.aaaa1111","claude.agent.bbbb2222","claude.agent.cccc3333"]}}' agents "$sessions"
+assert_not_contains "行が変わらなければ開き直さない" "$(log sketchybar)" "popup.drawing"
+assert_not_contains "行が変わらなければ消さない" "$(log sketchybar)" "--remove"
 
 echo "claude_agents: 入力待ち"
 agents '[{"id":"eeee5555","cwd":"/tmp/a","kind":"background","name":"x","status":"idle","state":"needs_input"},{"id":"ffff6666","cwd":"/tmp/b","kind":"background","name":"y","status":"busy","state":"working"}]'
