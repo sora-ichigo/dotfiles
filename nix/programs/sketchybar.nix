@@ -18,7 +18,5 @@
       "${config.home.homeDirectory}/.local/bin:${config.home.homeDirectory}/.nix-profile/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin";
 
     home.packages = [ pkgs.sketchybar-app-font ];
-
-    targets.darwin.defaults.NSGlobalDomain._HIHideMenuBar = true;
   };
 }

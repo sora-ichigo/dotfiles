@@ -7,7 +7,7 @@ APP_FONT="sketchybar-app-font:Regular:15.0"
 
 source "$CONFIG_DIR/colors.sh"
 
-sketchybar --bar position=top \
+sketchybar --bar position=bottom \
   height=36 \
   margin=10 \
   y_offset=6 \

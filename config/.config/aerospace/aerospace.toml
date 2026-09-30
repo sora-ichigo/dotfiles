@@ -22,8 +22,8 @@ exec-on-workspace-change = ['/bin/bash', '-c', '$HOME/.nix-profile/bin/sketchyba
     inner.horizontal = 6
     inner.vertical =   6
     outer.left =       12
-    outer.bottom =     12
-    outer.top =        54
+    outer.bottom =     48
+    outer.top =        12
     outer.right =      12
 
 [mode.main.binding]
