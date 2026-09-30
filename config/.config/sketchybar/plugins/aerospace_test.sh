@@ -97,6 +97,8 @@ assert_contains "空のワークスペースは番号の横を空にする" "$(s
 assert_contains "上限までアイコンを出す" "$(space 5)" "label=:Finder: :Mail: "
 assert_not_contains "上限を超えるアイコンは出さない" "$(space 5)" ":Notes:"
 assert_not_contains "アイコンを縦に積む枠は使わない" "$(log sketchybar)" "space.2.1"
+assert_contains "アイコンが 1 つなら通常の大きさにする" "$(space 1)" "label.font=sketchybar-app-font:Regular:15.0"
+assert_contains "アイコンが 2 つ並ぶときは小さくする" "$(space 2)" "label.font=sketchybar-app-font:Regular:13.0"
 
 echo "aerospace: フォーカス"
 run "$windows" 3
