@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+
+CONFIG_DIR=$(cd "$(dirname "$0")" && pwd)
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+FONT="Hack Nerd Font"
+APP_FONT="sketchybar-app-font:Regular:15.0"
+
+source "$CONFIG_DIR/colors.sh"
+
+sketchybar --bar position=left \
+  height=56 \
+  margin=6 \
+  y_offset=12 \
+  corner_radius=12 \
+  blur_radius=30 \
+  color="$BAR_COLOR" \
+  border_width=1 \
+  border_color="$BAR_BORDER_COLOR" \
+  padding_left=12 \
+  padding_right=12 \
+  shadow=on \
+  sticky=on \
+  topmost=off
+
+sketchybar --default updates=when_shown \
+  icon.font="$FONT:Bold:15.0" \
+  icon.color="$WHITE" \
+  label.font="$FONT:Bold:13.0" \
+  label.color="$WHITE" \
+  padding_left=6 \
+  padding_right=6 \
+  icon.padding_left=2 \
+  icon.padding_right=2 \
+  label.padding_left=2 \
+  label.padding_right=2 \
+  popup.background.color="$POPUP_BG_COLOR" \
+  popup.background.border_width=2 \
+  popup.background.border_color="$POPUP_BORDER_COLOR" \
+  popup.background.corner_radius=9 \
+  popup.background.shadow.drawing=on \
+  popup.blur_radius=20
+
+sketchybar --add item apple left \
+  --set apple icon= \
+  icon.font="$FONT:Bold:18.0" \
+  icon.color="$GREEN" \
+  label.drawing=off \
+  click_script="sketchybar --set apple popup.drawing=toggle"
+
+for entry in "󰒓|Preferences|open -a 'System Settings'" "󰍉|Activity|open -a 'Activity Monitor'" "󰌾|Lock Screen|pmset displaysleepnow"; do
+  IFS='|' read -r icon label command <<<"$entry"
+  name="apple.${label// /_}"
+  sketchybar --add item "$name" popup.apple \
+    --set "$name" icon="$icon" label="$label" \
+    click_script="$command; sketchybar --set apple popup.drawing=off"
+done
+
+sketchybar --add event aerospace_workspace_change
+for sid in $(aerospace list-workspaces --all); do
+  sketchybar --add item "space.$sid" left \
+    --set "space.$sid" icon="$sid" \
+    icon.font="$FONT:Bold:12.0" \
+    label.font="$APP_FONT" \
+    background.color="$ITEM_BG_COLOR" \
+    background.corner_radius=8 \
+    background.height=26 \
+    background.drawing=off \
+    click_script="aerospace workspace $sid"
+done
+
+sketchybar --add item aerospace left \
+  --subscribe aerospace aerospace_workspace_change front_app_switched space_windows_change system_woke \
+  --set aerospace drawing=off \
+  updates=on \
+  update_freq=10 \
+  script="SPACE_ICON_LIMIT=2 $PLUGIN_DIR/aerospace.sh"
+
+sketchybar --add item front_app left \
+  --subscribe front_app front_app_switched \
+  --set front_app icon.font="$APP_FONT" \
+  icon.color="$ORANGE" \
+  label.drawing=off \
+  script="$PLUGIN_DIR/front_app.sh"
+
+sketchybar --add event claude_agents_update \
+  --add item claude center \
+  --subscribe claude claude_agents_update \
+  --set claude icon=󰚩 \
+  icon.font="$FONT:Bold:18.0" \
+  icon.color="$GREY" \
+  label.font="$FONT:Bold:11.0" \
+  popup.align=center \
+  popup.height=26 \
+  click_script="sketchybar --set claude popup.drawing=toggle --trigger claude_agents_update" \
+  update_freq=15 \
+  updates=on \
+  script="CLAUDE_AGENTS_COMPACT=1 $PLUGIN_DIR/claude_agents.sh"
+
+sketchybar --update

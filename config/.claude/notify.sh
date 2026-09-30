@@ -25,13 +25,7 @@ if [ -n "$tmux" ]; then
   session=
   [ -n "$pane" ] && session=$("$tmux" display-message -p -t "$pane" '#S' 2>/dev/null)
   if [ -z "$session" ] && [ -n "$cwd" ]; then
-    pane=$("$tmux" list-panes -a -F '#{pane_id}	#{pane_current_path}	#{pane_current_command}' 2>/dev/null | awk -F '\t' -v cwd="$cwd" '
-      $2 == cwd || index(cwd, $2 "/") == 1 {
-        score = length($2) * 2 + ($3 == "claude" || $3 ~ /^[0-9]+\.[0-9]+\.[0-9]+$/)
-        if (score > best) { best = score; id = $1 }
-      }
-      END { print id }
-    ')
+    pane=$(bash "$(dirname "$0")/tmux_pane.sh" "$cwd")
     [ -n "$pane" ] && session=$("$tmux" display-message -p -t "$pane" '#S' 2>/dev/null)
   fi
   if [ -n "$session" ]; then

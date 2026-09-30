@@ -87,6 +87,7 @@ cask "app-name"
 - skills は `config/.claude/skills/` を単一のソースとする。SKILL.md の frontmatter には `name` を書く（Claude Code はディレクトリ名から推論するので省略できるが、Agent Skills 標準に準拠した他ツールは `name` を要求する）
 - MCP サーバーは `config/.claude/mcp.json` に定義し、`make claude-code` が `claude mcp add` に流し込む
 - 応答完了（Stop）と入力待ち（Notification）の hook で `config/.claude/notify.sh` が terminal-notifier で macOS 通知を出す。応答完了の本文には最後の応答（`last_assistant_message`）の先頭 100 文字を使う。tmux 内で動いていれば、サブタイトルに tmux セッション名を出し、通知をクリックすると WezTerm が前面に出て通知元の pane に切り替わる。`claude agents` のバックグラウンドセッションは daemon 配下で動き `TMUX_PANE` を持たないため、`cwd` かその親ディレクトリで開いている pane（claude が動いている pane を優先）を遷移先にする。環境変数 `CLAUDE_NTFY_TOPIC` があれば ntfy.sh にも送る。有効にするには 1Password にトピック名を保存して `config/secrets.json` に参照を足し、`make secrets` を実行する。トピック名を知っていれば誰でも購読できるため、推測されにくい文字列にする
+- SketchyBar（`config/.config/sketchybar/`）を画面左端の縦向きバーとして置く。macOS 標準のメニューバーはコントロールセンター・通知センター・アプリのメニューを使うため残す。中央に `claude agents` のバックグラウンドセッションを出し、クリックで一覧を開く。行をクリックすると、notify.sh と同じ `config/.claude/tmux_pane.sh` でセッションの cwd に近い tmux pane を探して切り替え、見つからなければ WezTerm で attach する。一覧は飛び先の tmux pane ごとにまとめ、pane の見出しに番号を振る。AeroSpace の `alt-c` で一覧を開いて claude モードに入り、見出しの番号キーでその pane に移動できる（`esc` で閉じる）。Claude Code の hook から `sketchybar --trigger claude_agents_update` を呼んで即座に更新する
 
 ### 導入していないツール
 
