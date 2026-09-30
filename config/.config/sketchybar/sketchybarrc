@@ -96,19 +96,4 @@ sketchybar --add event claude_agents_update \
   updates=on \
   script="$PLUGIN_DIR/claude_agents.sh"
 
-sketchybar --add graph cpu right 80 \
-  --set cpu update_freq=2 \
-  icon.drawing=off \
-  label.font="$FONT:Bold:10.0" \
-  label.y_offset=6 \
-  label.align=right \
-  label.width=0 \
-  graph.color="$BLUE" \
-  graph.fill_color=0x338aadf4 \
-  graph.line_width=1 \
-  background.height=26 \
-  background.drawing=on \
-  background.color="$TRANSPARENT" \
-  script="$PLUGIN_DIR/cpu.sh"
-
 sketchybar --update
