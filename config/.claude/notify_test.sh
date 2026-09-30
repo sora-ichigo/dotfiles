@@ -16,7 +16,10 @@ EOF
   chmod +x "$WORKDIR/bin/$cmd"
 done
 cat >>"$WORKDIR/bin/tmux" <<'EOF'
-[ "$1" = display-message ] && echo mysession
+case "$1" in
+display-message) [ "$4" != "%0" ] && echo mysession ;;
+list-panes) printf '%b' "${FAKE_PANES:-}" ;;
+esac
 EOF
 
 PASS=0
@@ -24,7 +27,7 @@ FAIL=0
 
 run() {
   rm -f "$WORKDIR"/*.log
-  printf '%s' "$1" | PATH="$WORKDIR/bin:$PATH" CLAUDE_NTFY_TOPIC="${2:-}" TMUX_PANE="${3:-}" bash "$NOTIFY"
+  printf '%s' "$1" | PATH="$WORKDIR/bin:$PATH" CLAUDE_NTFY_TOPIC="${2:-}" TMUX_PANE="${3:-}" FAKE_PANES="${4:-}" bash "$NOTIFY"
 }
 
 log() {
@@ -87,6 +90,16 @@ assert_contains "クリックで WezTerm を前面に出す" "$(log terminal-not
 assert_contains "サブタイトルに tmux セッション名を出す" "$(log terminal-notifier)" "$(printf -- '-subtitle\nmysession')"
 run '{"hook_event_name":"Stop","cwd":"/tmp/qux"}'
 assert_not_contains "tmux 外ではクリック時のコマンドを付けない" "$(log terminal-notifier)" "-execute"
+panes='%1\t/Users/me\tzsh\n%2\t/Users/me/repo\tzsh\n%3\t/Users/me/repo\t2.1.285\n%4\t/Users/me/other\t2.1.285\n'
+run '{"hook_event_name":"Stop","cwd":"/Users/me/repo/.claude/worktrees/x"}' "" "" "$panes"
+assert_contains "TMUX_PANE が無ければ cwd を含む claude の pane に切り替える" "$(log terminal-notifier)" "switch-client -t %3"
+assert_contains "TMUX_PANE が無くても WezTerm を前面に出す" "$(log terminal-notifier)" "com.github.wez.wezterm"
+run '{"hook_event_name":"Stop","cwd":"/Users/me/repo"}' "" "%0" "$panes"
+assert_contains "存在しない TMUX_PANE なら cwd から pane を探す" "$(log terminal-notifier)" "switch-client -t %3"
+run '{"hook_event_name":"Stop","cwd":"/Users/me/repo2"}' "" "" '%1\t/Users/me\tzsh\n%5\t/Users/me/repo\t2.1.285\n'
+assert_contains "cwd を含む pane が無ければ最も近い親ディレクトリの pane に切り替える" "$(log terminal-notifier)" "switch-client -t %1"
+run '{"hook_event_name":"Stop","cwd":"/opt/x"}' "" "" "$panes"
+assert_not_contains "該当する pane が無ければクリック時のコマンドを付けない" "$(log terminal-notifier)" "-execute"
 
 echo "ntfy"
 run '{"hook_event_name":"Stop","cwd":"/tmp/qux"}' "secret-topic"
