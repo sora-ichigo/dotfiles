@@ -4,23 +4,28 @@ PLUGIN_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 source "$PLUGIN_DIR/../colors.sh"
 source "$(command -v icon_map.sh)"
 
-sid=$1
 focused=${FOCUSED_WORKSPACE:-$(aerospace list-workspaces --focused)}
+windows=$(aerospace list-windows --all --format '%{workspace}|%{app-name}' | sort -u)
 
-icons=""
-count=0
-while IFS= read -r app; do
-  [ -n "$app" ] || continue
-  [ -n "${SPACE_ICON_LIMIT:-}" ] && [ "$count" -ge "$SPACE_ICON_LIMIT" ] && break
-  __icon_map "$app"
-  icons+="$icon_result "
-  count=$((count + 1))
-done < <(aerospace list-windows --workspace "$sid" --format '%{app-name}' | sort -u)
+args=()
+for sid in $(aerospace list-workspaces --all); do
+  icons=""
+  count=0
+  while IFS='|' read -r ws app; do
+    [ "$ws" = "$sid" ] && [ -n "$app" ] || continue
+    [ -n "${SPACE_ICON_LIMIT:-}" ] && [ "$count" -ge "$SPACE_ICON_LIMIT" ] && break
+    __icon_map "$app"
+    icons+="$icon_result "
+    count=$((count + 1))
+  done <<<"$windows"
 
-if [ "$sid" = "$focused" ]; then
-  sketchybar --set "$NAME" drawing=on background.drawing=on icon.color="$ACCENT_COLOR" label="$icons"
-elif [ -n "$icons" ]; then
-  sketchybar --set "$NAME" drawing=on background.drawing=off icon.color="$WHITE" label="$icons"
-else
-  sketchybar --set "$NAME" drawing=off
-fi
+  if [ "$sid" = "$focused" ]; then
+    args+=(--set "space.$sid" drawing=on background.drawing=on icon.color="$ACCENT_COLOR" label="$icons")
+  elif [ -n "$icons" ]; then
+    args+=(--set "space.$sid" drawing=on background.drawing=off icon.color="$WHITE" label="$icons")
+  else
+    args+=(--set "space.$sid" drawing=off)
+  fi
+done
+
+sketchybar "${args[@]}"

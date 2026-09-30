@@ -58,7 +58,6 @@ done
 sketchybar --add event aerospace_workspace_change
 for sid in $(aerospace list-workspaces --all); do
   sketchybar --add item "space.$sid" left \
-    --subscribe "space.$sid" aerospace_workspace_change front_app_switched space_windows_change \
     --set "space.$sid" icon="$sid" \
     icon.font="$FONT:Bold:12.0" \
     label.font="$APP_FONT" \
@@ -66,9 +65,15 @@ for sid in $(aerospace list-workspaces --all); do
     background.corner_radius=8 \
     background.height=26 \
     background.drawing=off \
-    click_script="aerospace workspace $sid" \
-    script="SPACE_ICON_LIMIT=1 $PLUGIN_DIR/aerospace.sh $sid"
+    click_script="aerospace workspace $sid"
 done
+
+sketchybar --add item aerospace left \
+  --subscribe aerospace aerospace_workspace_change front_app_switched space_windows_change system_woke \
+  --set aerospace drawing=off \
+  updates=on \
+  update_freq=10 \
+  script="SPACE_ICON_LIMIT=1 $PLUGIN_DIR/aerospace.sh"
 
 sketchybar --add bracket spaces '/space\..*/' \
   --set spaces background.color="$BAR_BORDER_COLOR" \
