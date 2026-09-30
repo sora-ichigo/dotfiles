@@ -101,6 +101,10 @@ assert_contains "枠の数までアプリを出す" "$(space 5.2)" "icon=:Notes:
 assert_not_contains "枠の数を超えるアプリは出さない" "$(log sketchybar)" "space.5.3"
 
 echo "aerospace: フォーカス"
+run "$windows" 2
+assert_contains "フォーカス中は下の枠にも背景を付ける" "$(space 2.1)" "background.drawing=on"
+run "$windows" 1
+assert_contains "フォーカスしていないワークスペースの下の枠は背景を消す" "$(space 2.1)" "background.drawing=off"
 run "$windows" 3
 assert_contains "空でもフォーカス中なら出す" "$(space 3)" "drawing=on"
 assert_contains "フォーカスが外れたワークスペースも中身があれば出す" "$(space 1)" "drawing=on"
