@@ -7,7 +7,7 @@ source "$SCRIPT_DIR/../colors.sh"
 WORKDIR=$(mktemp -d)
 trap 'rm -rf "$WORKDIR"' EXIT
 
-mkdir -p "$WORKDIR/bin" "$WORKDIR/root/github.com/foo/bar"
+mkdir -p "$WORKDIR/bin"
 cat >"$WORKDIR/bin/sketchybar" <<EOF
 #!/usr/bin/env bash
 if [ "\$1" = "--query" ]; then
@@ -21,20 +21,6 @@ cat >"$WORKDIR/bin/claude" <<EOF
 { pwd; printf '%s\n' "\$@"; } >>"$WORKDIR/claude.log"
 [ "\$1 \$2" = "agents --json" ] && printf '%s' "\${FAKE_JSON:-[]}"
 exit "\${FAKE_EXIT:-0}"
-EOF
-cat >"$WORKDIR/bin/ghq" <<EOF
-#!/usr/bin/env bash
-case "\$1" in
-root) echo "$WORKDIR/root" ;;
-list) printf 'github.com/foo/bar\ngithub.com/baz/qux\n' ;;
-esac
-EOF
-cat >"$WORKDIR/bin/osascript" <<'EOF'
-#!/usr/bin/env bash
-case "$*" in
-*"choose from list"*) printf '%s\n' "${FAKE_CHOICE:-false}" ;;
-*"display dialog"*) [ -n "${FAKE_PROMPT+x}" ] || exit 1; printf '%s\n' "$FAKE_PROMPT" ;;
-esac
 EOF
 for cmd in wezterm open; do
   cat >"$WORKDIR/bin/$cmd" <<EOF
@@ -127,19 +113,18 @@ assert_contains "バックグラウンドセッションごとにポップアッ
 assert_contains "行にセッション名とリポジトリ名を出す" "$(log sketchybar)" "label=fix login bug · bar"
 assert_contains "行のクリックで attach する" "$(log sketchybar)" "claude_attach.sh aaaa1111"
 assert_not_contains "インタラクティブセッションは出さない" "$(log sketchybar)" "dddd4444"
-assert_contains "新規作成の行を出す" "$(log sketchybar)" "claude_new.sh"
+assert_not_contains "新規作成の行は出さない" "$(log sketchybar)" "claude.agent.new"
 
 echo "claude_agents: 差分更新"
-FAKE_QUERY='{"popup":{"drawing":"off","items":["claude.agent.new","claude.agent.aaaa1111","claude.agent.zzzz9999"]}}' agents "$sessions"
+FAKE_QUERY='{"popup":{"drawing":"off","items":["claude.agent.aaaa1111","claude.agent.zzzz9999"]}}' agents "$sessions"
 assert_contains "無くなったセッションの行だけ消す" "$(log sketchybar)" "$(printf -- '--remove\nclaude.agent.zzzz9999')"
 assert_not_contains "既にある行は作り直さない" "$(log sketchybar)" "$(printf 'item\nclaude.agent.aaaa1111')"
-assert_not_contains "既にある新規作成の行は作り直さない" "$(log sketchybar)" "$(printf 'item\nclaude.agent.new')"
 assert_contains "既にある行の中身は更新する" "$(log sketchybar)" "label=fix login bug · bar"
 assert_contains "新しいセッションの行は足す" "$(log sketchybar)" "$(printf 'item\nclaude.agent.bbbb2222')"
 assert_not_contains "閉じているポップアップは開かない" "$(log sketchybar)" "popup.drawing"
-FAKE_QUERY='{"popup":{"drawing":"on","items":["claude.agent.new","claude.agent.aaaa1111"]}}' agents "$sessions"
+FAKE_QUERY='{"popup":{"drawing":"on","items":["claude.agent.aaaa1111"]}}' agents "$sessions"
 assert_contains "開いている間に行が増えたら開き直して表示する" "$(log sketchybar)" "$(printf 'popup.drawing=off\n--set\nclaude\npopup.drawing=on')"
-FAKE_QUERY='{"popup":{"drawing":"on","items":["claude.agent.new","claude.agent.aaaa1111","claude.agent.bbbb2222","claude.agent.cccc3333"]}}' agents "$sessions"
+FAKE_QUERY='{"popup":{"drawing":"on","items":["claude.agent.aaaa1111","claude.agent.bbbb2222","claude.agent.cccc3333"]}}' agents "$sessions"
 assert_not_contains "行が変わらなければ開き直さない" "$(log sketchybar)" "popup.drawing"
 assert_not_contains "行が変わらなければ消さない" "$(log sketchybar)" "--remove"
 
@@ -175,23 +160,6 @@ label.drawing=on"
 compact_agents '[{"id":"bbbb2222","cwd":"/tmp/a","kind":"background","name":"x","status":"idle","state":"done"}]'
 assert_contains "完了済みだけならラベルを隠す" "$(log sketchybar)" "label.drawing=off"
 assert_contains "コンパクト表示でも行は出す" "$(log sketchybar)" "claude.agent.bbbb2222"
-
-new() {
-  reset_logs
-  PATH="$WORKDIR/bin:$PATH" bash "$SCRIPT_DIR/claude_new.sh"
-}
-
-echo "claude_new"
-FAKE_CHOICE="github.com/foo/bar" FAKE_PROMPT="fix the flaky test" new
-assert_contains "選んだリポジトリで起動する" "$(log claude)" "$WORKDIR/root/github.com/foo/bar"
-assert_contains "入力したプロンプトでバックグラウンドセッションを作る" "$(log claude)" "$(printf -- '--bg\nfix the flaky test')"
-assert_contains "作成後にバーを更新する" "$(log sketchybar)" "claude_agents_update"
-FAKE_CHOICE="false" FAKE_PROMPT="x" new
-assert_empty "リポジトリ選択をキャンセルしたら作らない" "$(log claude)"
-FAKE_CHOICE="github.com/foo/bar" new
-assert_empty "プロンプト入力をキャンセルしたら作らない" "$(log claude)"
-FAKE_CHOICE="github.com/foo/bar" FAKE_PROMPT="" new
-assert_empty "プロンプトが空なら作らない" "$(log claude)"
 
 attach() {
   reset_logs
