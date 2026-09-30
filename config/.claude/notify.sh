@@ -8,7 +8,11 @@ project=${cwd##*/}
 
 case "$event" in
 Notification) message=$(jq -r '.message // "入力を待っています"' <<<"$input") ;;
-*) message="応答が完了しました" ;;
+*) message=$(jq -r '
+  (.last_assistant_message // "")
+  | gsub("[*`#]"; "") | gsub("\\s+"; " ") | sub("^ "; "") | sub(" $"; "")
+  | if . == "" then "応答が完了しました" elif length > 100 then .[0:100] + "…" else . end
+' <<<"$input") ;;
 esac
 
 title="Claude Code${project:+ ($project)}"
@@ -17,6 +21,8 @@ args=(-title "$title" -message "$message" -sound Glass)
 
 tmux=$(command -v tmux)
 if [ -n "${TMUX_PANE:-}" ] && [ -n "$tmux" ]; then
+  session=$("$tmux" display-message -p -t "$TMUX_PANE" '#S' 2>/dev/null)
+  [ -n "$session" ] && args+=(-subtitle "$session")
   args+=(-activate com.github.wez.wezterm -execute "$tmux switch-client -t $TMUX_PANE")
 fi
 
