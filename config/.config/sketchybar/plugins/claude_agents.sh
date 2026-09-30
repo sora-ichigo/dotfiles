@@ -20,18 +20,11 @@ drawing=$(head -n 1 <<<"$popup")
 existing=$'\n'$(tail -n +2 <<<"$popup")$'\n'
 wanted=$'\n'
 changed=
-
-args=()
-row() {
-  local name=$1
-  shift
-  case "$existing" in
-  *$'\n'"$name"$'\n'*) ;;
-  *) args+=(--add item "$name" popup."$NAME"); changed=1 ;;
-  esac
-  args+=(--set "$name" "$@")
-  wanted+="$name"$'\n'
-}
+names=()
+icons=()
+colors=()
+labels=()
+clicks=()
 
 waiting=0
 working=0
@@ -43,16 +36,42 @@ while IFS=$'\t' read -r id rank title repo; do
   1) working=$((working + 1)); icon=󰔟; color=$GREEN ;;
   *) done_count=$((done_count + 1)); icon=󰄬; color=$GREY ;;
   esac
-  row "claude.agent.$id" icon="$icon" icon.color="$color" label="$title · $repo" click_script="$PLUGIN_DIR/claude_attach.sh $id"
+  names+=("claude.agent.$id")
+  icons+=("$icon")
+  colors+=("$color")
+  labels+=("$title · $repo")
+  clicks+=("$PLUGIN_DIR/claude_attach.sh $id")
+  wanted+="claude.agent.$id"$'\n'
 done <<<"$rows"
 
+args=()
+order=()
 while IFS= read -r name; do
   [ -n "$name" ] || continue
   case "$wanted" in
-  *$'\n'"$name"$'\n'*) ;;
+  *$'\n'"$name"$'\n'*)
+    for i in "${!names[@]}"; do
+      [ "${names[$i]}" = "$name" ] && order+=("$i")
+    done
+    ;;
   *) args+=(--remove "$name"); changed=1 ;;
   esac
 done <<<"$existing"
+
+for i in "${!names[@]}"; do
+  case "$existing" in
+  *$'\n'"${names[$i]}"$'\n'*) ;;
+  *) args+=(--add item "${names[$i]}" popup."$NAME"); order+=("$i"); changed=1 ;;
+  esac
+done
+
+number=0
+for i in "${order[@]}"; do
+  number=$((number + 1))
+  label=${labels[$i]}
+  [ "$number" -le 9 ] && label="$number $label"
+  args+=(--set "${names[$i]}" icon="${icons[$i]}" icon.color="${colors[$i]}" label="$label" click_script="${clicks[$i]}")
+done
 
 parts=()
 [ "$waiting" -gt 0 ] && parts+=("$waiting waiting")

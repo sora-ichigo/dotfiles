@@ -73,6 +73,7 @@ on-focus-changed = ['exec-and-forget $HOME/.nix-profile/bin/sketchybar --trigger
     alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
     alt-shift-semicolon = 'mode service'
+    alt-c = ['exec-and-forget sketchybar --set claude popup.drawing=on --trigger claude_agents_update', 'mode claude']
 
 [mode.service.binding]
     esc = ['reload-config', 'mode main']
@@ -84,3 +85,22 @@ on-focus-changed = ['exec-and-forget $HOME/.nix-profile/bin/sketchybar --trigger
     alt-shift-j = ['join-with down', 'mode main']
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-l = ['join-with right', 'mode main']
+
+[mode.claude.binding]
+    esc = ['exec-and-forget sketchybar --set claude popup.drawing=off', 'mode main']
+    alt-c = ['exec-and-forget sketchybar --set claude popup.drawing=off', 'mode main']
+    1 = ['exec-and-forget $HOME/.config/sketchybar/plugins/claude_select.sh 1', 'mode main']
+    2 = ['exec-and-forget $HOME/.config/sketchybar/plugins/claude_select.sh 2', 'mode main']
+    3 = ['exec-and-forget $HOME/.config/sketchybar/plugins/claude_select.sh 3', 'mode main']
+    4 = ['exec-and-forget $HOME/.config/sketchybar/plugins/claude_select.sh 4', 'mode main']
+    5 = ['exec-and-forget $HOME/.config/sketchybar/plugins/claude_select.sh 5', 'mode main']
+    6 = ['exec-and-forget $HOME/.config/sketchybar/plugins/claude_select.sh 6', 'mode main']
+    7 = ['exec-and-forget $HOME/.config/sketchybar/plugins/claude_select.sh 7', 'mode main']
+    8 = ['exec-and-forget $HOME/.config/sketchybar/plugins/claude_select.sh 8', 'mode main']
+    9 = ['exec-and-forget $HOME/.config/sketchybar/plugins/claude_select.sh 9', 'mode main']
+
+[exec]
+    inherit-env-vars = true
+
+[exec.env-vars]
+    PATH = '${HOME}/.local/bin:${HOME}/.nix-profile/bin:/opt/homebrew/bin:${PATH}'
