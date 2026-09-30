@@ -8,7 +8,7 @@ APP_FONT="sketchybar-app-font:Regular:15.0"
 source "$CONFIG_DIR/colors.sh"
 
 sketchybar --bar position=left \
-  height=44 \
+  height=64 \
   margin=6 \
   y_offset=6 \
   corner_radius=12 \
@@ -61,27 +61,11 @@ for sid in $(aerospace list-workspaces --all); do
     --set "space.$sid" icon="$sid" \
     icon.font="$FONT:Bold:12.0" \
     label.font="$APP_FONT" \
-    padding_left=10 \
-    padding_right=0 \
     background.color="$ITEM_BG_COLOR" \
     background.corner_radius=8 \
     background.height=26 \
     background.drawing=off \
     click_script="aerospace workspace $sid"
-  for slot in 1 2; do
-    sketchybar --add item "space.$sid.$slot" left \
-      --set "space.$sid.$slot" icon.font="$APP_FONT" \
-      icon.padding_left=16 \
-      label.drawing=off \
-      padding_left=0 \
-      padding_right=0 \
-      background.color="$ITEM_BG_COLOR" \
-      background.corner_radius=8 \
-      background.height=26 \
-      background.drawing=off \
-      drawing=off \
-      click_script="aerospace workspace $sid"
-  done
 done
 
 sketchybar --add item aerospace left \
@@ -89,7 +73,7 @@ sketchybar --add item aerospace left \
   --set aerospace drawing=off \
   updates=on \
   update_freq=10 \
-  script="SPACE_APP_SLOTS=2 $PLUGIN_DIR/aerospace.sh"
+  script="SPACE_ICON_LIMIT=2 $PLUGIN_DIR/aerospace.sh"
 
 sketchybar --add item front_app left \
   --subscribe front_app front_app_switched \
