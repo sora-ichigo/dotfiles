@@ -80,6 +80,7 @@ cask "app-name"
 - For Nix-managed programs, prefer using Home Manager's native configuration options
 - ghq の root 外に実体を置く必要があるリポジトリ（Obsidian vault 内のものなど）は、`nix/programs/ghq.nix` で `mkOutOfStoreSymlink` を使い、ghq 側のパスから実体へのシンボリックリンクを張る
 - ツール自身が設定ファイルに書き戻す場合は `home.file` を使わない。Nix store へのシンボリックリンクは読み取り専用のため書き込みが失敗する。`home.activation` で書き込み可能な実ファイルとしてコピーし、ツールが書き込む区画だけ引き継ぐ
+- 起動中に設定を読み込むツールは `home.activation` で明示的に再起動・再読込する。Home Manager はシンボリックリンクを張り替えるだけで、稼働中のプロセスには何も伝えない。launchd agent も plist が前回と同一なら Home Manager 側の処理ごとスキップされるため、設定だけを変えても反映されない。SketchyBar は `launchctl kickstart -k` で再起動し、AeroSpace は `aerospace reload-config` で読み直す
 
 ### AI コーディングエージェントの設定
 

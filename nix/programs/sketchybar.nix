@@ -20,5 +20,9 @@
     };
 
     home.packages = [ pkgs.sketchybar-app-font ];
+
+    home.activation.restartSketchybar = lib.hm.dag.entryAfter [ "setupLaunchAgents" ] ''
+      run /bin/launchctl kickstart -k "gui/$UID/org.nix-community.home.sketchybar" 2>/dev/null || true
+    '';
   };
 }
