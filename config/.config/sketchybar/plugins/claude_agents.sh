@@ -64,7 +64,7 @@ while IFS= read -r key; do
     args+=(--set "$header" icon.drawing=off label="tmux pane なし" label.color="$GREY" click_script="")
   else
     number=$((number + 1))
-    name=$(tmux -u display-message -p -t "$key" '#S · #{b:pane_current_path}' 2>/dev/null)
+    name=$(tmux -u display-message -p -t "$key" '#{?#{==:#S,#{b:pane_current_path}},#S,#S · #{b:pane_current_path}}' 2>/dev/null)
     label=${name:-$key}
     [ "$number" -le 9 ] && label="$number $label"
     args+=(--set "$header" icon.drawing=off label="$label" label.color="$BLUE" click_script="$PLUGIN_DIR/claude_attach.sh $first")
