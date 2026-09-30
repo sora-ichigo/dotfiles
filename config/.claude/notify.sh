@@ -13,11 +13,14 @@ esac
 
 title="Claude Code${project:+ ($project)}"
 
-osascript \
-  -e 'on run argv' \
-  -e 'display notification (item 2 of argv) with title (item 1 of argv) sound name "Glass"' \
-  -e 'end run' \
-  "$title" "$message" >/dev/null 2>&1
+args=(-title "$title" -message "$message" -sound Glass)
+
+tmux=$(command -v tmux)
+if [ -n "${TMUX_PANE:-}" ] && [ -n "$tmux" ]; then
+  args+=(-activate com.github.wez.wezterm -execute "$tmux switch-client -t $TMUX_PANE")
+fi
+
+terminal-notifier "${args[@]}" >/dev/null 2>&1
 
 if [ -n "${CLAUDE_NTFY_TOPIC:-}" ]; then
   curl -fsS -m 5 -H "Title: $title" -d "$message" "https://ntfy.sh/$CLAUDE_NTFY_TOPIC" >/dev/null 2>&1
