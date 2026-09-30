@@ -16,7 +16,7 @@ EOF
 cat >"$WORKDIR/bin/aerospace" <<'EOF'
 #!/usr/bin/env bash
 case "$1 $2" in
-"list-workspaces --all") printf '1\n2\n3\n4\n' ;;
+"list-workspaces --all") printf '1\n2\n3\n4\n5\n' ;;
 "list-workspaces --focused") printf '%s\n' "${FAKE_FOCUSED:-1}" ;;
 "list-windows --all") printf '%b' "${FAKE_WINDOWS:-}" ;;
 esac
@@ -66,22 +66,40 @@ assert_contains() {
   esac
 }
 
+assert_not_contains() {
+  local name=$1 haystack=$2 needle=$3
+  case "$haystack" in
+  *"$needle"*) ng "$name" "expected not to contain: $needle" ;;
+  *) ok "$name" ;;
+  esac
+}
+
 assert_eq() {
   local name=$1 actual=$2 expected=$3
   if [ "$actual" = "$expected" ]; then ok "$name"; else ng "$name" "expected: $expected, got: $actual"; fi
 }
 
-windows='1|WezTerm\n2|Slack\n2|Google Chrome\n2|Slack\n'
+windows='1|WezTerm\n2|Slack\n2|Google Chrome\n2|Slack\n5|Finder\n5|Mail\n5|Notes\n5|Safari\n'
 
-echo "aerospace: 表示"
+echo "aerospace: 番号"
 run "$windows" 1
 assert_contains "フォーカス中のワークスペースは背景付きで出す" "$(space 1)" "background.drawing=on"
 assert_contains "フォーカス中のワークスペースはアクセント色にする" "$(space 1)" "icon.color=$ACCENT_COLOR"
-assert_contains "ウィンドウのアプリアイコンを出す" "$(space 1)" "label=:WezTerm: "
 assert_contains "ウィンドウがあるワークスペースは出す" "$(space 2)" "drawing=on"
 assert_contains "フォーカスしていないワークスペースは背景を消す" "$(space 2)" "background.drawing=off"
-assert_contains "同じアプリのアイコンは 1 つにまとめる" "$(space 2)" "label=:Google Chrome: :Slack: "
 assert_contains "空でフォーカスしていないワークスペースは隠す" "$(space 3)" "drawing=off"
+
+echo "aerospace: アイコン枠"
+run "$windows" 1
+assert_contains "アプリのアイコンを枠に出す" "$(space 1.1)" "icon=:WezTerm:"
+assert_contains "アイコンを出した枠は表示する" "$(space 1.1)" "drawing=on"
+assert_contains "使わない枠は隠す" "$(space 1.2)" "drawing=off"
+assert_contains "複数のアプリは枠を分けて出す" "$(space 2.1)" "icon=:Google Chrome:"
+assert_contains "2 つ目のアプリは 2 つ目の枠に出す" "$(space 2.2)" "icon=:Slack:"
+assert_contains "同じアプリは 1 つの枠にまとめる" "$(space 2.3)" "drawing=off"
+assert_contains "空のワークスペースの枠は隠す" "$(space 3.1)" "drawing=off"
+assert_contains "枠の数までアプリを出す" "$(space 5.3)" "icon=:Notes:"
+assert_not_contains "枠の数を超えるアプリは出さない" "$(log sketchybar)" "space.5.4"
 
 echo "aerospace: フォーカス"
 run "$windows" 3
@@ -93,10 +111,6 @@ assert_contains "イベントで渡されたフォーカス中のワークスペ
 echo "aerospace: まとめて更新"
 run "$windows" 1
 assert_eq "全ワークスペースを 1 回の sketchybar 呼び出しで更新する" "$(grep -c -- '^---$' "$WORKDIR/sketchybar.log")" "1"
-
-echo "aerospace: アイコン数の上限"
-run "$windows" 1 env SPACE_ICON_LIMIT=1
-assert_contains "上限を超えるアイコンは出さない" "$(space 2)" "label=:Google Chrome: "
 
 echo
 echo "pass: $PASS, fail: $FAIL"
