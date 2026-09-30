@@ -32,9 +32,18 @@ case "$*" in
 *"display dialog"*) [ -n "${FAKE_PROMPT+x}" ] || exit 1; printf '%s\n' "$FAKE_PROMPT" ;;
 esac
 EOF
-cat >"$WORKDIR/bin/wezterm" <<EOF
+for cmd in wezterm open; do
+  cat >"$WORKDIR/bin/$cmd" <<EOF
 #!/usr/bin/env bash
-printf '%s\n' "\$@" >>"$WORKDIR/wezterm.log"
+printf '%s\n' "\$@" >>"$WORKDIR/$cmd.log"
+EOF
+done
+cat >"$WORKDIR/bin/tmux" <<EOF
+#!/usr/bin/env bash
+case "\$1" in
+list-panes) printf '%b' "\${FAKE_PANES:-}" ;;
+*) printf '%s\n' "\$@" >>"$WORKDIR/tmux.log" ;;
+esac
 EOF
 chmod +x "$WORKDIR"/bin/*
 
@@ -125,9 +134,11 @@ echo "claude_agents: 取得失敗"
 agents '' routine 1
 assert_contains "claude が失敗したらアイコンを赤にする" "$(log sketchybar)" "icon.color=$RED"
 
-echo "claude_agents: クリック"
+echo "claude_agents: 開閉状態"
 agents "$sessions" mouse.clicked
-assert_contains "クリックでポップアップを開閉する" "$(log sketchybar)" "popup.drawing=toggle"
+assert_not_contains "クリックイベントでもポップアップの開閉状態は変えない" "$(log sketchybar)" "popup.drawing"
+agents "$sessions" claude_agents_update
+assert_not_contains "更新でポップアップの開閉状態を変えない" "$(log sketchybar)" "popup.drawing"
 
 echo "claude_agents: コンパクト表示"
 compact_agents "$sessions"
@@ -157,15 +168,24 @@ assert_empty "プロンプト入力をキャンセルしたら作らない" "$(l
 FAKE_CHOICE="github.com/foo/bar" FAKE_PROMPT="" new
 assert_empty "プロンプトが空なら作らない" "$(log claude)"
 
+attach() {
+  reset_logs
+  FAKE_JSON="$1" FAKE_PANES="$2" CLAUDE_TMUX_PANE_SCRIPT="$SCRIPT_DIR/../../../.claude/tmux_pane.sh" PATH="$WORKDIR/bin:$PATH" bash "$SCRIPT_DIR/claude_attach.sh" aaaa1111
+}
+
 echo "claude_attach"
-reset_logs
-PATH="$WORKDIR/bin:$PATH" bash "$SCRIPT_DIR/claude_attach.sh" aaaa1111
+attach "$sessions" '%1\t/Users/me\tzsh\n%2\t/Users/me/ghq/github.com/foo/bar\tzsh\n%3\t/Users/me/ghq/github.com/foo/bar\t2.1.285\n'
+assert_contains "セッションの cwd に近い claude の tmux pane に切り替える" "$(log tmux)" "$(printf 'switch-client\n-t\n%%3')"
+assert_contains "WezTerm を前面に出す" "$(log open)" "WezTerm"
+assert_empty "pane があれば新しいウィンドウは開かない" "$(log wezterm)"
+assert_contains "切り替え後にポップアップを閉じる" "$(log sketchybar)" "popup.drawing=off"
+attach "$sessions" '%1\t/opt\tzsh\n'
 for _ in $(seq 1 20); do
   [ -s "$WORKDIR/wezterm.log" ] && break
   sleep 0.1
 done
-assert_contains "WezTerm の新しいウィンドウで attach する" "$(log wezterm)" "$(printf 'start\n--\nclaude\nattach\naaaa1111')"
-assert_contains "attach 後にポップアップを閉じる" "$(log sketchybar)" "popup.drawing=off"
+assert_contains "pane が無ければ WezTerm の新しいウィンドウで attach する" "$(log wezterm)" "$(printf 'start\n--\nclaude\nattach\naaaa1111')"
+assert_empty "pane が無ければ tmux は切り替えない" "$(log tmux)"
 
 echo
 echo "pass: $PASS, fail: $FAIL"
