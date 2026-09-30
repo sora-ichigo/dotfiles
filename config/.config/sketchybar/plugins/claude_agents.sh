@@ -4,7 +4,7 @@ PLUGIN_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 PANE_SCRIPT=${CLAUDE_TMUX_PANE_SCRIPT:-$HOME/.claude/tmux_pane.sh}
 source "$PLUGIN_DIR/../colors.sh"
 
-if ! json=$(claude agents --json 2>/dev/null) || ! rows=$(jq -r '
+if ! json=$(claude agents --json --all 2>/dev/null) || ! rows=$(jq -r '
   map(select(.kind == "background"))
   | map(. + {rank: (if .state == "working" then 1 elif .state == "done" then 2 else 0 end)})
   | sort_by(.rank)
