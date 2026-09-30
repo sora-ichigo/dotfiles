@@ -52,6 +52,7 @@
     uv
     google-cloud-sdk
     cloudflared
+    terminal-notifier
 
     # Docker (Colima + CLI)
     docker

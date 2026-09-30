@@ -8,16 +8,25 @@ project=${cwd##*/}
 
 case "$event" in
 Notification) message=$(jq -r '.message // "入力を待っています"' <<<"$input") ;;
-*) message="応答が完了しました" ;;
+*) message=$(jq -r '
+  (.last_assistant_message // "")
+  | gsub("[*`#]"; "") | gsub("\\s+"; " ") | sub("^ "; "") | sub(" $"; "")
+  | if . == "" then "応答が完了しました" elif length > 100 then .[0:100] + "…" else . end
+' <<<"$input") ;;
 esac
 
 title="Claude Code${project:+ ($project)}"
 
-osascript \
-  -e 'on run argv' \
-  -e 'display notification (item 2 of argv) with title (item 1 of argv) sound name "Glass"' \
-  -e 'end run' \
-  "$title" "$message" >/dev/null 2>&1
+args=(-title "$title" -message "$message" -sound Glass)
+
+tmux=$(command -v tmux)
+if [ -n "${TMUX_PANE:-}" ] && [ -n "$tmux" ]; then
+  session=$("$tmux" display-message -p -t "$TMUX_PANE" '#S' 2>/dev/null)
+  [ -n "$session" ] && args+=(-subtitle "$session")
+  args+=(-activate com.github.wez.wezterm -execute "$tmux switch-client -t $TMUX_PANE")
+fi
+
+terminal-notifier "${args[@]}" >/dev/null 2>&1
 
 if [ -n "${CLAUDE_NTFY_TOPIC:-}" ]; then
   curl -fsS -m 5 -H "Title: $title" -d "$message" "https://ntfy.sh/$CLAUDE_NTFY_TOPIC" >/dev/null 2>&1
