@@ -4,7 +4,7 @@ set -u
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 NOTIFY="$SCRIPT_DIR/notify.sh"
 
-WORKDIR=$(mktemp -d)
+WORKDIR=$(cd "$(mktemp -d)" && pwd -P)
 trap 'rm -rf "$WORKDIR"' EXIT
 
 mkdir -p "$WORKDIR/bin"
@@ -35,7 +35,7 @@ FAIL=0
 
 run() {
   rm -f "$WORKDIR"/*.log
-  printf '%s' "$1" | PATH="$WORKDIR/bin:$PATH" CLAUDE_NTFY_TOPIC="${2:-}" TMUX_PANE="${3:-}" FAKE_PANES="${4:-}" bash "$NOTIFY"
+  printf '%s' "$1" | GHQ_ROOT="$WORKDIR/ghq" PATH="$WORKDIR/bin:$PATH" CLAUDE_NTFY_TOPIC="${2:-}" TMUX_PANE="${3:-}" FAKE_PANES="${4:-}" bash "$NOTIFY"
 }
 
 log() {
@@ -108,6 +108,11 @@ run '{"hook_event_name":"Stop","cwd":"/Users/me/repo2"}' "" "" '%1\t/Users/me\tz
 assert_contains "cwd を含む pane が無ければ最も近い親ディレクトリの pane に切り替える" "$(log terminal-notifier)" "switch-client -t %1"
 run '{"hook_event_name":"Stop","cwd":"/opt/x"}' "" "" "$panes"
 assert_not_contains "該当する pane が無ければクリック時のコマンドを付けない" "$(log terminal-notifier)" "-execute"
+mkdir -p "$WORKDIR/vault/perf/sub" "$WORKDIR/store" "$WORKDIR/ghq/github.com/me"
+ln -s "$WORKDIR/vault/perf" "$WORKDIR/store/perf"
+ln -s "$WORKDIR/store/perf" "$WORKDIR/ghq/github.com/me/perf"
+run "{\"hook_event_name\":\"Stop\",\"cwd\":\"$WORKDIR/vault/perf/sub\"}" "" "" "%7\t$WORKDIR/ghq/github.com/me\t2.1.285\n%8\t$WORKDIR/ghq/github.com/other\t2.1.285\n"
+assert_contains "cwd が ghq 配下の symlink の実体なら ghq 側のパスで pane を探す" "$(log terminal-notifier)" "switch-client -t %7"
 
 echo "ntfy"
 run '{"hook_event_name":"Stop","cwd":"/tmp/qux"}' "secret-topic"
