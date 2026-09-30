@@ -15,14 +15,29 @@ if ! json=$(claude agents --json 2>/dev/null) || ! rows=$(jq -r '
   exit 0
 fi
 
+popup=$(sketchybar --query "$NAME" 2>/dev/null | jq -r '(.popup.drawing // "off"), (.popup.items[]?)' 2>/dev/null)
+drawing=$(head -n 1 <<<"$popup")
+existing=$'\n'$(tail -n +2 <<<"$popup")$'\n'
+wanted=$'\n'
+changed=
+
+args=()
+row() {
+  local name=$1
+  shift
+  case "$existing" in
+  *$'\n'"$name"$'\n'*) ;;
+  *) args+=(--add item "$name" popup."$NAME"); changed=1 ;;
+  esac
+  args+=(--set "$name" "$@")
+  wanted+="$name"$'\n'
+}
+
+row claude.agent.new icon=󰐕 icon.color="$BLUE" label="New session" click_script="$PLUGIN_DIR/claude_new.sh"
+
 waiting=0
 working=0
 done_count=0
-args=(--remove '/claude\.agent\..*/')
-args+=(--add item claude.agent.new popup."$NAME"
-  --set claude.agent.new icon=󰐕 icon.color="$BLUE" label="New session"
-  click_script="$PLUGIN_DIR/claude_new.sh")
-
 while IFS=$'\t' read -r id rank title repo; do
   [ -n "$id" ] || continue
   case "$rank" in
@@ -30,10 +45,16 @@ while IFS=$'\t' read -r id rank title repo; do
   1) working=$((working + 1)); icon=󰔟; color=$GREEN ;;
   *) done_count=$((done_count + 1)); icon=󰄬; color=$GREY ;;
   esac
-  args+=(--add item "claude.agent.$id" popup."$NAME"
-    --set "claude.agent.$id" icon="$icon" icon.color="$color" label="$title · $repo"
-    click_script="$PLUGIN_DIR/claude_attach.sh $id")
+  row "claude.agent.$id" icon="$icon" icon.color="$color" label="$title · $repo" click_script="$PLUGIN_DIR/claude_attach.sh $id"
 done <<<"$rows"
+
+while IFS= read -r name; do
+  [ -n "$name" ] || continue
+  case "$wanted" in
+  *$'\n'"$name"$'\n'*) ;;
+  *) args+=(--remove "$name"); changed=1 ;;
+  esac
+done <<<"$existing"
 
 parts=()
 [ "$waiting" -gt 0 ] && parts+=("$waiting waiting")
@@ -60,6 +81,10 @@ elif [ ${#parts[@]} -gt 0 ]; then
   args+=(--set "$NAME" icon.color="$color" label="${label:3}" label.drawing=on)
 else
   args+=(--set "$NAME" icon.color="$color" label.drawing=off)
+fi
+
+if [ -n "$changed" ] && [ "$drawing" = "on" ]; then
+  args+=(--set "$NAME" popup.drawing=off --set "$NAME" popup.drawing=on)
 fi
 
 sketchybar "${args[@]}"
