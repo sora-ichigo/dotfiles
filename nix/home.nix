@@ -52,12 +52,11 @@
     uv
     google-cloud-sdk
     cloudflared
-    terminal-notifier
 
     # Docker (Colima + CLI)
     docker
     docker-compose
     colima
 
-  ];
+  ] ++ lib.optional (lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.terminal-notifier) pkgs.terminal-notifier;
 }
