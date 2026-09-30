@@ -19,7 +19,7 @@ EOF
 cat >"$WORKDIR/bin/claude" <<EOF
 #!/usr/bin/env bash
 { pwd; printf '%s\n' "\$@"; } >>"$WORKDIR/claude.log"
-[ "\$1 \$2" = "agents --json" ] && printf '%s' "\${FAKE_JSON:-[]}"
+[ "\$*" = "agents --json --all" ] && printf '%s' "\${FAKE_JSON:-[]}"
 exit "\${FAKE_EXIT:-0}"
 EOF
 for cmd in wezterm open; do
