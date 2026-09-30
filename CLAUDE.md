@@ -78,6 +78,7 @@ cask "app-name"
 - Place application config files in `config/` directory matching the target location structure
 - Files in `config/` are symlinked to `$HOME/` by Home Manager or manually
 - For Nix-managed programs, prefer using Home Manager's native configuration options
+- ghq の root 外に実体を置く必要があるリポジトリ（Obsidian vault 内のものなど）は、`nix/programs/ghq.nix` で `mkOutOfStoreSymlink` を使い、ghq 側のパスから実体へのシンボリックリンクを張る
 - ツール自身が設定ファイルに書き戻す場合は `home.file` を使わない。Nix store へのシンボリックリンクは読み取り専用のため書き込みが失敗する。`home.activation` で書き込み可能な実ファイルとしてコピーし、ツールが書き込む区画だけ引き継ぐ
 
 ### AI コーディングエージェントの設定

@@ -21,6 +21,7 @@
     ./programs/crit.nix
     ./programs/redis.nix
     ./programs/chrome.nix
+    ./programs/ghq.nix
   ];
 
   home.stateVersion = "24.05";
