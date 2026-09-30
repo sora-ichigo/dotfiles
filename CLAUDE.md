@@ -84,7 +84,6 @@ cask "app-name"
 ### AI コーディングエージェントの設定
 
 - Claude Code の設定は `config/.claude/` に置く
-- `settings.json` は `/voice` などで Claude Code が書き戻すため、`home.activation` で実ファイルとしてコピーする。既存ファイルの `voice` / `voiceEnabled` だけ引き継ぎ、それ以外はリポジトリの内容で上書きする
 - skills は `config/.claude/skills/` を単一のソースとする。SKILL.md の frontmatter には `name` を書く（Claude Code はディレクトリ名から推論するので省略できるが、Agent Skills 標準に準拠した他ツールは `name` を要求する）
 - MCP サーバーは `config/.claude/mcp.json` に定義し、`make claude-code` が `claude mcp add` に流し込む
 - 応答完了（Stop）と入力待ち（Notification）の hook で `config/.claude/notify.sh` が terminal-notifier で macOS 通知を出す。応答完了の本文には最後の応答（`last_assistant_message`）の先頭 100 文字を使う。tmux 内で動いていれば、サブタイトルに tmux セッション名を出し、通知をクリックすると WezTerm が前面に出て通知元の pane に切り替わる。`claude agents` のバックグラウンドセッションは daemon 配下で動き `TMUX_PANE` を持たないため、`cwd` かその親ディレクトリで開いている pane（claude が動いている pane を優先）を遷移先にする。環境変数 `CLAUDE_NTFY_TOPIC` があれば ntfy.sh にも送る。有効にするには 1Password にトピック名を保存して `config/secrets.json` に参照を足し、`make secrets` を実行する。トピック名を知っていれば誰でも購読できるため、推測されにくい文字列にする
