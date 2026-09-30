@@ -85,6 +85,7 @@ cask "app-name"
 - Claude Code の設定は `config/.claude/` に置く
 - skills は `config/.claude/skills/` を単一のソースとする。SKILL.md の frontmatter には `name` を書く（Claude Code はディレクトリ名から推論するので省略できるが、Agent Skills 標準に準拠した他ツールは `name` を要求する）
 - MCP サーバーは `config/.claude/mcp.json` に定義し、`make claude-code` が `claude mcp add` に流し込む
+- 応答完了（Stop）と入力待ち（Notification）の hook で `config/.claude/notify.sh` が osascript で macOS 通知を出す。環境変数 `CLAUDE_NTFY_TOPIC` があれば ntfy.sh にも送る。有効にするには 1Password にトピック名を保存して `config/secrets.json` に参照を足し、`make secrets` を実行する。トピック名を知っていれば誰でも購読できるため、推測されにくい文字列にする
 
 ### 導入していないツール
 

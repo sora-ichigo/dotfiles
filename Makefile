@@ -9,6 +9,7 @@ brew:
 .PHONY: test
 test:
 	bash config/.claude/statusline_test.sh
+	bash config/.claude/notify_test.sh
 
 CLAUDE_SETTINGS := config/.claude/settings.json
 CLAUDE_MCP := config/.claude/mcp.json

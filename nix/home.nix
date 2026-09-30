@@ -58,8 +58,5 @@
     docker-compose
     colima
 
-  ] ++ lib.optionals pkgs.stdenv.isDarwin [
-    # macOS only
-    terminal-notifier
   ];
 }
