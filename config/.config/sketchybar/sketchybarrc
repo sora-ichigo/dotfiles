@@ -96,28 +96,6 @@ sketchybar --add event claude_agents_update \
   updates=on \
   script="$PLUGIN_DIR/claude_agents.sh"
 
-sketchybar --add item calendar right \
-  --set calendar icon.drawing=off \
-  update_freq=30 \
-  click_script="open -a Calendar" \
-  script="$PLUGIN_DIR/calendar.sh"
-
-sketchybar --add item battery right \
-  --subscribe battery system_woke power_source_change \
-  --set battery update_freq=120 \
-  label.drawing=off \
-  script="$PLUGIN_DIR/battery.sh" \
-  --add item volume right \
-  --subscribe volume volume_change \
-  --set volume label.drawing=off \
-  script="$PLUGIN_DIR/volume.sh" \
-  --add bracket status battery volume \
-  --set status background.color="$BAR_BORDER_COLOR" \
-  background.corner_radius=10 \
-  background.height=30 \
-  background.border_width=1 \
-  background.border_color="$ITEM_BG_COLOR"
-
 sketchybar --add graph cpu right 80 \
   --set cpu update_freq=2 \
   icon.drawing=off \
