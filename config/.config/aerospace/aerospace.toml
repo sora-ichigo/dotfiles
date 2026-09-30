@@ -26,7 +26,7 @@ on-focus-changed = ['exec-and-forget $HOME/.nix-profile/bin/sketchybar --trigger
     inner.vertical =   6
     outer.left =       68
     outer.bottom =     12
-    outer.top =        12
+    outer.top =        [{ monitor.built-in = 0 }, 12]
     outer.right =      12
 
 [mode.main.binding]
