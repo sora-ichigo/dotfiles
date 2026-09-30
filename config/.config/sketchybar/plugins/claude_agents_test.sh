@@ -50,6 +50,11 @@ agents() {
   FAKE_JSON="$1" FAKE_EXIT="${3:-0}" NAME=claude SENDER="${2:-routine}" PATH="$WORKDIR/bin:$PATH" bash "$SCRIPT_DIR/claude_agents.sh"
 }
 
+compact_agents() {
+  reset_logs
+  FAKE_JSON="$1" CLAUDE_AGENTS_COMPACT=1 NAME=claude SENDER=routine PATH="$WORKDIR/bin:$PATH" bash "$SCRIPT_DIR/claude_agents.sh"
+}
+
 log() {
   cat "$WORKDIR/$1.log" 2>/dev/null
 }
@@ -123,6 +128,17 @@ assert_contains "claude が失敗したらアイコンを赤にする" "$(log sk
 echo "claude_agents: クリック"
 agents "$sessions" mouse.clicked
 assert_contains "クリックでポップアップを開閉する" "$(log sketchybar)" "popup.drawing=toggle"
+
+echo "claude_agents: コンパクト表示"
+compact_agents "$sessions"
+assert_contains "入力待ちと作業中の合計だけをラベルに出す" "$(log sketchybar)" "label=1
+label.drawing=on"
+compact_agents '[{"id":"eeee5555","cwd":"/tmp/a","kind":"background","name":"x","status":"idle","state":"needs_input"},{"id":"ffff6666","cwd":"/tmp/b","kind":"background","name":"y","status":"busy","state":"working"}]'
+assert_contains "入力待ちも合計に含める" "$(log sketchybar)" "label=2
+label.drawing=on"
+compact_agents '[{"id":"bbbb2222","cwd":"/tmp/a","kind":"background","name":"x","status":"idle","state":"done"}]'
+assert_contains "完了済みだけならラベルを隠す" "$(log sketchybar)" "label.drawing=off"
+assert_contains "コンパクト表示でも行は出す" "$(log sketchybar)" "claude.agent.bbbb2222"
 
 new() {
   reset_logs
