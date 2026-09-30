@@ -110,7 +110,8 @@ agents "$sessions"
 assert_contains "状態ごとの件数をラベルに出す" "$(log sketchybar)" "label=1 working · 2 done"
 assert_contains "作業中があればアイコンを緑にする" "$(log sketchybar)" "icon.color=$GREEN"
 assert_contains "バックグラウンドセッションごとにポップアップ行を足す" "$(log sketchybar)" "$(printf 'claude.agent.aaaa1111\npopup.claude')"
-assert_contains "行にセッション名とリポジトリ名を出す" "$(log sketchybar)" "label=fix login bug · bar"
+assert_contains "行に番号とセッション名とリポジトリ名を出す" "$(log sketchybar)" "label=1 fix login bug · bar"
+assert_contains "行の番号は表示順に振る" "$(log sketchybar)" "label=2 write blog outline · baz"
 assert_contains "行のクリックで attach する" "$(log sketchybar)" "claude_attach.sh aaaa1111"
 assert_not_contains "インタラクティブセッションは出さない" "$(log sketchybar)" "dddd4444"
 assert_not_contains "新規作成の行は出さない" "$(log sketchybar)" "claude.agent.new"
@@ -119,9 +120,14 @@ echo "claude_agents: 差分更新"
 FAKE_QUERY='{"popup":{"drawing":"off","items":["claude.agent.aaaa1111","claude.agent.zzzz9999"]}}' agents "$sessions"
 assert_contains "無くなったセッションの行だけ消す" "$(log sketchybar)" "$(printf -- '--remove\nclaude.agent.zzzz9999')"
 assert_not_contains "既にある行は作り直さない" "$(log sketchybar)" "$(printf 'item\nclaude.agent.aaaa1111')"
-assert_contains "既にある行の中身は更新する" "$(log sketchybar)" "label=fix login bug · bar"
+assert_contains "既にある行の中身は更新する" "$(log sketchybar)" "label=1 fix login bug · bar"
+assert_contains "消えた行を詰めて番号を振る" "$(log sketchybar)" "label=2 write blog outline · baz"
 assert_contains "新しいセッションの行は足す" "$(log sketchybar)" "$(printf 'item\nclaude.agent.bbbb2222')"
 assert_not_contains "閉じているポップアップは開かない" "$(log sketchybar)" "popup.drawing"
+FAKE_QUERY='{"popup":{"drawing":"off","items":["claude.agent.cccc3333","claude.agent.aaaa1111"]}}' agents "$sessions"
+assert_contains "既にある行は今の並び順で番号を振る" "$(log sketchybar)" "label=1 review pr · qux"
+assert_contains "既にある 2 行目は 2 番にする" "$(log sketchybar)" "label=2 fix login bug · bar"
+assert_contains "新しい行は末尾の番号にする" "$(log sketchybar)" "label=3 write blog outline · baz"
 FAKE_QUERY='{"popup":{"drawing":"on","items":["claude.agent.aaaa1111"]}}' agents "$sessions"
 assert_contains "開いている間に行が増えたら開き直して表示する" "$(log sketchybar)" "$(printf 'popup.drawing=off\n--set\nclaude\npopup.drawing=on')"
 FAKE_QUERY='{"popup":{"drawing":"on","items":["claude.agent.aaaa1111","claude.agent.bbbb2222","claude.agent.cccc3333"]}}' agents "$sessions"
@@ -179,6 +185,19 @@ for _ in $(seq 1 20); do
 done
 assert_contains "pane が無ければ WezTerm の新しいウィンドウで attach する" "$(log wezterm)" "$(printf 'start\n--\nclaude\nattach\naaaa1111')"
 assert_empty "pane が無ければ tmux は切り替えない" "$(log tmux)"
+
+select_row() {
+  reset_logs
+  FAKE_JSON="$sessions" FAKE_QUERY='{"popup":{"drawing":"on","items":["claude.agent.bbbb2222","claude.agent.aaaa1111"]}}' FAKE_PANES="$2" CLAUDE_TMUX_PANE_SCRIPT="$SCRIPT_DIR/../../../.claude/tmux_pane.sh" PATH="$WORKDIR/bin:$PATH" bash "$SCRIPT_DIR/claude_select.sh" "$1"
+}
+
+echo "claude_select"
+select_row 2 '%1\t/Users/me\tzsh\n%3\t/Users/me/ghq/github.com/foo/bar\t2.1.285\n'
+assert_contains "番号の行のセッションの pane に切り替える" "$(log tmux)" "$(printf 'switch-client\n-t\n%%3')"
+select_row 5 '%3\t/Users/me/ghq/github.com/foo/bar\t2.1.285\n'
+assert_empty "範囲外の番号では切り替えない" "$(log tmux)"
+assert_empty "範囲外の番号では新しいウィンドウも開かない" "$(log wezterm)"
+assert_contains "範囲外の番号でもポップアップは閉じる" "$(log sketchybar)" "popup.drawing=off"
 
 echo
 echo "pass: $PASS, fail: $FAIL"
