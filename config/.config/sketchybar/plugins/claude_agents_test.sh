@@ -44,8 +44,16 @@ EOF
 done
 cat >"$WORKDIR/bin/tmux" <<EOF
 #!/usr/bin/env bash
+utf8=
+[ "\$1" = "-u" ] && utf8=1 && shift
 case "\$1" in
-list-panes) printf '%b' "\${FAKE_PANES:-}" ;;
+list-panes)
+  if [ -n "\$utf8" ]; then
+    printf '%b' "\${FAKE_PANES:-}"
+  else
+    printf '%b' "\${FAKE_PANES:-}" | tr '\t' '_'
+  fi
+  ;;
 *) printf '%s\n' "\$@" >>"$WORKDIR/tmux.log" ;;
 esac
 EOF

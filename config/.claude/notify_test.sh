@@ -16,9 +16,17 @@ EOF
   chmod +x "$WORKDIR/bin/$cmd"
 done
 cat >>"$WORKDIR/bin/tmux" <<'EOF'
+utf8=
+[ "$1" = "-u" ] && utf8=1 && shift
 case "$1" in
 display-message) [ "$4" != "%0" ] && echo mysession ;;
-list-panes) printf '%b' "${FAKE_PANES:-}" ;;
+list-panes)
+  if [ -n "$utf8" ]; then
+    printf '%b' "${FAKE_PANES:-}"
+  else
+    printf '%b' "${FAKE_PANES:-}" | tr '\t' '_'
+  fi
+  ;;
 esac
 EOF
 
