@@ -21,6 +21,22 @@ on-focus-changed = ['exec-and-forget $HOME/.nix-profile/bin/sketchybar --trigger
     if.app-id = 'com.electron.aqua-voice'
     run = 'layout floating'
 
+[[on-window-detected]]
+    if.app-id = 'com.github.wez.wezterm'
+    run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+    if.app-id = 'md.obsidian'
+    run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+    if.app-id = 'com.google.Chrome'
+    run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap'
+    run = 'move-node-to-workspace 4'
+
 [gaps]
     inner.horizontal = 6
     inner.vertical =   6
@@ -71,6 +87,7 @@ on-focus-changed = ['exec-and-forget $HOME/.nix-profile/bin/sketchybar --trigger
 
     alt-tab = 'workspace-back-and-forth'
     alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+    alt-shift-a = 'exec-and-forget $HOME/.config/aerospace/arrange.sh'
 
     alt-shift-semicolon = 'mode service'
     alt-c = ['exec-and-forget sketchybar --set claude popup.drawing=on --trigger claude_agents_update', 'mode claude']
