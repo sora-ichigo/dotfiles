@@ -29,6 +29,10 @@ on-focus-changed = ['exec-and-forget $HOME/.nix-profile/bin/sketchybar --trigger
     if.app-id = 'md.obsidian'
     run = 'move-node-to-workspace 2'
 
+[[on-window-detected]]
+    if.app-id = 'com.google.Chrome'
+    run = 'move-node-to-workspace 3'
+
 [gaps]
     inner.horizontal = 6
     inner.vertical =   6
