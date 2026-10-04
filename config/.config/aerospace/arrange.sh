@@ -5,6 +5,7 @@ LAYOUT=(
   "com.github.wez.wezterm 1"
   "md.obsidian 2"
   "com.google.Chrome 3"
+  "com.tinyspeck.slackmacgap 4"
 )
 
 workspace_for() {

@@ -33,6 +33,10 @@ on-focus-changed = ['exec-and-forget $HOME/.nix-profile/bin/sketchybar --trigger
     if.app-id = 'com.google.Chrome'
     run = 'move-node-to-workspace 3'
 
+[[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap'
+    run = 'move-node-to-workspace 4'
+
 [gaps]
     inner.horizontal = 6
     inner.vertical =   6
