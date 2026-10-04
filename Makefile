@@ -12,6 +12,7 @@ test:
 	bash config/.claude/notify_test.sh
 	bash config/.config/sketchybar/plugins/claude_agents_test.sh
 	bash config/.config/sketchybar/plugins/aerospace_test.sh
+	bash config/.config/aerospace/arrange_test.sh
 
 CLAUDE_SETTINGS := config/.claude/settings.json
 CLAUDE_MCP := config/.claude/mcp.json
