@@ -50,8 +50,8 @@ check() {
 
 echo "arrange.sh"
 
-run '10 com.github.wez.wezterm\n20 md.obsidian\n30 com.google.Chrome\n11 com.github.wez.wezterm\n'
-check "WezTerm を 1、Obsidian を 2 に移し、他のアプリは動かさない" \
+run '10 com.github.wez.wezterm 4\n20 md.obsidian 2\n11 com.github.wez.wezterm 1\n'
+check "WezTerm を 1、Obsidian を 2 に移す" \
   "$(printf '%s\n' \
     'move-node-to-workspace --window-id 10 1' \
     'move-node-to-workspace --window-id 20 2' \
@@ -60,12 +60,21 @@ check "WezTerm を 1、Obsidian を 2 に移し、他のアプリは動かさな
 check "起動済みのアプリは起動しない" "" "$(log open)"
 check "SketchyBar を更新する" "--trigger aerospace_workspace_change" "$(log sketchybar)"
 
-run '30 com.google.Chrome\n'
+run '10 com.github.wez.wezterm 1\n30 com.amazon.Lassen 1\n31 com.google.Chrome 2\n32 com.hnc.Discord 4\n20 md.obsidian 2\n'
+check "1 と 2 にある他のアプリを 3 に追い出し、それ以外のワークスペースのアプリは動かさない" \
+  "$(printf '%s\n' \
+    'move-node-to-workspace --window-id 10 1' \
+    'move-node-to-workspace --window-id 30 3' \
+    'move-node-to-workspace --window-id 31 3' \
+    'move-node-to-workspace --window-id 20 2')" \
+  "$(log aerospace)"
+
+run '30 com.google.Chrome 1\n'
 check "起動していないアプリを起動する" \
   "$(printf '%s\n' '-g -b com.github.wez.wezterm' '-g -b md.obsidian')" \
   "$(log open)"
 
-run '20 md.obsidian\n'
+run '20 md.obsidian 2\n'
 check "起動していないアプリだけを起動する" "-g -b com.github.wez.wezterm" "$(log open)"
 
 echo
