@@ -50,33 +50,35 @@ check() {
 
 echo "arrange.sh"
 
-run '10 com.github.wez.wezterm 4\n20 md.obsidian 2\n11 com.github.wez.wezterm 1\n31 com.google.Chrome 1\n'
-check "WezTerm を 1、Obsidian を 2、Chrome を 3 に移す" \
+run '10 com.github.wez.wezterm 4\n20 md.obsidian 2\n11 com.github.wez.wezterm 1\n31 com.google.Chrome 1\n40 com.tinyspeck.slackmacgap 2\n'
+check "WezTerm を 1、Obsidian を 2、Chrome を 3、Slack を 4 に移す" \
   "$(printf '%s\n' \
     'move-node-to-workspace --window-id 10 1' \
     'move-node-to-workspace --window-id 20 2' \
     'move-node-to-workspace --window-id 11 1' \
-    'move-node-to-workspace --window-id 31 3')" \
+    'move-node-to-workspace --window-id 31 3' \
+    'move-node-to-workspace --window-id 40 4')" \
   "$(log aerospace)"
 check "起動済みのアプリは起動しない" "" "$(log open)"
 check "SketchyBar を更新する" "--trigger aerospace_workspace_change" "$(log sketchybar)"
 
-run '10 com.github.wez.wezterm 1\n30 com.amazon.Lassen 1\n33 com.apple.finder 3\n32 com.hnc.Discord 5\n20 md.obsidian 2\n31 com.google.Chrome 3\n'
-check "1〜3 にある他のアプリを 4 に追い出し、それ以外のワークスペースのアプリは動かさない" \
+run '10 com.github.wez.wezterm 1\n30 com.amazon.Lassen 1\n33 com.apple.finder 4\n32 com.hnc.Discord 6\n20 md.obsidian 2\n31 com.google.Chrome 3\n40 com.tinyspeck.slackmacgap 4\n'
+check "1〜4 にある他のアプリを 5 に追い出し、それ以外のワークスペースのアプリは動かさない" \
   "$(printf '%s\n' \
     'move-node-to-workspace --window-id 10 1' \
-    'move-node-to-workspace --window-id 30 4' \
-    'move-node-to-workspace --window-id 33 4' \
+    'move-node-to-workspace --window-id 30 5' \
+    'move-node-to-workspace --window-id 33 5' \
     'move-node-to-workspace --window-id 20 2' \
-    'move-node-to-workspace --window-id 31 3')" \
+    'move-node-to-workspace --window-id 31 3' \
+    'move-node-to-workspace --window-id 40 4')" \
   "$(log aerospace)"
 
 run '30 com.amazon.Lassen 1\n'
 check "起動していないアプリを起動する" \
-  "$(printf '%s\n' '-g -b com.github.wez.wezterm' '-g -b md.obsidian' '-g -b com.google.Chrome')" \
+  "$(printf '%s\n' '-g -b com.github.wez.wezterm' '-g -b md.obsidian' '-g -b com.google.Chrome' '-g -b com.tinyspeck.slackmacgap')" \
   "$(log open)"
 
-run '20 md.obsidian 2\n31 com.google.Chrome 3\n'
+run '20 md.obsidian 2\n31 com.google.Chrome 3\n40 com.tinyspeck.slackmacgap 4\n'
 check "起動していないアプリだけを起動する" "-g -b com.github.wez.wezterm" "$(log open)"
 
 echo
