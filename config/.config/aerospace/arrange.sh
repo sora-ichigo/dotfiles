@@ -17,17 +17,34 @@ workspace_for() {
   return 1
 }
 
-windows=$(aerospace list-windows --all --format '%{window-id} %{app-bundle-id}')
+is_reserved() {
+  local entry
+  for entry in "${LAYOUT[@]}"; do
+    [ "${entry#* }" = "$1" ] && return 0
+  done
+  return 1
+}
 
-while read -r id app; do
+spare=0
+for entry in "${LAYOUT[@]}"; do
+  [ "${entry#* }" -gt "$spare" ] && spare=${entry#* }
+done
+spare=$((spare + 1))
+
+windows=$(aerospace list-windows --all --format '%{window-id} %{app-bundle-id} %{workspace}')
+
+while read -r id app current; do
   [ -n "$id" ] || continue
-  ws=$(workspace_for "$app") || continue
-  aerospace move-node-to-workspace --window-id "$id" "$ws"
+  if ws=$(workspace_for "$app"); then
+    aerospace move-node-to-workspace --window-id "$id" "$ws"
+  elif is_reserved "$current"; then
+    aerospace move-node-to-workspace --window-id "$id" "$spare"
+  fi
 done <<<"$windows"
 
 for entry in "${LAYOUT[@]}"; do
   app=${entry% *}
-  grep -q " $app\$" <<<"$windows" || open -g -b "$app"
+  grep -q " $app " <<<"$windows" || open -g -b "$app"
 done
 
 sketchybar --trigger aerospace_workspace_change
