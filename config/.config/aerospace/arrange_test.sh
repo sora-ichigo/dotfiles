@@ -13,6 +13,10 @@ if [ "\$1" = "list-windows" ]; then
   printf '%b' "\${FAKE_WINDOWS:-}"
   exit 0
 fi
+if [ "\$1" = "list-monitors" ]; then
+  echo "\${FAKE_MONITORS:-1}"
+  exit 0
+fi
 echo "\$*" >>"$WORKDIR/aerospace.log"
 EOF
 cat >"$WORKDIR/bin/open" <<EOF
@@ -30,7 +34,7 @@ FAIL=0
 
 run() {
   rm -f "$WORKDIR"/*.log
-  FAKE_WINDOWS="$1" PATH="$WORKDIR/bin:$PATH" bash "$SCRIPT_DIR/arrange.sh"
+  FAKE_WINDOWS="$1" FAKE_MONITORS="${2:-1}" PATH="$WORKDIR/bin:$PATH" bash "$SCRIPT_DIR/arrange.sh"
 }
 
 log() {
@@ -71,6 +75,16 @@ check "1〜4 にある他のアプリを 5 に追い出し、それ以外のワ�
     'move-node-to-workspace --window-id 20 2' \
     'move-node-to-workspace --window-id 31 3' \
     'move-node-to-workspace --window-id 40 4')" \
+  "$(log aerospace)"
+
+run '10 com.github.wez.wezterm 1\n20 md.obsidian 2\n31 com.google.Chrome 3\n40 com.tinyspeck.slackmacgap 4\n33 com.apple.finder 4\n' 2
+check "モニターが 2 枚なら Slack を Obsidian と同じ 2 に移し、1〜4 にある他のアプリは 5 に追い出す" \
+  "$(printf '%s\n' \
+    'move-node-to-workspace --window-id 10 1' \
+    'move-node-to-workspace --window-id 20 2' \
+    'move-node-to-workspace --window-id 31 3' \
+    'move-node-to-workspace --window-id 40 2' \
+    'move-node-to-workspace --window-id 33 5')" \
   "$(log aerospace)"
 
 run '30 com.amazon.Lassen 1\n'

@@ -8,8 +8,15 @@ LAYOUT=(
   "com.tinyspeck.slackmacgap 4"
 )
 
+SLACK=com.tinyspeck.slackmacgap
+SHARED_WORKSPACE=2
+
 workspace_for() {
   local entry
+  if [ "$1" = "$SLACK" ] && [ "$(aerospace list-monitors --count)" = 2 ]; then
+    echo "$SHARED_WORKSPACE"
+    return 0
+  fi
   for entry in "${LAYOUT[@]}"; do
     if [ "${entry% *}" = "$1" ]; then
       echo "${entry#* }"

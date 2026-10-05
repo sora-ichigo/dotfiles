@@ -82,6 +82,12 @@ cask "app-name"
 - ツール自身が設定ファイルに書き戻す場合は `home.file` を使わない。Nix store へのシンボリックリンクは読み取り専用のため書き込みが失敗する。`home.activation` で書き込み可能な実ファイルとしてコピーし、ツールが書き込む区画だけ引き継ぐ
 - 起動中に設定を読み込むツールは `home.activation` で明示的に再起動・再読込する。Home Manager はシンボリックリンクを張り替えるだけで、稼働中のプロセスには何も伝えない。launchd agent も plist が前回と同一なら Home Manager 側の処理ごとスキップされるため、設定だけを変えても反映されない。SketchyBar は `launchctl kickstart -k` で再起動し、AeroSpace は `aerospace reload-config` で読み直す
 
+### AeroSpace のワークスペース配置
+
+- WezTerm・Obsidian・Chrome・Slack をワークスペース 1〜4 に振り分け、`alt-shift-a`（`config/.config/aerospace/arrange.sh`）で並べ直す
+- 外部ディスプレイがあるときは、2（Obsidian）と 4（Slack）を `workspace-to-monitor-force-assignment` でサブモニターに固定する。モニターが 1 枚のときは割り当てが一致せず、メインに表示される
+- モニターが 2 枚のときは Slack を 2 に移し、サブモニターで Obsidian と並べる。AeroSpace にはモニター数の条件もモニターの抜き差しを受け取るコールバックもないため、`config/.config/aerospace/place_slack.sh` を Slack のウィンドウが開いたとき（`on-window-detected`）と SketchyBar の `display_change` イベントで呼んで振り分ける
+
 ### AI コーディングエージェントの設定
 
 - Claude Code の設定は `config/.claude/` に置く

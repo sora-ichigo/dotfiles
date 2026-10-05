@@ -3,6 +3,7 @@
 {
   home.file.".config/aerospace/aerospace.toml".source = ../../config/.config/aerospace/aerospace.toml;
   home.file.".config/aerospace/arrange.sh".source = ../../config/.config/aerospace/arrange.sh;
+  home.file.".config/aerospace/place_slack.sh".source = ../../config/.config/aerospace/place_slack.sh;
 
   home.activation.reloadAerospace = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if [ -x /opt/homebrew/bin/aerospace ]; then
