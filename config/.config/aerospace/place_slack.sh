@@ -13,4 +13,6 @@ for id in $ids; do
   aerospace move-node-to-workspace --window-id "$id" "$workspace"
 done
 
+[ "$workspace" = 2 ] && aerospace layout --window-id "${ids%%$'\n'*}" v_tiles
+
 sketchybar --trigger aerospace_workspace_change
