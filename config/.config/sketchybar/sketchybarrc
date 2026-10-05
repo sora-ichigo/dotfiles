@@ -75,6 +75,12 @@ sketchybar --add item aerospace left \
   update_freq=10 \
   script="SPACE_ICON_LIMIT=2 $PLUGIN_DIR/aerospace.sh"
 
+sketchybar --add item display left \
+  --subscribe display display_change \
+  --set display drawing=off \
+  updates=on \
+  script="sleep 1; $HOME/.config/aerospace/place_slack.sh"
+
 sketchybar --add item front_app left \
   --subscribe front_app front_app_switched \
   --set front_app icon.font="$APP_FONT" \

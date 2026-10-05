@@ -35,7 +35,11 @@ on-focus-changed = ['exec-and-forget $HOME/.nix-profile/bin/sketchybar --trigger
 
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap'
-    run = 'move-node-to-workspace 4'
+    run = ['move-node-to-workspace 4', 'exec-and-forget $HOME/.config/aerospace/place_slack.sh']
+
+[workspace-to-monitor-force-assignment]
+    2 = 'secondary'
+    4 = 'secondary'
 
 [gaps]
     inner.horizontal = 6
