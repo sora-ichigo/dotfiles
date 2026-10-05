@@ -86,7 +86,7 @@ cask "app-name"
 
 - WezTerm・Obsidian・Chrome・Slack をワークスペース 1〜4 に振り分け、`alt-shift-a`（`config/.config/aerospace/arrange.sh`）で並べ直す
 - 外部ディスプレイがあるときは、2（Obsidian）と 4（Slack）を `workspace-to-monitor-force-assignment` でサブモニターに固定する。モニターが 1 枚のときは割り当てが一致せず、メインに表示される
-- モニターが 2 枚のときは Slack を 2 に移し、サブモニターで Obsidian と並べる。AeroSpace にはモニター数の条件もモニターの抜き差しを受け取るコールバックもないため、`config/.config/aerospace/place_slack.sh` を Slack のウィンドウが開いたとき（`on-window-detected`）と SketchyBar の `display_change` イベントで呼んで振り分ける
+- モニターが 2 枚のときは Slack を 2 に移し、サブモニターで Obsidian と縦に並べる。ワークスペース 2 は起動時にメインモニター（横長）で作られて横並びになるため、縦長のサブモニターに合わせて `layout v_tiles` で縦並びにする。AeroSpace にはモニター数の条件もモニターの抜き差しを受け取るコールバックもないため、`config/.config/aerospace/place_slack.sh` を Slack のウィンドウが開いたとき（`on-window-detected`）と SketchyBar の `display_change` イベントで呼んで振り分ける
 
 ### AI コーディングエージェントの設定
 

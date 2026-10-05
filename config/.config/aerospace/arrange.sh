@@ -42,14 +42,18 @@ spare=$((spare + 1))
 
 windows=$(aerospace list-windows --all --format '%{window-id} %{app-bundle-id} %{workspace}')
 
+shared_id=""
 while read -r id app current; do
   [ -n "$id" ] || continue
   if ws=$(workspace_for "$app"); then
     aerospace move-node-to-workspace --window-id "$id" "$ws"
+    [ "$app" = "$SLACK" ] && [ "$ws" = "$SHARED_WORKSPACE" ] && [ -z "$shared_id" ] && shared_id=$id
   elif is_reserved "$current"; then
     aerospace move-node-to-workspace --window-id "$id" "$spare"
   fi
 done <<<"$windows"
+
+[ -n "$shared_id" ] && aerospace layout --window-id "$shared_id" v_tiles
 
 for entry in "${LAYOUT[@]}"; do
   app=${entry% *}

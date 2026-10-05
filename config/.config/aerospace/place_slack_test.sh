@@ -51,10 +51,11 @@ check() {
 echo "place_slack.sh"
 
 run '20 md.obsidian 2\n40 com.tinyspeck.slackmacgap 4\n41 com.tinyspeck.slackmacgap 6\n' 2
-check "モニターが 2 枚なら Slack のウィンドウをすべて 2 に移す" \
+check "モニターが 2 枚なら Slack のウィンドウをすべて 2 に移し、縦に並べる" \
   "$(printf '%s\n' \
     'move-node-to-workspace --window-id 40 2' \
-    'move-node-to-workspace --window-id 41 2')" \
+    'move-node-to-workspace --window-id 41 2' \
+    'layout --window-id 40 v_tiles')" \
   "$(log aerospace)"
 check "SketchyBar を更新する" "--trigger aerospace_workspace_change" "$(log sketchybar)"
 
