@@ -80,6 +80,7 @@
   "enabledPlugins": {
     "context7-plugin@context7-marketplace": true,
     "marp-wantedly@wantedly-cc-plugins": true,
+    "product-design@wantedly-cc-plugins": true,
     "slack@claude-plugins-official": true,
     "crit@crit": true
   },
