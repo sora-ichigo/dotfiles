@@ -96,6 +96,7 @@ cask "app-name"
 - セッション内の diff サイドバーは使わないため、`~/.claude.json` の `diffSidebarOpen` を `false` にして無効化している。`~/.claude.json` は Claude Code 自身が書き戻すので、`nix/programs/claude-code.nix` の `home.activation` でこのキーだけを書き換える
 - 応答完了（Stop）と入力待ち（Notification）の hook で `config/.claude/notify.sh` が terminal-notifier で macOS 通知を出す。応答完了の本文には最後の応答（`last_assistant_message`）の先頭 100 文字を使う。tmux 内で動いていれば、サブタイトルに tmux セッション名を出し、通知をクリックすると WezTerm が前面に出て通知元の pane に切り替わる。`claude agents` のバックグラウンドセッションは daemon 配下で動き `TMUX_PANE` を持たないため、`cwd` かその親ディレクトリで開いている pane（claude が動いている pane を優先）を遷移先にする。`cwd` が ghq 配下の symlink の実体（Obsidian vault 内のリポジトリなど）なら、ghq 側のパスでも pane を探す。環境変数 `CLAUDE_NTFY_TOPIC` があれば ntfy.sh にも送る。有効にするには 1Password にトピック名を保存して `config/secrets.json` に参照を足し、`make secrets` を実行する。トピック名を知っていれば誰でも購読できるため、推測されにくい文字列にする
 - SketchyBar（`config/.config/sketchybar/`）を画面左端の縦向きバーとして置く。macOS 標準のメニューバーはコントロールセンター・通知センター・アプリのメニューを使うため残す。中央に `claude agents` のバックグラウンドセッションを出し、クリックで一覧を開く。行をクリックすると、notify.sh と同じ `config/.claude/tmux_pane.sh` でセッションの cwd に近い tmux pane を探して切り替え、見つからなければ WezTerm で attach する。一覧は飛び先の tmux pane ごとにまとめ、pane の見出しに番号を振る。AeroSpace の `alt-c` で一覧を開いて claude モードに入り、見出しの番号キーでその pane に移動できる（`esc` で閉じる）。Claude Code の hook から `sketchybar --trigger claude_agents_update` を呼んで即座に更新する
+- Hunk はセッションを閉じるとコメントが消えるため、拡張 `config/.config/hunk/extensions/notes-backup.ts` が `note_changed` イベントを受けるたびに、そのセッションのコメント全件を `~/.local/state/hunk/notes/<起動時刻>-<リポジトリ名>.json` に書き出す。拡張から引けるファイルの識別子は内容のハッシュのみのため、ファイルパスは Hunk の画面で書いたコメント（`note_created`）にだけ付く
 
 ### 導入していないツール
 
