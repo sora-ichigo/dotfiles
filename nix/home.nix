@@ -14,7 +14,6 @@
     ./programs/claude-code.nix
     ./programs/wezterm.nix
     ./programs/aerospace.nix
-    ./programs/yabai.nix
     ./programs/git-worktree-runner.nix
     ./programs/lazygit.nix
     ./programs/hunk.nix
