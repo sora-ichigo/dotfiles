@@ -24,9 +24,9 @@ sketchybar --bar position=left \
 
 sketchybar --default updates=when_shown \
   icon.font="$FONT:Bold:15.0" \
-  icon.color="$WHITE" \
+  icon.color="$TEXT_COLOR" \
   label.font="$FONT:Bold:13.0" \
-  label.color="$WHITE" \
+  label.color="$TEXT_COLOR" \
   padding_left=6 \
   padding_right=6 \
   icon.padding_left=2 \

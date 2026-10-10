@@ -1,4 +1,4 @@
-theme = "solarized-dark"
+theme = "catppuccin-latte"
 mode = "stack"
 wrap_lines = true
 agent_notes = true

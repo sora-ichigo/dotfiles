@@ -25,7 +25,7 @@ for sid in $(aerospace list-workspaces --all); do
   if [ "$sid" = "$focused" ]; then
     args+=(--set "space.$sid" drawing=on background.drawing=on icon.color="$ACCENT_COLOR" label="$icons" label.font="$font")
   elif [ -n "$icons" ]; then
-    args+=(--set "space.$sid" drawing=on background.drawing=off icon.color="$WHITE" label="$icons" label.font="$font")
+    args+=(--set "space.$sid" drawing=on background.drawing=off icon.color="$TEXT_COLOR" label="$icons" label.font="$font")
   else
     args+=(--set "space.$sid" drawing=off label="")
   fi

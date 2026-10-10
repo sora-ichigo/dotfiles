@@ -9,10 +9,7 @@ end
 config.font = wezterm.font("Hack Nerd Font Mono", { weight = "Regular" })
 config.font_size = 14
 
-config.color_scheme = "Catppuccin Mocha"
-config.colors = {
-	background = "#0a1a2f",
-}
+config.color_scheme = "Catppuccin Latte"
 
 config.window_background_opacity = 0.90
 config.macos_window_background_blur = 30
