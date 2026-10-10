@@ -34,16 +34,5 @@
         system = "@SYSTEM@";
         username = "@USERNAME@";
       };
-
-      # CI 用の設定
-      homeConfigurations."ci-x86_64-darwin" = mkHomeConfiguration {
-        system = "x86_64-darwin";
-        username = "runner";
-      };
-
-      homeConfigurations."ci-x86_64-linux" = mkHomeConfiguration {
-        system = "x86_64-linux";
-        username = "runner";
-      };
     };
 }
