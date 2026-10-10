@@ -37,7 +37,7 @@ in
       {
         plugin = catppuccin;
         extraConfig = ''
-          set -g @catppuccin_flavor "mocha"
+          set -g @catppuccin_flavor "latte"
           set -g @catppuccin_window_status_style "rounded"
           set -g @catppuccin_window_default_text " #W"
           set -g @catppuccin_window_current_text " #W"
@@ -104,7 +104,7 @@ in
       unbind s
       bind S choose-tree -Zs
 
-      bind T run-shell "sesh connect \"\$({ sesh list -i; ghq list -p | grep -v -- '-worktrees/' | sed \"s|^\$HOME|~|\"; } | awk '!seen[\$NF]++' | fzf-tmux -p 60%,60% --ansi --no-sort --reverse --border-label ' sesh ' --color=bg:-1,bg+:-1,gutter:-1,hl:#cba6f7,hl+:#cba6f7:bold,fg:#cdd6f4,fg+:#cdd6f4:bold,prompt:#89b4fa,pointer:#f38ba8,marker:#a6e3a1,border:#89b4fa,label:#89b4fa)\""
+      bind T run-shell "sesh connect \"\$({ sesh list -i; ghq list -p | grep -v -- '-worktrees/' | sed \"s|^\$HOME|~|\"; } | awk '!seen[\$NF]++' | fzf-tmux -p 60%,60% --ansi --no-sort --reverse --border-label ' sesh ' --color=bg:-1,bg+:-1,gutter:-1,hl:#8839ef,hl+:#8839ef:bold,fg:#4c4f69,fg+:#4c4f69:bold,prompt:#1e66f5,pointer:#d20f39,marker:#40a02b,border:#1e66f5,label:#1e66f5)\""
 
       bind h select-pane -L
       bind j select-pane -D

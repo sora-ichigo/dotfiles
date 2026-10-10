@@ -31,8 +31,8 @@
 	ui = true
 
 [delta]
-	dark = true
-	syntax-theme = Solarized (dark)
+	light = true
+	syntax-theme = Solarized (light)
 
 [push]
 	default = simple
