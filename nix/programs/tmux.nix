@@ -1,13 +1,6 @@
 { pkgs, ... }:
 
 let
-  ssidScript = pkgs.writeShellScript "tmux-ssid" ''
-    ssid=$(ipconfig getsummary en0 2>/dev/null \
-      | awk -F ' SSID : ' '/ SSID : / {print $2; exit}')
-    [ -z "$ssid" ] && ssid="--"
-    printf '%s' "$ssid" | head -c 18
-  '';
-
   gitStatusScript = pkgs.writeShellScript "tmux-git-status" ''
     cd "$1" 2>/dev/null || { printf '%s' "--"; exit; }
     branch=$(git symbolic-ref --short HEAD 2>/dev/null \
@@ -81,21 +74,17 @@ in
       set -g status-left-length 120
       set -g status-right-length 200
 
-      set -g @online_icon "▲ UP"
-      set -g @offline_icon "▽ DN"
+      set -g automatic-rename-format "#{?#{m/r:^[0-9]+[.][0-9]+[.][0-9]+$,#{pane_current_command}},claude,#{pane_current_command}}"
 
-      set -g status-left "#[fg=#{@thm_crust},bg=#{@thm_green}] ◉ #S #[fg=#{@thm_green},bg=default]█ "
+      set -g status-left "#{S/n:#[fg=#{@thm_subtext_0}#,bg=#{@thm_surface_0}] #{session_name} #[default] ,#[fg=#{@thm_crust}#,bg=#{@thm_green}#,bold] #{session_name} #[default] }#[fg=#{@thm_overlay_0}]│ "
 
-      set -g status-right "#[fg=#{@thm_sky},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_sky}] SSID #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #(${ssidScript}) "
-      set -ag status-right "#[fg=#{@thm_green},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_green}] LINK #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #{online_status} "
-      set -ag status-right "#[fg=#{@thm_yellow},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_yellow}] CPU #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #{cpu_percentage} "
-      set -ag status-right "#[fg=#{@thm_lavender},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_lavender}] PWR #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #{battery_icon_status} #{battery_percentage} "
-      set -ag status-right "#[fg=#{@thm_mauve},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_mauve}] GIT #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #(${gitStatusScript} '#{pane_current_path}') "
-      set -ag status-right "#[fg=#{@thm_overlay_0},bg=default]█#[fg=#{@thm_fg},bg=#{@thm_overlay_0}] %m/%d (%a) %H:%M "
+      set -g status-right "#[fg=#{@thm_mauve}] #(${gitStatusScript} '#{pane_current_path}')  "
+      set -ag status-right "#[fg=#{@thm_yellow}] #{cpu_percentage}  "
+      set -ag status-right "#[fg=#{@thm_lavender}]#{battery_icon_status} #{battery_percentage}  "
+      set -ag status-right "#[fg=#{@thm_overlay_1}]%H:%M "
 
       run-shell ${pkgs.tmuxPlugins.cpu.rtp}
       run-shell ${pkgs.tmuxPlugins.battery.rtp}
-      run-shell ${pkgs.tmuxPlugins.online-status.rtp}
 
       bind v split-window -h -c "#{pane_current_path}"
       bind "|" split-window -h -c "#{pane_current_path}"
