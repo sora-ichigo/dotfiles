@@ -106,6 +106,8 @@ run '{"hook_event_name":"Stop","cwd":"/Users/me/repo"}' "" "%0" "$panes"
 assert_contains "存在しない TMUX_PANE なら cwd から pane を探す" "$(log terminal-notifier)" "switch-client -t %3"
 run '{"hook_event_name":"Stop","cwd":"/Users/me/repo2"}' "" "" '%1\t/Users/me\tzsh\n%5\t/Users/me/repo\t2.1.285\n'
 assert_contains "cwd を含む pane が無ければ最も近い親ディレクトリの pane に切り替える" "$(log terminal-notifier)" "switch-client -t %1"
+run '{"hook_event_name":"Stop","cwd":"/Users/me/repo"}' "" "" '%1\t/Users/me\t2.1.285\n%2\t/Users/me/repo\tnvim\n'
+assert_contains "親ディレクトリで claude が動いている pane を cwd の claude 以外の pane より優先する" "$(log terminal-notifier)" "switch-client -t %1"
 run '{"hook_event_name":"Stop","cwd":"/opt/x"}' "" "" "$panes"
 assert_not_contains "該当する pane が無ければクリック時のコマンドを付けない" "$(log terminal-notifier)" "-execute"
 mkdir -p "$WORKDIR/vault/perf/sub" "$WORKDIR/store" "$WORKDIR/ghq/github.com/me"
