@@ -1,13 +1,6 @@
 { pkgs, ... }:
 
 let
-  ssidScript = pkgs.writeShellScript "tmux-ssid" ''
-    ssid=$(ipconfig getsummary en0 2>/dev/null \
-      | awk -F ' SSID : ' '/ SSID : / {print $2; exit}')
-    [ -z "$ssid" ] && ssid="--"
-    printf '%s' "$ssid" | head -c 18
-  '';
-
   gitStatusScript = pkgs.writeShellScript "tmux-git-status" ''
     cd "$1" 2>/dev/null || { printf '%s' "--"; exit; }
     branch=$(git symbolic-ref --short HEAD 2>/dev/null \
@@ -21,6 +14,18 @@ let
     else
       printf '%s' "$branch"
     fi
+  '';
+
+  sessionsScript = pkgs.writeShellScript "tmux-sessions" ''
+    tmux list-sessions -F '#S' | LC_ALL=C sort | awk -v cur="$1" -v fg="$2" -v bg="$3" -v cfg="$4" -v cbg="$5" '{
+      if ($0 == cur) printf "#[fg=%s,bg=%s,bold] %d %s #[default] ", cfg, cbg, NR, $0
+      else printf "#[fg=%s,bg=%s] %d %s #[default] ", fg, bg, NR, $0
+    }'
+  '';
+
+  switchSessionScript = pkgs.writeShellScript "tmux-switch-session" ''
+    name=$(tmux list-sessions -F '#S' | LC_ALL=C sort | sed -n "$1p")
+    [ -n "$name" ] && tmux switch-client -t "=$name"
   '';
 in
 {
@@ -81,27 +86,33 @@ in
       set -g status-left-length 120
       set -g status-right-length 200
 
-      set -g @online_icon "▲ UP"
-      set -g @offline_icon "▽ DN"
+      set -g automatic-rename-format "#{?#{m/r:^[0-9]+[.][0-9]+[.][0-9]+$,#{pane_current_command}},claude,#{pane_current_command}}"
 
-      set -g status-left "#[fg=#{@thm_crust},bg=#{@thm_green}] ◉ #S #[fg=#{@thm_green},bg=default]█ "
+      set -g status-left "#(${sessionsScript} '#{client_session}' '#{@thm_subtext_0}' '#{@thm_surface_0}' '#{@thm_crust}' '#{@thm_green}')#[fg=#{@thm_overlay_0}]│ "
 
-      set -g status-right "#[fg=#{@thm_sky},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_sky}] SSID #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #(${ssidScript}) "
-      set -ag status-right "#[fg=#{@thm_green},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_green}] LINK #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #{online_status} "
-      set -ag status-right "#[fg=#{@thm_yellow},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_yellow}] CPU #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #{cpu_percentage} "
-      set -ag status-right "#[fg=#{@thm_lavender},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_lavender}] PWR #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #{battery_icon_status} #{battery_percentage} "
-      set -ag status-right "#[fg=#{@thm_mauve},bg=default]█#[fg=#{@thm_crust},bg=#{@thm_mauve}] GIT #[fg=#{@thm_fg},bg=#{@thm_surface_0}] #(${gitStatusScript} '#{pane_current_path}') "
-      set -ag status-right "#[fg=#{@thm_overlay_0},bg=default]█#[fg=#{@thm_fg},bg=#{@thm_overlay_0}] %m/%d (%a) %H:%M "
+      set -g status-right "#[fg=#{@thm_mauve}] #(${gitStatusScript} '#{pane_current_path}')  "
+      set -ag status-right "#[fg=#{@thm_yellow}] #{cpu_percentage}  "
+      set -ag status-right "#[fg=#{@thm_lavender}]#{battery_icon_status} #{battery_percentage}  "
+      set -ag status-right "#[fg=#{@thm_overlay_1}]%H:%M "
 
       run-shell ${pkgs.tmuxPlugins.cpu.rtp}
       run-shell ${pkgs.tmuxPlugins.battery.rtp}
-      run-shell ${pkgs.tmuxPlugins.online-status.rtp}
 
       bind v split-window -h -c "#{pane_current_path}"
       bind "|" split-window -h -c "#{pane_current_path}"
       bind "-" split-window -v -c "#{pane_current_path}"
 
       unbind s
+      bind s switch-client -T session
+      bind -T session 1 run-shell "${switchSessionScript} 1"
+      bind -T session 2 run-shell "${switchSessionScript} 2"
+      bind -T session 3 run-shell "${switchSessionScript} 3"
+      bind -T session 4 run-shell "${switchSessionScript} 4"
+      bind -T session 5 run-shell "${switchSessionScript} 5"
+      bind -T session 6 run-shell "${switchSessionScript} 6"
+      bind -T session 7 run-shell "${switchSessionScript} 7"
+      bind -T session 8 run-shell "${switchSessionScript} 8"
+      bind -T session 9 run-shell "${switchSessionScript} 9"
       bind S choose-tree -Zs
 
       bind T run-shell "sesh connect \"\$({ sesh list -i; ghq list -p | grep -v -- '-worktrees/' | sed \"s|^\$HOME|~|\"; } | awk '!seen[\$NF]++' | fzf-tmux -p 60%,60% --ansi --no-sort --reverse --border-label ' sesh ' --color=bg:-1,bg+:-1,gutter:-1,hl:#cba6f7,hl+:#cba6f7:bold,fg:#cdd6f4,fg+:#cdd6f4:bold,prompt:#89b4fa,pointer:#f38ba8,marker:#a6e3a1,border:#89b4fa,label:#89b4fa)\""
