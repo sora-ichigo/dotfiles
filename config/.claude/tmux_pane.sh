@@ -16,7 +16,7 @@ tmux -u list-panes -a -F '#{pane_id}	#{pane_current_path}	#{pane_current_command
   {
     for (i = 1; i <= n; i++) {
       if ($2 == paths[i] || index(paths[i], $2 "/") == 1) {
-        score = length($2) * 2 + ($3 == "claude" || $3 ~ /^[0-9]+\.[0-9]+\.[0-9]+$/)
+        score = length($2) + 100000 * ($3 == "claude" || $3 ~ /^[0-9]+\.[0-9]+\.[0-9]+$/)
         if (score > best) { best = score; id = $1 }
       }
     }
