@@ -15,6 +15,18 @@ let
       printf '%s' "$branch"
     fi
   '';
+
+  sessionsScript = pkgs.writeShellScript "tmux-sessions" ''
+    tmux list-sessions -F '#S' | LC_ALL=C sort | awk -v cur="$1" -v fg="$2" -v bg="$3" -v cfg="$4" -v cbg="$5" '{
+      if ($0 == cur) printf "#[fg=%s,bg=%s,bold] %d %s #[default] ", cfg, cbg, NR, $0
+      else printf "#[fg=%s,bg=%s] %d %s #[default] ", fg, bg, NR, $0
+    }'
+  '';
+
+  switchSessionScript = pkgs.writeShellScript "tmux-switch-session" ''
+    name=$(tmux list-sessions -F '#S' | LC_ALL=C sort | sed -n "$1p")
+    [ -n "$name" ] && tmux switch-client -t "=$name"
+  '';
 in
 {
   programs.tmux = {
@@ -76,7 +88,7 @@ in
 
       set -g automatic-rename-format "#{?#{m/r:^[0-9]+[.][0-9]+[.][0-9]+$,#{pane_current_command}},claude,#{pane_current_command}}"
 
-      set -g status-left "#{S/n:#[fg=#{@thm_subtext_0}#,bg=#{@thm_surface_0}] #{session_name} #[default] ,#[fg=#{@thm_crust}#,bg=#{@thm_green}#,bold] #{session_name} #[default] }#[fg=#{@thm_overlay_0}]│ "
+      set -g status-left "#(${sessionsScript} '#{client_session}' '#{@thm_subtext_0}' '#{@thm_surface_0}' '#{@thm_crust}' '#{@thm_green}')#[fg=#{@thm_overlay_0}]│ "
 
       set -g status-right "#[fg=#{@thm_mauve}] #(${gitStatusScript} '#{pane_current_path}')  "
       set -ag status-right "#[fg=#{@thm_yellow}] #{cpu_percentage}  "
@@ -91,6 +103,16 @@ in
       bind "-" split-window -v -c "#{pane_current_path}"
 
       unbind s
+      bind s switch-client -T session
+      bind -T session 1 run-shell "${switchSessionScript} 1"
+      bind -T session 2 run-shell "${switchSessionScript} 2"
+      bind -T session 3 run-shell "${switchSessionScript} 3"
+      bind -T session 4 run-shell "${switchSessionScript} 4"
+      bind -T session 5 run-shell "${switchSessionScript} 5"
+      bind -T session 6 run-shell "${switchSessionScript} 6"
+      bind -T session 7 run-shell "${switchSessionScript} 7"
+      bind -T session 8 run-shell "${switchSessionScript} 8"
+      bind -T session 9 run-shell "${switchSessionScript} 9"
       bind S choose-tree -Zs
 
       bind T run-shell "sesh connect \"\$({ sesh list -i; ghq list -p | grep -v -- '-worktrees/' | sed \"s|^\$HOME|~|\"; } | awk '!seen[\$NF]++' | fzf-tmux -p 60%,60% --ansi --no-sort --reverse --border-label ' sesh ' --color=bg:-1,bg+:-1,gutter:-1,hl:#cba6f7,hl+:#cba6f7:bold,fg:#cdd6f4,fg+:#cdd6f4:bold,prompt:#89b4fa,pointer:#f38ba8,marker:#a6e3a1,border:#89b4fa,label:#89b4fa)\""
