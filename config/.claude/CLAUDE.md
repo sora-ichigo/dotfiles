@@ -17,6 +17,10 @@
 
 - GitHubのリソース（リポジトリ、Issue、PR、コード等）を操作する際は、`gh` コマンド（GitHub CLI）を使用する
 - WebFetchやWebSearchではなく、`gh` コマンドを優先する
+- PR をマージしたら、確認を取らずに続けて cleanup まで行う
+  1. デフォルトブランチに切り替えて最新を pull する
+  2. マージ済みのローカルブランチを削除する（リモートブランチが残っていれば削除する）
+  3. 作業に使った git worktree があれば削除する
 
 ## Google Workspace Operations
 
