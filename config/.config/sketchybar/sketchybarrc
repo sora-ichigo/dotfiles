@@ -12,7 +12,6 @@ sketchybar --bar position=left \
   margin=6 \
   y_offset=12 \
   corner_radius=12 \
-  blur_radius=30 \
   color="$BAR_COLOR" \
   border_width=1 \
   border_color="$BAR_BORDER_COLOR" \
@@ -37,8 +36,7 @@ sketchybar --default updates=when_shown \
   popup.background.border_width=2 \
   popup.background.border_color="$POPUP_BORDER_COLOR" \
   popup.background.corner_radius=9 \
-  popup.background.shadow.drawing=on \
-  popup.blur_radius=20
+  popup.background.shadow.drawing=on
 
 sketchybar --add item apple left \
   --set apple icon= \
