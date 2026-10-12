@@ -14,9 +14,6 @@ config.colors = {
 	background = "#0a1a2f",
 }
 
-config.window_background_opacity = 0.90
-config.macos_window_background_blur = 30
-
 -- config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.use_ime = true
