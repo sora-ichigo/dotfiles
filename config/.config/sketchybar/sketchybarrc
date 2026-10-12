@@ -53,8 +53,13 @@ for entry in "󰒓|Preferences|open -a 'System Settings'" "󰍉|Activity|open -a
     click_script="$command; sketchybar --set apple popup.drawing=off"
 done
 
+for _ in $(seq 60); do
+  workspaces=$(aerospace list-workspaces --all 2>/dev/null) && [ -n "$workspaces" ] && break
+  sleep 1
+done
+
 sketchybar --add event aerospace_workspace_change
-for sid in $(aerospace list-workspaces --all); do
+for sid in $workspaces; do
   sketchybar --add item "space.$sid" left \
     --set "space.$sid" icon="$sid" \
     icon.font="$FONT:Bold:12.0" \
