@@ -63,9 +63,6 @@ if [ -f '/Users/ichigo/google-cloud-sdk/path.zsh.inc' ]; then
   . '/Users/ichigo/google-cloud-sdk/path.zsh.inc';
 fi
 
-# github
-export GIT_SSH_COMMAND="ssh -i ~/.ssh/github.pem"
-
 # https://stackoverflow.com/questions/52671926/rails-may-have-been-in-progress-in-another-thread-when-fork-was-called
 export DISABLE_SPRING=true
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
