@@ -5,4 +5,6 @@
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.obsidian/igsr5/10_wantedly";
   home.file."ghq/github.com/sora-ichigo/personal".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.obsidian/igsr5/12_personal";
+  home.file."ghq/github.com/sora-ichigo/obsidian".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.obsidian/igsr5";
 }
