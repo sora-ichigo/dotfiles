@@ -53,10 +53,10 @@ on-focus-changed = ['exec-and-forget $HOME/.nix-profile/bin/sketchybar --trigger
     alt-slash = 'layout tiles horizontal vertical'
     alt-comma = 'layout accordion horizontal vertical'
 
-    alt-h = 'focus left'
-    alt-j = 'focus down'
-    alt-k = 'focus up'
-    alt-l = 'focus right'
+    ctrl-alt-h = 'focus left'
+    ctrl-alt-j = 'focus down'
+    ctrl-alt-k = 'focus up'
+    ctrl-alt-l = 'focus right'
 
     alt-shift-h = 'move left'
     alt-shift-j = 'move down'
