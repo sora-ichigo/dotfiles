@@ -23,6 +23,7 @@
     ./programs/ghq.nix
     ./programs/menubar.nix
     ./programs/sketchybar.nix
+    ./programs/macskk.nix
   ];
 
   home.stateVersion = "24.05";

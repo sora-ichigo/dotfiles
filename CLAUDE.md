@@ -89,6 +89,13 @@ cask "app-name"
 - 外部ディスプレイがあるときは、2（Obsidian）と 4（Slack）を `workspace-to-monitor-force-assignment` でサブモニターに固定する。モニターが 1 枚のときは割り当てが一致せず、メインに表示される
 - モニターが 2 枚のときは Slack を 2 に移し、サブモニターで Obsidian と縦に並べる。ワークスペース 2 は起動時にメインモニター（横長）で作られて横並びになるため、縦長のサブモニターに合わせて `layout v_tiles` で縦並びにする。AeroSpace にはモニター数の条件もモニターの抜き差しを受け取るコールバックもないため、`config/.config/aerospace/place_slack.sh` を Slack のウィンドウが開いたとき（`on-window-detected`）と SketchyBar の `display_change` イベントで呼んで振り分ける
 
+### 日本語入力（macSKK）
+
+- macSKK は `Brewfile` の cask で入れ、辞書 `SKK-JISYO.L` は nixpkgs の `skkDictionaries.l` を `nix/programs/macskk.nix` の `home.activation` でコンテナ内の辞書フォルダにコピーする。サンドボックス内で動くため、Nix store へのシンボリックリンクではなく実ファイルとして置く。同じフォルダには macSKK がユーザー辞書を書き込む
+- コンテナは macSKK の初回起動時に macOS が作るため、無ければコピーを飛ばす。`make brew` → ログアウト・ログイン → 入力ソースに追加 → `make nix` の順で入れる。辞書は置いただけでは有効にならないので、macSKK の設定画面で一度有効にする
+- macOS はほかのアプリのコンテナへのターミナルからの書き込みを拒否するため、ターミナルにフルディスクアクセスが無いとコピーは失敗する。失敗しても activation は止めず警告だけ出すので、その場合は Finder で辞書フォルダにコピーする
+- WezTerm は初期設定だと Ctrl 付きのキーを日本語入力に渡さず、`Ctrl-j` が Claude Code などに取られてひらがなモードに戻れない。`macos_forward_to_ime_modifier_mask` に `CTRL` を足して macSKK に先に渡す。zsh で `Ctrl-j` に割り当てていた `select_worktree` は `Ctrl-s` に移し、`Ctrl-s` で端末の出力が止まらないよう `no_flow_control` にしている
+
 ### AI コーディングエージェントの設定
 
 - Claude Code の設定は `config/.claude/` に置く

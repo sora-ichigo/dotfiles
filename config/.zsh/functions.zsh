@@ -60,7 +60,7 @@ select_worktree() {
   BUFFER=""
   zle accept-line
 }
-register_keycommand "^j" select_worktree
+register_keycommand "^s" select_worktree
 
 gwb() {
   if [[ -z "$1" ]]; then
