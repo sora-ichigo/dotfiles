@@ -2,6 +2,7 @@
 setopt IGNOREEOF
 setopt no_beep
 setopt interactive_comments
+setopt no_flow_control
 setopt glob_dots
 
 # cd
