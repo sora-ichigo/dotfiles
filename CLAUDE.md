@@ -94,6 +94,7 @@ cask "app-name"
 - macSKK は `Brewfile` の cask で入れ、辞書 `SKK-JISYO.L` は nixpkgs の `skkDictionaries.l` を `nix/programs/macskk.nix` の `home.activation` でコンテナ内の辞書フォルダにコピーする。サンドボックス内で動くため、Nix store へのシンボリックリンクではなく実ファイルとして置く。同じフォルダには macSKK がユーザー辞書を書き込む
 - コンテナは macSKK の初回起動時に macOS が作るため、無ければコピーを飛ばす。`make brew` → ログアウト・ログイン → 入力ソースに追加 → `make nix` の順で入れる。辞書は置いただけでは有効にならないので、macSKK の設定画面で一度有効にする
 - macOS はほかのアプリのコンテナへのターミナルからの書き込みを拒否するため、ターミナルにフルディスクアクセスが無いとコピーは失敗する。失敗しても activation は止めず警告だけ出すので、その場合は Finder で辞書フォルダにコピーする
+- WezTerm は初期設定だと Ctrl 付きのキーを日本語入力に渡さず、`Ctrl-j` が Claude Code などに取られてひらがなモードに戻れない。`macos_forward_to_ime_modifier_mask` に `CTRL` を足して macSKK に先に渡す
 
 ### AI コーディングエージェントの設定
 
