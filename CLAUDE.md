@@ -89,6 +89,11 @@ cask "app-name"
 - 外部ディスプレイがあるときは、2（Obsidian）と 4（Slack）を `workspace-to-monitor-force-assignment` でサブモニターに固定する。モニターが 1 枚のときは割り当てが一致せず、メインに表示される
 - モニターが 2 枚のときは Slack を 2 に移し、サブモニターで Obsidian と縦に並べる。ワークスペース 2 は起動時にメインモニター（横長）で作られて横並びになるため、縦長のサブモニターに合わせて `layout v_tiles` で縦並びにする。AeroSpace にはモニター数の条件もモニターの抜き差しを受け取るコールバックもないため、`config/.config/aerospace/place_slack.sh` を Slack のウィンドウが開いたとき（`on-window-detected`）と SketchyBar の `display_change` イベントで呼んで振り分ける
 
+### 日本語入力（macSKK）
+
+- macSKK は `Brewfile` の cask で入れ、辞書 `SKK-JISYO.L` は nixpkgs の `skkDictionaries.l` を `nix/programs/macskk.nix` の `home.activation` でコンテナ内の辞書フォルダにコピーする。サンドボックス内で動くため、Nix store へのシンボリックリンクではなく実ファイルとして置く。同じフォルダには macSKK がユーザー辞書を書き込む
+- コンテナは macSKK の初回起動時に macOS が作るため、無ければコピーを飛ばす。`make brew` → ログアウト・ログイン → 入力ソースに追加 → `make nix` の順で入れる。辞書は置いただけでは有効にならないので、macSKK の設定画面で一度有効にする
+
 ### AI コーディングエージェントの設定
 
 - Claude Code の設定は `config/.claude/` に置く
