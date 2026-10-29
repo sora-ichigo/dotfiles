@@ -17,7 +17,6 @@ config.colors = {
 -- config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.use_ime = true
-config.macos_forward_to_ime_modifier_mask = "SHIFT|CTRL"
 
 config.hide_tab_bar_if_only_one_tab = true
 
