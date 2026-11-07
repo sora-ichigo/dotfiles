@@ -91,8 +91,9 @@ cask "app-name"
 
 ### 日本語入力（macSKK）
 
-- macSKK は `Brewfile` の cask で入れ、辞書 `SKK-JISYO.L` は nixpkgs の `skkDictionaries.l` を `nix/programs/macskk.nix` の `home.activation` でコンテナ内の辞書フォルダにコピーする。サンドボックス内で動くため、Nix store へのシンボリックリンクではなく実ファイルとして置く。同じフォルダには macSKK がユーザー辞書を書き込む
-- コンテナは macSKK の初回起動時に macOS が作るため、無ければコピーを飛ばす。`make brew` → ログアウト・ログイン → 入力ソースに追加 → `make nix` の順で入れる。辞書は置いただけでは有効にならないので、macSKK の設定画面で一度有効にする
+- macSKK は `Brewfile` の cask で入れ、辞書は `nix/programs/macskk.nix` の `home.activation` でコンテナ内の辞書フォルダにコピーする。サンドボックス内で動くため、Nix store へのシンボリックリンクではなく実ファイルとして置く。同じフォルダには macSKK がユーザー辞書を書き込む
+- 辞書は nixpkgs の `skkDictionaries.l`（`SKK-JISYO.L`）と、Mozc のオープンソース版の辞書から生成する `SKK-JISYO.mozc` の 2 つ。`SKK-JISYO.L` は「深掘り」のような新しめの口語が弱いため Mozc で補う。`nix/programs/macskk/mozc2skk.py` が Mozc の読みと表記を macSKK が読める辞書の形式に変換し、候補は Mozc のコストが低い順に並べる。表記の末尾のひらがなが読みの末尾と一致すれば、送りありの見出し（`深掘り` → `ふかぼr /深掘/`）も作る。読みをカタカナにしただけの候補は `q` で出せるので除く。macSKK の辞書の文字コードの既定に合わせて EUC-JP で書き出し、EUC-JP で表せない候補は捨てる
+- コンテナは macSKK の初回起動時に macOS が作るため、無ければコピーを飛ばす。`make brew` → ログアウト・ログイン → 入力ソースに追加 → `make nix` の順で入れる。辞書は置いただけでは有効にならないので、macSKK の設定画面で一度有効にする。候補は設定画面の辞書の並び順で上にある辞書から出る
 - macOS はほかのアプリのコンテナへのターミナルからの書き込みを拒否するため、ターミナルにフルディスクアクセスが無いとコピーは失敗する。失敗しても activation は止めず警告だけ出すので、その場合は Finder で辞書フォルダにコピーする
 - WezTerm は初期設定だと Ctrl 付きのキーを日本語入力に渡さず、`Ctrl-j` が Claude Code などに取られてひらがなモードに戻れない。`macos_forward_to_ime_modifier_mask` に `CTRL` を足して macSKK に先に渡す。zsh で `Ctrl-j` に割り当てていた `select_worktree` は `Ctrl-s` に移し、`Ctrl-s` で端末の出力が止まらないよう `no_flow_control` にしている
 
