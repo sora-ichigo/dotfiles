@@ -25,6 +25,7 @@ brew "googleworkspace-cli"
 
 brew "aqua"
 brew "crit"
+brew "git"
 brew "libyaml"
 brew "xcodes"
 
