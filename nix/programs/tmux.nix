@@ -71,6 +71,7 @@ in
 
     extraConfig = ''
       set -ag terminal-overrides ",xterm-256color:RGB"
+      set -ag terminal-overrides ",*:Cmg@:Clmg@:Dsmg@:Enmg@"
 
       set -g status-position "top"
       set -g status-justify "left"
