@@ -91,7 +91,7 @@ cask "app-name"
 
 ### tmux と WezTerm
 
-- tmux は WezTerm を自動検出して左右マージン（`margins`）を使った部分スクロールを有効にするが、WezTerm 20240203 はこれを正しく描画できず、縦分割したペインに古い文字が残る。`nix/programs/tmux.nix` の `terminal-overrides` でマージン関連の機能（`Cmg`・`Clmg`・`Dsmg`・`Enmg`）を外している
+- tmux は WezTerm を自動検出して左右マージン（`margins`）を使った部分スクロールを有効にするが、WezTerm 20240203 はこれを正しく描画できず、左右に分割した画面でスクロールすると古い文字が残る。`nix/programs/tmux.nix` の `terminal-overrides` でマージン関連の機能（`Cmg`・`Clmg`・`Dsmg`・`Enmg`）を外している
 
 ### 日本語入力（macSKK）
 
