@@ -89,6 +89,10 @@ cask "app-name"
 - 外部ディスプレイがあるときは、2（Obsidian）と 4（Slack）を `workspace-to-monitor-force-assignment` でサブモニターに固定する。モニターが 1 枚のときは割り当てが一致せず、メインに表示される
 - モニターが 2 枚のときは Slack を 2 に移し、サブモニターで Obsidian と縦に並べる。ワークスペース 2 は起動時にメインモニター（横長）で作られて横並びになるため、縦長のサブモニターに合わせて `layout v_tiles` で縦並びにする。AeroSpace にはモニター数の条件もモニターの抜き差しを受け取るコールバックもないため、`config/.config/aerospace/place_slack.sh` を Slack のウィンドウが開いたとき（`on-window-detected`）と SketchyBar の `display_change` イベントで呼んで振り分ける
 
+### tmux と WezTerm
+
+- tmux は WezTerm を自動検出して左右マージン（`margins`）を使った部分スクロールを有効にするが、WezTerm 20240203 はこれを正しく描画できず、左右に分割した画面でスクロールすると古い文字が残る。`nix/programs/tmux.nix` の `terminal-overrides` でマージン関連の機能（`Cmg`・`Clmg`・`Dsmg`・`Enmg`）を外している
+
 ### 日本語入力（macSKK）
 
 - macSKK は `Brewfile` の cask で入れ、辞書は `nix/programs/macskk.nix` の `home.activation` でコンテナ内の辞書フォルダにコピーする。サンドボックス内で動くため、Nix store へのシンボリックリンクではなく実ファイルとして置く。同じフォルダには macSKK がユーザー辞書を書き込む
